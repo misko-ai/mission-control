@@ -29,7 +29,7 @@ All responses return JSON. Successful writes return `{ "success": true }` (and o
 
 ### 1. Dashboard (`/`)
 
-The home screen. Shows system overview: total tasks, open bugs, active projects, active agents, task column distribution, active bugs by severity, project progress bars, agent status, and recent activity feed. Read-only — no API needed, it aggregates data from other endpoints. It's a server-rendered page, so data appears on load without client-side fetching.
+The home screen. Shows system overview: total tasks, open bugs, active projects, active agents, task column distribution, active bugs by severity, project progress bars, agent status, upcoming schedule (top 5 active calendar events sorted by due date/next run), and recent activity feed. Read-only — no API needed, it aggregates data from other endpoints. It's a server-rendered page, so data appears on load without client-side fetching.
 
 ---
 
@@ -95,24 +95,50 @@ A Kanban board for managing work. Tasks move through five columns: **backlog →
 
 ### 3. Calendar (`/calendar`)
 
-Manages scheduled and recurring events.
+The operational schedule board — the timing and visibility layer of Mission Control. Not a personal calendar, but a structured view of what runs, what's due, and what needs regular attention.
 
 **API Endpoints:**
 
 | Action | Method | Endpoint | Body |
 |--------|--------|----------|------|
 | List events | GET | `/api/calendar` | — |
-| Create event | POST | `/api/calendar` | `{ name, description, scheduleType, schedule, cronExpression?, status? }` |
+| Create event | POST | `/api/calendar` | `{ name, description, scheduleType, schedule, eventType?, cronExpression?, owner?, priority?, dueDate?, linkedTaskId?, linkedDocId?, linkedCronId?, status? }` |
 | Update event | PUT | `/api/calendar` | `{ id, ...updates }` |
 | Delete event | DELETE | `/api/calendar?id=<id>` | — |
 
+**Event types** (4 categories — the primary organizing axis):
+- `"automation"` — things already executing automatically (crons, daily reports). Default.
+- `"reminder"` — workflow reminders that aren't full automations (session wrap-ups, maintenance prompts).
+- `"deadline"` — concrete deadlines with due dates, tied to tasks.
+- `"review"` — regular check-ins (bug triage, docs cleanup, inbox review).
+
 **Schedule types:** `"recurring"` or `"one-time"`
-**Statuses:** `"active"`, `"paused"`, `"completed"`, `"failed"`
+**Statuses:** `"active"`, `"paused"`, `"completed"`, `"failed"`, `"draft"`
+**Owner:** `"user"` or `"agent"` (defaults to `"user"`)
+**Priority:** `"low"`, `"medium"`, `"high"` (defaults to `"medium"`, mainly relevant for deadlines)
+
+**Optional linking fields:**
+- `linkedTaskId` — tie event to a task on the taskboard
+- `linkedDocId` — tie event to documentation
+- `linkedCronId` — tie event to a real cron job
+
+**Tracking fields (set via PUT):**
+- `lastRunAt` / `nextRunAt` — timestamps for recurring automations
+- `lastOutcome` — `"ok"`, `"failed"`, or `"skipped"` (for automation events)
+- `dueDate` — ISO date string (for deadline events)
 
 **How you should use it:**
-- Log recurring tasks you perform (daily reports, weekly reviews).
-- Track one-time deadlines.
-- Update `lastRunAt` and `nextRunAt` when you execute scheduled work.
+- **Automations:** Register every recurring cron/automation as an `"automation"` event. Update `lastRunAt`, `nextRunAt`, and `lastOutcome` after each execution. If a cron fails, set status to `"failed"`.
+- **Reminders:** Create `"reminder"` events for operational discipline (session wrap-ups, memory cleanup).
+- **Deadlines:** Create `"deadline"` events with `dueDate` for concrete time-bound work. Link to the relevant task via `linkedTaskId`.
+- **Reviews:** Create `"review"` events for recurring check-ins (weekly bug triage, docs maintenance).
+- **Linking:** When an event is tied to a cron, task, or doc, set the corresponding linked ID so the calendar shows the connection.
+
+**Relationship to other sections:**
+- **Calendar ↔ Cron:** If something repeats and has operational importance, it should exist as both a cron AND a calendar event. Cron executes; Calendar provides visibility.
+- **Calendar ↔ Taskboard:** Deadline events should link to tasks. Review events can spawn tasks when work is identified.
+- **Calendar ↔ Docs:** Important recurring events should have a linked doc explaining what the event does and what output is expected.
+- **Calendar ↔ Memories:** If an event leads to a workflow change or decision, record it in Memories.
 
 ---
 
@@ -384,8 +410,8 @@ POST   /api/tasks/approve                Approve agent task
 GET    /api/tasks/activities             Task activity log
 
 GET    /api/calendar                     List events
-POST   /api/calendar                     Create event
-PUT    /api/calendar                     Update event
+POST   /api/calendar                     Create event { name, scheduleType, schedule, eventType?, ... }
+PUT    /api/calendar                     Update event { id, name?, status?, eventType?, ... }
 DELETE /api/calendar?id=<id>             Delete event
 
 GET    /api/projects                     List projects
