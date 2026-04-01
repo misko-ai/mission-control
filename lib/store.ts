@@ -27,7 +27,7 @@ export interface ActivityEntry {
   timestamp: string;
 }
 
-export type TaskColumn = "backlog" | "in-progress" | "review" | "done";
+export type TaskColumn = "backlog" | "in-progress" | "review" | "done" | "blocked";
 export type TaskAssignee = "user" | "agent";
 
 export interface Task {
@@ -36,6 +36,7 @@ export interface Task {
   description: string;
   assignee: TaskAssignee;
   column: TaskColumn;
+  blockReason?: string;
   createdAt: string;
   updatedAt: string;
   completedAt?: string;
@@ -285,6 +286,18 @@ export async function addTask(task: Task): Promise<void> {
   const data = await getData();
   data.tasks.push(task);
   await saveData(data);
+}
+
+export async function updateTask(
+  id: string,
+  updates: Partial<Task>
+): Promise<void> {
+  const data = await getData();
+  const idx = data.tasks.findIndex((t) => t.id === id);
+  if (idx !== -1) {
+    data.tasks[idx] = { ...data.tasks[idx], ...updates, updatedAt: new Date().toISOString() };
+    await saveData(data);
+  }
 }
 
 export async function deleteTask(id: string): Promise<void> {

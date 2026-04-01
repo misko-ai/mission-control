@@ -1,13 +1,997 @@
 {
-  "tools": [],
-  "activities": [],
+  "tools": [
+    {
+      "id": "1bg6f1ez1",
+      "name": "exec",
+      "description": "Execute shell commands on the host system. Use for file ops, git, npm, system commands. Parameters: command (string, required)",
+      "parameters": [
+        {
+          "name": "command",
+          "type": "string",
+          "description": "Shell command to execute",
+          "required": true
+        }
+      ],
+      "createdAt": "2026-04-01T12:57:41.358Z",
+      "usageCount": 0
+    },
+    {
+      "id": "j1qpz036x",
+      "name": "read",
+      "description": "Read file contents from disk. Use for reading source code, configs, documents. Parameters: path (string, required)",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "string",
+          "description": "Absolute file path to read",
+          "required": true
+        }
+      ],
+      "createdAt": "2026-04-01T12:57:49.698Z",
+      "usageCount": 0
+    },
+    {
+      "id": "er5gei785",
+      "name": "write",
+      "description": "Write or overwrite files on disk. Creates parent dirs if needed. Parameters: path (string), content (string, required)",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "string",
+          "description": "Absolute file path to write",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "description": "File content to write",
+          "required": true
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:07.282Z",
+      "usageCount": 0
+    },
+    {
+      "id": "brkymhiim",
+      "name": "edit",
+      "description": "Make precise text edits to files using exact replacement. Edits are matched against original, non-overlapping. Parameters: file (string, required), edits (json array, required)",
+      "parameters": [
+        {
+          "name": "file",
+          "type": "string",
+          "description": "File path to edit",
+          "required": true
+        },
+        {
+          "name": "edits",
+          "type": "json",
+          "description": "Array of {oldText, newText} replacements",
+          "required": true
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:07.307Z",
+      "usageCount": 0
+    },
+    {
+      "id": "wu5ujrfeu",
+      "name": "browser",
+      "description": "Automate web browser via Playwright. Launch Chrome at /usr/bin/google-chrome (headless:false for JS-heavy sites). Use waitForSelector instead of networkidle. Parameters: url (string, optional)",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "string",
+          "description": "URL to open in browser",
+          "required": false
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:07.333Z",
+      "usageCount": 0
+    },
+    {
+      "id": "svl6u0mx2",
+      "name": "web_fetch",
+      "description": "Fetch and extract readable content from URLs. Returns markdown/text. Use for reading web pages without browser. Parameters: url (string, required)",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "string",
+          "description": "HTTP URL to fetch",
+          "required": true
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:07.358Z",
+      "usageCount": 0
+    },
+    {
+      "id": "152a9w840",
+      "name": "web_search",
+      "description": "Search the web via DuckDuckGo. Returns titles, URLs, snippets. Parameters: query (string, required)",
+      "parameters": [
+        {
+          "name": "query",
+          "type": "string",
+          "description": "Search query",
+          "required": true
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:07.384Z",
+      "usageCount": 0
+    },
+    {
+      "id": "zxfqb7y92",
+      "name": "image_generate",
+      "description": "Generate images via AI. Parameters: prompt (string, required), size (string, optional), count (number, optional)",
+      "parameters": [
+        {
+          "name": "prompt",
+          "type": "string",
+          "description": "Image generation prompt",
+          "required": true
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:07.409Z",
+      "usageCount": 0
+    },
+    {
+      "id": "q7bifjhsb",
+      "name": "email_read",
+      "description": "Read emails via IMAP. Usage: python3 read_emails.py [--unread|--search QUERY]. Returns inbox messages.",
+      "parameters": [
+        {
+          "name": "query",
+          "type": "string",
+          "description": "Search query or --unread flag",
+          "required": false
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:07.434Z",
+      "usageCount": 0
+    },
+    {
+      "id": "q5n1lwd9s",
+      "name": "email_send",
+      "description": "Send emails via nodemailer. Usage: node send.js --to ADDRESS --subject SUBJECT --body TEXT",
+      "parameters": [
+        {
+          "name": "to",
+          "type": "string",
+          "description": "Recipient email address",
+          "required": true
+        },
+        {
+          "name": "subject",
+          "type": "string",
+          "description": "Email subject",
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "string",
+          "description": "Email body text",
+          "required": true
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:07.460Z",
+      "usageCount": 0
+    },
+    {
+      "id": "nwd9woequ",
+      "name": "github",
+      "description": "GitHub operations via CLI or API. Use gh CLI or GitHub API. Repos must be private.",
+      "parameters": [
+        {
+          "name": "action",
+          "type": "string",
+          "description": "Action: create-repo, push, clone, etc.",
+          "required": true
+        },
+        {
+          "name": "repo",
+          "type": "string",
+          "description": "Repository name",
+          "required": false
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:21.436Z",
+      "usageCount": 0
+    },
+    {
+      "id": "a5idixc8j",
+      "name": "cron",
+      "description": "Schedule recurring or one-time tasks. Job types: systemEvent (main session), agentTurn (isolated). Schedule: cron expression or every Ms.",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Job name",
+          "required": false
+        },
+        {
+          "name": "schedule",
+          "type": "json",
+          "description": "Schedule object {kind: cron|every|at, expr|everyMs|at}",
+          "required": true
+        },
+        {
+          "name": "payload",
+          "type": "json",
+          "description": "Payload object {kind: systemEvent|agentTurn, text|message}",
+          "required": true
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:21.461Z",
+      "usageCount": 0
+    },
+    {
+      "id": "wbv8cwqll",
+      "name": "memory_search",
+      "description": "Search long-term memory files. Returns relevant snippets from MEMORY.md and memory/. Parameters: query (string, required)",
+      "parameters": [
+        {
+          "name": "query",
+          "type": "string",
+          "description": "Search query for memory",
+          "required": true
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:21.488Z",
+      "usageCount": 0
+    },
+    {
+      "id": "dtx3iljy0",
+      "name": "subagent_spawn",
+      "description": "Spawn a sub-agent session (Claude Code, Codex, etc.). Parameters: task (string, required), runtime (string: subagent|acp), mode (string: run|session)",
+      "parameters": [
+        {
+          "name": "task",
+          "type": "string",
+          "description": "Task prompt for sub-agent",
+          "required": true
+        },
+        {
+          "name": "runtime",
+          "type": "string",
+          "description": "Runtime: subagent or acp",
+          "required": false
+        },
+        {
+          "name": "mode",
+          "type": "string",
+          "description": "Mode: run (one-shot) or session (persistent)",
+          "required": false
+        }
+      ],
+      "createdAt": "2026-04-01T12:58:21.512Z",
+      "usageCount": 0
+    }
+  ],
+  "activities": [
+    {
+      "id": "dppugzjri",
+      "toolId": "dtx3iljy0",
+      "toolName": "subagent_spawn",
+      "action": "created",
+      "details": "Tool \"subagent_spawn\" was created",
+      "timestamp": "2026-04-01T12:58:21.513Z"
+    },
+    {
+      "id": "xsf6plho1",
+      "toolId": "wbv8cwqll",
+      "toolName": "memory_search",
+      "action": "created",
+      "details": "Tool \"memory_search\" was created",
+      "timestamp": "2026-04-01T12:58:21.489Z"
+    },
+    {
+      "id": "8i0u3cf0r",
+      "toolId": "a5idixc8j",
+      "toolName": "cron",
+      "action": "created",
+      "details": "Tool \"cron\" was created",
+      "timestamp": "2026-04-01T12:58:21.463Z"
+    },
+    {
+      "id": "vg6ajlxyl",
+      "toolId": "nwd9woequ",
+      "toolName": "github",
+      "action": "created",
+      "details": "Tool \"github\" was created",
+      "timestamp": "2026-04-01T12:58:21.438Z"
+    },
+    {
+      "id": "tw1hzbgfi",
+      "toolId": "q5n1lwd9s",
+      "toolName": "email_send",
+      "action": "created",
+      "details": "Tool \"email_send\" was created",
+      "timestamp": "2026-04-01T12:58:07.461Z"
+    },
+    {
+      "id": "xh04yd5tn",
+      "toolId": "q7bifjhsb",
+      "toolName": "email_read",
+      "action": "created",
+      "details": "Tool \"email_read\" was created",
+      "timestamp": "2026-04-01T12:58:07.435Z"
+    },
+    {
+      "id": "i2pipmpwp",
+      "toolId": "zxfqb7y92",
+      "toolName": "image_generate",
+      "action": "created",
+      "details": "Tool \"image_generate\" was created",
+      "timestamp": "2026-04-01T12:58:07.410Z"
+    },
+    {
+      "id": "ql40h4v9j",
+      "toolId": "152a9w840",
+      "toolName": "web_search",
+      "action": "created",
+      "details": "Tool \"web_search\" was created",
+      "timestamp": "2026-04-01T12:58:07.385Z"
+    },
+    {
+      "id": "iocno27n8",
+      "toolId": "svl6u0mx2",
+      "toolName": "web_fetch",
+      "action": "created",
+      "details": "Tool \"web_fetch\" was created",
+      "timestamp": "2026-04-01T12:58:07.360Z"
+    },
+    {
+      "id": "2y54cg9rn",
+      "toolId": "wu5ujrfeu",
+      "toolName": "browser",
+      "action": "created",
+      "details": "Tool \"browser\" was created",
+      "timestamp": "2026-04-01T12:58:07.334Z"
+    },
+    {
+      "id": "0lhp1inpx",
+      "toolId": "brkymhiim",
+      "toolName": "edit",
+      "action": "created",
+      "details": "Tool \"edit\" was created",
+      "timestamp": "2026-04-01T12:58:07.308Z"
+    },
+    {
+      "id": "gecl371js",
+      "toolId": "er5gei785",
+      "toolName": "write",
+      "action": "created",
+      "details": "Tool \"write\" was created",
+      "timestamp": "2026-04-01T12:58:07.284Z"
+    },
+    {
+      "id": "5up3lzfn6",
+      "toolId": "j1qpz036x",
+      "toolName": "read",
+      "action": "created",
+      "details": "Tool \"read\" was created",
+      "timestamp": "2026-04-01T12:57:49.700Z"
+    },
+    {
+      "id": "jgjsai22q",
+      "toolId": "1bg6f1ez1",
+      "toolName": "exec",
+      "action": "created",
+      "details": "Tool \"exec\" was created",
+      "timestamp": "2026-04-01T12:57:41.359Z"
+    }
+  ],
   "settings": {
     "theme": "light",
     "autoSave": true,
     "logLevel": "normal"
   },
-  "tasks": [],
+  "tasks": [
+    {
+      "id": "uty4sh1og",
+      "title": "API updated title",
+      "description": "After update",
+      "assignee": "user",
+      "column": "backlog",
+      "createdAt": "2026-04-01T14:07:24.460Z",
+      "updatedAt": "2026-04-01T14:07:24.472Z"
+    }
+  ],
   "taskActivities": [
+    {
+      "id": "l8vhs7rrn",
+      "taskId": "uty4sh1og",
+      "taskTitle": "API update test",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"API update test\" created and assigned to User",
+      "timestamp": "2026-04-01T14:07:24.460Z"
+    },
+    {
+      "id": "yfd4qfj7a",
+      "taskId": "kkvt2mri7",
+      "taskTitle": "DeleteMeXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"DeleteMeXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T14:07:24.380Z"
+    },
+    {
+      "id": "zxp9m9sf8",
+      "taskId": "y4pbnf0yl",
+      "taskTitle": "BlockedReasonXYZ",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "blocked",
+      "actor": "user",
+      "details": "\"BlockedReasonXYZ\" moved from Backlog to Blocked",
+      "timestamp": "2026-04-01T14:07:23.766Z"
+    },
+    {
+      "id": "xji8357fw",
+      "taskId": "y4pbnf0yl",
+      "taskTitle": "BlockedReasonXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"BlockedReasonXYZ\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T14:07:23.753Z"
+    },
+    {
+      "id": "5p756avds",
+      "taskId": "ss0rl6lr9",
+      "taskTitle": "BlockMeXYZ",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "blocked",
+      "actor": "user",
+      "details": "\"BlockMeXYZ\" moved from Backlog to Blocked",
+      "timestamp": "2026-04-01T14:07:23.684Z"
+    },
+    {
+      "id": "rhed4d8bm",
+      "taskId": "ss0rl6lr9",
+      "taskTitle": "BlockMeXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"BlockMeXYZ\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T14:07:23.668Z"
+    },
+    {
+      "id": "hrg543iq8",
+      "taskId": "q80cnrv4m",
+      "taskTitle": "CancelEditXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"CancelEditXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T14:07:22.956Z"
+    },
+    {
+      "id": "u2yj2ufl0",
+      "taskId": "ov3qv4j4m",
+      "taskTitle": "EditableXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"EditableXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T14:07:22.230Z"
+    },
+    {
+      "id": "1f3f2h2xb",
+      "taskId": "wseg0ph1d",
+      "taskTitle": "Unique create test xyz",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Unique create test xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T14:07:22.074Z"
+    },
+    {
+      "id": "k5czfbh1q",
+      "taskId": "jtxf1hwso",
+      "taskTitle": "Backlog task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Backlog task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T14:07:18.626Z"
+    },
+    {
+      "id": "qdxyy8pf4",
+      "taskId": "44s0s2uzv",
+      "taskTitle": "Done task for progress",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Done task for progress\" moved from Backlog to Done",
+      "timestamp": "2026-04-01T14:07:18.614Z"
+    },
+    {
+      "id": "sq8bh0o5d",
+      "taskId": "44s0s2uzv",
+      "taskTitle": "Done task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Done task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T14:07:18.274Z"
+    },
+    {
+      "id": "cnfz918av",
+      "taskId": "4nyarvzyy",
+      "taskTitle": "Linkable task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linkable task\" created and assigned to User",
+      "timestamp": "2026-04-01T14:07:17.235Z"
+    },
+    {
+      "id": "wo6r4ayh3",
+      "taskId": "xpn61d445",
+      "taskTitle": "API update test",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"API update test\" created and assigned to User",
+      "timestamp": "2026-04-01T14:05:42.770Z"
+    },
+    {
+      "id": "9mapfbly0",
+      "taskId": "oziu1pjj8",
+      "taskTitle": "DeleteMeXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"DeleteMeXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T14:05:42.689Z"
+    },
+    {
+      "id": "cgm7gw1dd",
+      "taskId": "eiij8chyc",
+      "taskTitle": "BlockedReasonXYZ",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "blocked",
+      "actor": "user",
+      "details": "\"BlockedReasonXYZ\" moved from Backlog to Blocked",
+      "timestamp": "2026-04-01T14:05:41.997Z"
+    },
+    {
+      "id": "ooce26taw",
+      "taskId": "eiij8chyc",
+      "taskTitle": "BlockedReasonXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"BlockedReasonXYZ\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T14:05:41.984Z"
+    },
+    {
+      "id": "ht6v9s01q",
+      "taskId": "c4iuus5q8",
+      "taskTitle": "BlockMeXYZ",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "blocked",
+      "actor": "user",
+      "details": "\"BlockMeXYZ\" moved from Backlog to Blocked",
+      "timestamp": "2026-04-01T14:05:41.910Z"
+    },
+    {
+      "id": "qin6ftlh0",
+      "taskId": "c4iuus5q8",
+      "taskTitle": "BlockMeXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"BlockMeXYZ\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T14:05:41.681Z"
+    },
+    {
+      "id": "wfzp4vqgl",
+      "taskId": "bgr1gaxmh",
+      "taskTitle": "CancelEditXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"CancelEditXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T14:05:40.967Z"
+    },
+    {
+      "id": "je3woedjc",
+      "taskId": "9r5cdqj2w",
+      "taskTitle": "EditableXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"EditableXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T14:05:40.237Z"
+    },
+    {
+      "id": "w9fraxshf",
+      "taskId": "v4zdsjyto",
+      "taskTitle": "Unique create test xyz",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Unique create test xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T14:05:40.064Z"
+    },
+    {
+      "id": "fd1v3e9uf",
+      "taskId": "pd4jbaqo9",
+      "taskTitle": "API update test",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"API update test\" created and assigned to User",
+      "timestamp": "2026-04-01T14:04:58.506Z"
+    },
+    {
+      "id": "p8gbbbgs2",
+      "taskId": "v0aq04wbh",
+      "taskTitle": "Delete me task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Delete me task\" created and assigned to User",
+      "timestamp": "2026-04-01T14:04:42.720Z"
+    },
+    {
+      "id": "i5jvrmmhn",
+      "taskId": "lwlybh3z9",
+      "taskTitle": "Blocked with reason",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "blocked",
+      "actor": "user",
+      "details": "\"Blocked with reason\" moved from Backlog to Blocked",
+      "timestamp": "2026-04-01T14:04:41.995Z"
+    },
+    {
+      "id": "a6ojojzyq",
+      "taskId": "lwlybh3z9",
+      "taskTitle": "Blocked with reason",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Blocked with reason\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T14:04:41.743Z"
+    },
+    {
+      "id": "n9czq8k40",
+      "taskId": "tsyyubq8z",
+      "taskTitle": "Block me task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Block me task\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T14:04:25.967Z"
+    },
+    {
+      "id": "urxel1l1v",
+      "taskId": "7o6h2mp81",
+      "taskTitle": "Cancel edit task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Cancel edit task\" created and assigned to User",
+      "timestamp": "2026-04-01T14:04:24.764Z"
+    },
+    {
+      "id": "kzjmnu5aq",
+      "taskId": "hq6wvqst9",
+      "taskTitle": "Editable task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Editable task\" created and assigned to User",
+      "timestamp": "2026-04-01T14:04:08.974Z"
+    },
+    {
+      "id": "nd5b4kjyz",
+      "taskId": "t7iy7zxnk",
+      "taskTitle": "Test task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Test task\" created and assigned to User",
+      "timestamp": "2026-04-01T14:04:08.333Z"
+    },
+    {
+      "id": "9ew2lzx77",
+      "taskId": "xa85i978a",
+      "taskTitle": "Send a discord message",
+      "action": "moved",
+      "fromColumn": "review",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Send a discord message\" moved from Review to Done",
+      "timestamp": "2026-04-01T13:59:42.832Z"
+    },
+    {
+      "id": "6vosqknrm",
+      "taskId": "xa85i978a",
+      "taskTitle": "Send a discord message",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "review",
+      "actor": "user",
+      "details": "\"Send a discord message\" moved from Backlog to Review",
+      "timestamp": "2026-04-01T13:59:42.010Z"
+    },
+    {
+      "id": "ajuvvn9cm",
+      "taskId": "xa85i978a",
+      "taskTitle": "Send a discord message",
+      "action": "moved",
+      "fromColumn": "review",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "\"Send a discord message\" moved from Review to Backlog",
+      "timestamp": "2026-04-01T13:56:38.095Z"
+    },
+    {
+      "id": "z8u1cajm5",
+      "taskId": "xa85i978a",
+      "taskTitle": "Send a discord message",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "review",
+      "actor": "user",
+      "details": "\"Send a discord message\" moved from Backlog to Review",
+      "timestamp": "2026-04-01T13:52:57.158Z"
+    },
+    {
+      "id": "ynys2gwly",
+      "taskId": "xa85i978a",
+      "taskTitle": "Send a discord message",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Send a discord message\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T13:52:15.345Z"
+    },
+    {
+      "id": "hpud3ivl7",
+      "taskId": "pm6fcczhr",
+      "taskTitle": "send me a hello Marko  Test task",
+      "action": "moved",
+      "fromColumn": "review",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"send me a hello Marko  Test task\" moved from Review to Done",
+      "timestamp": "2026-04-01T13:51:32.970Z"
+    },
+    {
+      "id": "ozvqpp5v9",
+      "taskId": "pm6fcczhr",
+      "taskTitle": "send me a hello Marko  Test task",
+      "action": "moved",
+      "fromColumn": "done",
+      "toColumn": "review",
+      "actor": "user",
+      "details": "\"send me a hello Marko  Test task\" moved from Done to Review",
+      "timestamp": "2026-04-01T13:51:19.926Z"
+    },
+    {
+      "id": "8ca6kfaqt",
+      "taskId": "873eqxf32",
+      "taskTitle": "Test email task",
+      "action": "approved",
+      "fromColumn": "review",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Test email task\" approved and moved to Done",
+      "timestamp": "2026-04-01T13:51:10.547Z"
+    },
+    {
+      "id": "u40yxu1m8",
+      "taskId": "pm6fcczhr",
+      "taskTitle": "send me a hello Marko  Test task",
+      "action": "approved",
+      "fromColumn": "review",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"send me a hello Marko  Test task\" approved and moved to Done",
+      "timestamp": "2026-04-01T13:51:09.315Z"
+    },
+    {
+      "id": "twfd7cp3e",
+      "taskId": "873eqxf32",
+      "taskTitle": "Test email task",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "review",
+      "actor": "user",
+      "details": "\"Test email task\" moved from Backlog to Review",
+      "timestamp": "2026-04-01T13:49:51.259Z"
+    },
+    {
+      "id": "a3aspkiug",
+      "taskId": "pm6fcczhr",
+      "taskTitle": "send me a hello Marko  Test task",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "review",
+      "actor": "user",
+      "details": "\"send me a hello Marko  Test task\" moved from Backlog to Review",
+      "timestamp": "2026-04-01T13:49:41.330Z"
+    },
+    {
+      "id": "de2xveaht",
+      "taskId": "873eqxf32",
+      "taskTitle": "Test email task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Test email task\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T13:45:03.261Z"
+    },
+    {
+      "id": "zdsotpa61",
+      "taskId": "pm6fcczhr",
+      "taskTitle": "send me a hello Marko  Test task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"send me a hello Marko  Test task\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T13:40:33.096Z"
+    },
+    {
+      "id": "k7o48o877",
+      "taskId": "6m8fr9wwy",
+      "taskTitle": "Test Task",
+      "action": "approved",
+      "fromColumn": "review",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Test Task\" approved and moved to Done",
+      "timestamp": "2026-04-01T13:39:54.591Z"
+    },
+    {
+      "id": "rzlwm4h31",
+      "taskId": "6m8fr9wwy",
+      "taskTitle": "Test Task",
+      "action": "moved",
+      "fromColumn": "in-progress",
+      "toColumn": "review",
+      "actor": "user",
+      "details": "\"Test Task\" moved from In Progress to Review",
+      "timestamp": "2026-04-01T13:38:39.494Z"
+    },
+    {
+      "id": "0rjgad1sg",
+      "taskId": "6m8fr9wwy",
+      "taskTitle": "Test Task",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "in-progress",
+      "actor": "user",
+      "details": "\"Test Task\" moved from Backlog to In Progress",
+      "timestamp": "2026-04-01T13:36:58.910Z"
+    },
+    {
+      "id": "t1domuzat",
+      "taskId": "6m8fr9wwy",
+      "taskTitle": "Test Task",
+      "action": "moved",
+      "fromColumn": "review",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "\"Test Task\" moved from Review to Backlog",
+      "timestamp": "2026-04-01T13:31:00.870Z"
+    },
+    {
+      "id": "z1hbfwt9o",
+      "taskId": "k3o77k8wj",
+      "taskTitle": "Backlog task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Backlog task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T13:25:24.683Z"
+    },
+    {
+      "id": "18d9o2d7p",
+      "taskId": "e555jegwz",
+      "taskTitle": "Done task for progress",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Done task for progress\" moved from Backlog to Done",
+      "timestamp": "2026-04-01T13:25:24.670Z"
+    },
+    {
+      "id": "7dhgmntpb",
+      "taskId": "e555jegwz",
+      "taskTitle": "Done task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Done task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T13:25:24.512Z"
+    },
+    {
+      "id": "myx3um6jw",
+      "taskId": "3d9zpves4",
+      "taskTitle": "Linkable task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linkable task\" created and assigned to User",
+      "timestamp": "2026-04-01T13:25:23.370Z"
+    },
+    {
+      "id": "yifccq8ir",
+      "taskId": "6m8fr9wwy",
+      "taskTitle": "Test Task",
+      "action": "completed",
+      "fromColumn": "in-progress",
+      "toColumn": "review",
+      "actor": "agent",
+      "details": "Agent completed \"Test Task\", awaiting review",
+      "timestamp": "2026-04-01T13:04:20.677Z"
+    },
+    {
+      "id": "lx2lbdkda",
+      "taskId": "6m8fr9wwy",
+      "taskTitle": "Test Task",
+      "action": "picked-up",
+      "fromColumn": "backlog",
+      "toColumn": "in-progress",
+      "actor": "agent",
+      "details": "Agent picked up \"Test Task\"",
+      "timestamp": "2026-04-01T13:04:15.938Z"
+    },
+    {
+      "id": "k1sjp3653",
+      "taskId": "6m8fr9wwy",
+      "taskTitle": "Test Task",
+      "action": "moved",
+      "fromColumn": "review",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "\"Test Task\" moved from Review to Backlog",
+      "timestamp": "2026-04-01T13:04:15.646Z"
+    },
+    {
+      "id": "7ke301o3e",
+      "taskId": "6m8fr9wwy",
+      "taskTitle": "Test Task",
+      "action": "completed",
+      "fromColumn": "in-progress",
+      "toColumn": "review",
+      "actor": "agent",
+      "details": "Agent completed \"Test Task\", awaiting review",
+      "timestamp": "2026-04-01T12:59:20.787Z"
+    },
+    {
+      "id": "ytzeexjl9",
+      "taskId": "6m8fr9wwy",
+      "taskTitle": "Test Task",
+      "action": "picked-up",
+      "fromColumn": "backlog",
+      "toColumn": "in-progress",
+      "actor": "agent",
+      "details": "Agent picked up \"Test Task\"",
+      "timestamp": "2026-04-01T12:59:15.780Z"
+    },
+    {
+      "id": "xruaq6h6e",
+      "taskId": "6m8fr9wwy",
+      "taskTitle": "Test Task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Test Task\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T12:59:14.102Z"
+    },
     {
       "id": "tkv624lz9",
       "taskId": "3whg45yj1",
@@ -216,128 +1200,93 @@
   ],
   "scheduledEvents": [
     {
-      "id": "doznr2x3y",
+      "id": "7j43ekd65",
       "name": "Filter recurring",
       "description": "",
       "scheduleType": "recurring",
       "schedule": "Daily",
       "status": "active",
-      "createdAt": "2026-04-01T12:40:23.664Z",
-      "updatedAt": "2026-04-01T12:40:23.664Z"
+      "createdAt": "2026-04-01T14:06:46.238Z",
+      "updatedAt": "2026-04-01T14:06:46.238Z"
     },
     {
-      "id": "c56afdtik",
+      "id": "bq756me9q",
       "name": "Filter onetime",
       "description": "",
       "scheduleType": "one-time",
       "schedule": "Tomorrow",
       "status": "active",
-      "createdAt": "2026-04-01T12:40:23.672Z",
-      "updatedAt": "2026-04-01T12:40:23.672Z"
+      "createdAt": "2026-04-01T14:06:46.249Z",
+      "updatedAt": "2026-04-01T14:06:46.249Z"
     }
   ],
   "projects": [
     {
-      "id": "xekqi8t2u",
+      "id": "u1qqg7opt",
       "name": "Active filter project",
       "description": "",
       "status": "active",
       "linkedTaskIds": [],
-      "createdAt": "2026-04-01T12:40:56.339Z",
-      "updatedAt": "2026-04-01T12:40:56.339Z",
-      "lastActiveAt": "2026-04-01T12:40:56.339Z"
+      "createdAt": "2026-04-01T14:07:19.351Z",
+      "updatedAt": "2026-04-01T14:07:19.351Z",
+      "lastActiveAt": "2026-04-01T14:07:19.351Z"
     },
     {
-      "id": "vo9b0i7a7",
+      "id": "ox8rqpdnh",
       "name": "Archived filter project",
       "description": "",
       "status": "archived",
       "linkedTaskIds": [],
-      "createdAt": "2026-04-01T12:40:56.347Z",
-      "updatedAt": "2026-04-01T12:40:56.357Z",
-      "lastActiveAt": "2026-04-01T12:40:56.357Z"
+      "createdAt": "2026-04-01T14:07:19.360Z",
+      "updatedAt": "2026-04-01T14:07:19.369Z",
+      "lastActiveAt": "2026-04-01T14:07:19.369Z"
     }
   ],
-  "conversationMemories": [
-    {
-      "id": "8tkcstxmi",
-      "date": "2026-04-01",
-      "title": "Mission Control setup session",
-      "content": "First session with Marko. Set up Misko as primary orchestrator agent. Confirmed Mission Control is a Next.js app at localhost:3000. Created GitHub repo for mission-control. Fixed exec approval spam. Browser automation (Playwright) is working. Registered Misko as orchestrator agent with ID e2j0z7yss.",
-      "tags": [
-        "setup",
-        "mission-control",
-        "agent",
-        "github"
-      ],
-      "createdAt": "2026-04-01T12:52:46.071Z",
-      "updatedAt": "2026-04-01T12:52:46.071Z"
-    }
-  ],
+  "conversationMemories": [],
   "longTermMemories": [
     {
-      "id": "fm96020iq",
+      "id": "02ualbc3a",
       "title": "A preference",
       "content": "Likes dark mode",
       "category": "preference",
-      "createdAt": "2026-04-01T12:40:40.055Z",
-      "updatedAt": "2026-04-01T12:40:40.055Z"
+      "createdAt": "2026-04-01T14:07:02.715Z",
+      "updatedAt": "2026-04-01T14:07:02.715Z"
     },
     {
-      "id": "8uibbk02v",
+      "id": "axr4q6kai",
       "title": "A decision",
       "content": "Use Next.js",
       "category": "decision",
-      "createdAt": "2026-04-01T12:40:40.064Z",
-      "updatedAt": "2026-04-01T12:40:40.064Z"
-    },
-    {
-      "id": "etplbmshl",
-      "title": "Mission Control API",
-      "content": "Mission Control runs at localhost:3000. REST API at /api/. Must register as agent on startup (POST /api/team/agents). Log conversation memories after sessions. Create tasks for work. Use Docs for documents. Use Bugs for errors.",
-      "category": "context",
-      "createdAt": "2026-04-01T12:52:53.803Z",
-      "updatedAt": "2026-04-01T12:52:53.803Z"
+      "createdAt": "2026-04-01T14:07:02.726Z",
+      "updatedAt": "2026-04-01T14:07:02.726Z"
     }
   ],
   "docs": [
     {
-      "id": "8d0yzyc6x",
+      "id": "ivilt5csx",
       "title": "Badged doc",
       "content": "Content here",
       "category": "newsletter",
       "format": "markdown",
-      "createdAt": "2026-04-01T12:40:30.916Z",
-      "updatedAt": "2026-04-01T12:40:30.916Z"
+      "createdAt": "2026-04-01T14:06:53.663Z",
+      "updatedAt": "2026-04-01T14:06:53.663Z"
     }
   ],
   "team": {
     "missionStatement": "",
-    "agents": [
-      {
-        "id": "e2j0z7yss",
-        "name": "Misko",
-        "role": "orchestrator",
-        "description": "Primary AI agent — setting up and learning Mission Control",
-        "model": "",
-        "parentId": null,
-        "status": "running",
-        "createdAt": "2026-04-01T12:52:32.649Z",
-        "updatedAt": "2026-04-01T12:52:32.649Z"
-      }
-    ]
+    "agents": []
   },
   "bugs": [
     {
-      "id": "w20m9ksql",
+      "id": "nem0moy4l",
       "title": "Badge test bug",
       "screen": "Calendar",
       "severity": "critical",
       "status": "open",
       "stepsToReproduce": "",
       "notes": [],
-      "createdAt": "2026-04-01T12:40:17.138Z",
-      "updatedAt": "2026-04-01T12:40:17.138Z"
+      "createdAt": "2026-04-01T14:06:39.679Z",
+      "updatedAt": "2026-04-01T14:06:39.679Z"
     }
   ]
 }

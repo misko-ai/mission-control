@@ -31,7 +31,7 @@ The home screen. Shows system overview: total tools, executions, activity count,
 
 ### 2. Taskboard (`/taskboard`)
 
-A Kanban board for managing work. Tasks move through four columns: **backlog → in-progress → review → done**.
+A Kanban board for managing work. Tasks move through five columns: **backlog → in-progress → blocked → review → done**.
 
 **API Endpoints:**
 
@@ -39,16 +39,36 @@ A Kanban board for managing work. Tasks move through four columns: **backlog →
 |--------|--------|----------|------|
 | List tasks | GET | `/api/tasks` | — |
 | Create task | POST | `/api/tasks` | `{ title, description, assignee: "user" \| "agent" }` |
+| Update task | PUT | `/api/tasks` | `{ id, title?, description?, assignee?, blockReason? }` |
 | Delete task | DELETE | `/api/tasks?id=<id>` | — |
 | Move task | POST | `/api/tasks/move` | `{ taskId, toColumn }` |
 | Approve task | POST | `/api/tasks/approve` | `{ taskId }` |
 | Agent tick | POST | `/api/tasks/agent-tick` | `{}` |
 | Get activities | GET | `/api/tasks/activities` | — |
 
-**Columns:** `backlog`, `in-progress`, `review`, `done`
+**Columns:** `backlog`, `in-progress`, `blocked`, `review`, `done`
+
+**The `blocked` column:**
+- Move a task here when you cannot complete it due to an error, missing dependency, or any blocker.
+- When you move a task to `blocked`, immediately update it with a `blockReason` explaining why:
+  ```
+  POST /api/tasks/move   { "taskId": "<id>", "toColumn": "blocked" }
+  PUT  /api/tasks         { "id": "<id>", "blockReason": "Cannot reach external API — returns 503" }
+  ```
+- The block reason is displayed prominently on the task card so Marko can see what went wrong.
+- Once the blocker is resolved, move the task back to `in-progress` and clear the reason:
+  ```
+  POST /api/tasks/move   { "taskId": "<id>", "toColumn": "in-progress" }
+  PUT  /api/tasks         { "id": "<id>", "blockReason": "" }
+  ```
+
+**Editing tasks:**
+- Tasks are fully editable via `PUT /api/tasks`. You can update `title`, `description`, `assignee`, and `blockReason`.
+- Use this to refine task descriptions as you learn more about the work, or to reassign between user and agent.
 
 **How you should use it:**
 - When you start working on something, create a task assigned to `"agent"` and move it to `in-progress`.
+- If you hit a blocker you cannot resolve, move the task to `blocked` and set a clear `blockReason`.
 - When you finish, move it to `review` so Marko can approve it.
 - Use task activities to log what you did.
 - Check the backlog regularly for work assigned to you.
@@ -321,6 +341,7 @@ App configuration.
 ```
 GET    /api/tasks                        List tasks
 POST   /api/tasks                        Create task
+PUT    /api/tasks                        Update task (title, description, assignee, blockReason)
 DELETE /api/tasks?id=<id>                Delete task
 POST   /api/tasks/move                   Move task to column
 POST   /api/tasks/approve                Approve agent task

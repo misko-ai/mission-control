@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   getTasks,
   addTask,
+  updateTask,
   deleteTask,
   logTaskActivity,
   Task,
@@ -61,6 +62,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, task });
   } catch {
     return NextResponse.json({ error: "Failed to create task" }, { status: 500 });
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { id, ...updates } = body;
+
+    if (!id) {
+      return NextResponse.json({ error: "ID required" }, { status: 400 });
+    }
+
+    await updateTask(id, updates);
+    return NextResponse.json({ success: true });
+  } catch {
+    return NextResponse.json({ error: "Failed to update task" }, { status: 500 });
   }
 }
 

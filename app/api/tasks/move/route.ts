@@ -5,7 +5,7 @@ function generateId() {
   return Math.random().toString(36).substring(2, 11);
 }
 
-const validColumns: TaskColumn[] = ["backlog", "in-progress", "review", "done"];
+const validColumns: TaskColumn[] = ["backlog", "in-progress", "review", "done", "blocked"];
 
 export async function POST(request: NextRequest) {
   try {
@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
       "in-progress": "In Progress",
       review: "Review",
       done: "Done",
+      blocked: "Blocked",
     };
 
     const activity: TaskActivityEntry = {
