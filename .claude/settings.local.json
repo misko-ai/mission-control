@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /home/marko/mission-control -type d -not -path */node_modules/* -not -path */.next/*)",
+      "Bash(find /home/marko/mission-control -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.json -o -name *.css \\\\\\) ! -path */node_modules/* ! -path */.next/*)",
+      "Bash(grep -r \"TODO\\\\|FIXME\\\\|HACK\\\\|BUG\" /home/marko/mission-control --include=*.ts --include=*.tsx --include=*.js --include=*.json --include=*.css)",
+      "Bash(npm list:*)",
+      "Bash(grep -o className=[^]* /home/marko/mission-control/app/page.tsx /home/marko/mission-control/app/tools/page.tsx /home/marko/mission-control/app/settings/page.tsx /home/marko/mission-control/components/Sidebar.tsx)",
+      "Bash(grep -r \"text-green-400\\\\|text-blue-400\\\\|text-red-400\" /home/marko/mission-control --include=*.tsx --include=*.ts --include=*.jsx --include=*.js)",
+      "Bash(npm run:*)",
+      "Bash(grep -r \"agent\\\\|heartbeat\\\\|loop\\\\|polling\\\\|websocket\\\\|sse\" /home/marko/mission-control --include=*.ts --include=*.tsx ! -path */node_modules/* ! -path */.next/*)",
+      "Bash(find /home/marko/mission-control -type f \\\\\\( -name \"*.ts\" -o -name \"*.tsx\" -o -name \"*.js\" \\\\\\) ! -path \"*/node_modules/*\" ! -path \"*/.next/*\" -exec wc -l {} +)",
+      "Bash(grep:*)",
+      "Bash(find /home/marko/mission-control -type f -name data.json -o -name *.sqlite -o -name *.db)",
+      "Bash(npx next:*)",
+      "Bash(find /home/marko/mission-control -type f -name *test* -o -name *spec*)",
+      "Bash(find /home/marko/mission-control -path ./node_modules -prune -o -type d -name *test* -o -type d -name *spec*)",
+      "Bash(npm install:*)",
+      "Bash(npx playwright:*)"
+    ]
+  }
+}

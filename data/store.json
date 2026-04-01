@@ -1,0 +1,254 @@
+{
+  "tools": [],
+  "activities": [],
+  "settings": {
+    "theme": "light",
+    "autoSave": true,
+    "logLevel": "normal"
+  },
+  "tasks": [],
+  "taskActivities": [
+    {
+      "id": "crot27p2n",
+      "taskId": "heycuf6mo",
+      "taskTitle": "Backlog task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Backlog task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T12:29:26.978Z"
+    },
+    {
+      "id": "qdymwt7t3",
+      "taskId": "pq1ifyumr",
+      "taskTitle": "Done task for progress",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Done task for progress\" moved from Backlog to Done",
+      "timestamp": "2026-04-01T12:29:26.966Z"
+    },
+    {
+      "id": "3x3zue0m8",
+      "taskId": "pq1ifyumr",
+      "taskTitle": "Done task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Done task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T12:29:26.769Z"
+    },
+    {
+      "id": "yv7qfv1qs",
+      "taskId": "h57c7jxfi",
+      "taskTitle": "Linkable task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linkable task\" created and assigned to User",
+      "timestamp": "2026-04-01T12:29:25.591Z"
+    },
+    {
+      "id": "49ud6z7ph",
+      "taskId": "pdxssv7l4",
+      "taskTitle": "Backlog task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Backlog task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T12:21:06.024Z"
+    },
+    {
+      "id": "8qffi672s",
+      "taskId": "gygs0zez7",
+      "taskTitle": "Done task for progress",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Done task for progress\" moved from Backlog to Done",
+      "timestamp": "2026-04-01T12:21:06.010Z"
+    },
+    {
+      "id": "ieiwiw835",
+      "taskId": "gygs0zez7",
+      "taskTitle": "Done task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Done task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T12:21:05.807Z"
+    },
+    {
+      "id": "b1lbcptmb",
+      "taskId": "fmu8wpohu",
+      "taskTitle": "Linkable task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linkable task\" created and assigned to User",
+      "timestamp": "2026-04-01T12:21:04.618Z"
+    },
+    {
+      "id": "vb6lnocol",
+      "taskId": "wlnkx4fhl",
+      "taskTitle": "Backlog task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Backlog task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T12:15:44.650Z"
+    },
+    {
+      "id": "4vbxu97h0",
+      "taskId": "uvb3erf0u",
+      "taskTitle": "Done task for progress",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Done task for progress\" moved from Backlog to Done",
+      "timestamp": "2026-04-01T12:15:44.639Z"
+    },
+    {
+      "id": "tfmn5otka",
+      "taskId": "uvb3erf0u",
+      "taskTitle": "Done task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Done task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T12:15:44.465Z"
+    },
+    {
+      "id": "yeunzaaob",
+      "taskId": "9pfjac22p",
+      "taskTitle": "Linkable task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linkable task\" created and assigned to User",
+      "timestamp": "2026-04-01T12:15:43.337Z"
+    },
+    {
+      "id": "gnhoameds",
+      "taskId": "ehg34p3dr",
+      "taskTitle": "Backlog task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Backlog task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T12:04:13.809Z"
+    },
+    {
+      "id": "2s4wexl5q",
+      "taskId": "otnt77l0u",
+      "taskTitle": "Done task for progress",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Done task for progress\" moved from Backlog to Done",
+      "timestamp": "2026-04-01T12:04:13.797Z"
+    },
+    {
+      "id": "uv1l8dthx",
+      "taskId": "otnt77l0u",
+      "taskTitle": "Done task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Done task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T12:04:13.615Z"
+    },
+    {
+      "id": "4kwph7e0e",
+      "taskId": "wr9m69lat",
+      "taskTitle": "Linkable task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linkable task\" created and assigned to User",
+      "timestamp": "2026-04-01T12:04:12.533Z"
+    }
+  ],
+  "scheduledEvents": [
+    {
+      "id": "5p6i1j8nz",
+      "name": "Filter recurring",
+      "description": "",
+      "scheduleType": "recurring",
+      "schedule": "Daily",
+      "status": "active",
+      "createdAt": "2026-04-01T12:28:53.925Z",
+      "updatedAt": "2026-04-01T12:28:53.925Z"
+    },
+    {
+      "id": "6ckpu5mv5",
+      "name": "Filter onetime",
+      "description": "",
+      "scheduleType": "one-time",
+      "schedule": "Tomorrow",
+      "status": "active",
+      "createdAt": "2026-04-01T12:28:53.935Z",
+      "updatedAt": "2026-04-01T12:28:53.935Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "q780ixudv",
+      "name": "Active filter project",
+      "description": "",
+      "status": "active",
+      "linkedTaskIds": [],
+      "createdAt": "2026-04-01T12:29:27.697Z",
+      "updatedAt": "2026-04-01T12:29:27.697Z",
+      "lastActiveAt": "2026-04-01T12:29:27.697Z"
+    },
+    {
+      "id": "2am8n7ibh",
+      "name": "Archived filter project",
+      "description": "",
+      "status": "archived",
+      "linkedTaskIds": [],
+      "createdAt": "2026-04-01T12:29:27.705Z",
+      "updatedAt": "2026-04-01T12:29:27.715Z",
+      "lastActiveAt": "2026-04-01T12:29:27.715Z"
+    }
+  ],
+  "conversationMemories": [],
+  "longTermMemories": [
+    {
+      "id": "dw0xyz90w",
+      "title": "A preference",
+      "content": "Likes dark mode",
+      "category": "preference",
+      "createdAt": "2026-04-01T12:29:11.067Z",
+      "updatedAt": "2026-04-01T12:29:11.067Z"
+    },
+    {
+      "id": "pg8pnyim5",
+      "title": "A decision",
+      "content": "Use Next.js",
+      "category": "decision",
+      "createdAt": "2026-04-01T12:29:11.076Z",
+      "updatedAt": "2026-04-01T12:29:11.076Z"
+    }
+  ],
+  "docs": [
+    {
+      "id": "zcs32k1qe",
+      "title": "Badged doc",
+      "content": "Content here",
+      "category": "newsletter",
+      "format": "markdown",
+      "createdAt": "2026-04-01T12:29:01.584Z",
+      "updatedAt": "2026-04-01T12:29:01.584Z"
+    }
+  ],
+  "team": {
+    "missionStatement": "",
+    "agents": []
+  }
+}

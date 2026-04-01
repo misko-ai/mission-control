@@ -1,0 +1,28 @@
+{
+  "name": "mission-control",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_ENV=development next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "next": "^15.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/browser-chromium": "^1.59.0",
+    "@playwright/test": "^1.59.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.27",
+    "playwright": "^1.59.0",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.0",
+    "typescript": "5.9.3"
+  }
+}
