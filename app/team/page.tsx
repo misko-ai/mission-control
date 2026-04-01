@@ -1,21 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-
-type AgentRole = "orchestrator" | "worker" | "specialist";
-type AgentStatus = "running" | "idle" | "offline";
-
-interface Agent {
-  id: string;
-  name: string;
-  role: AgentRole;
-  description: string;
-  model: string;
-  parentId: string | null;
-  status: AgentStatus;
-  createdAt: string;
-  updatedAt: string;
-}
+import type { AgentRole, AgentStatus, Agent } from "@/lib/types";
 
 const roleBadge: Record<AgentRole, string> = {
   orchestrator: "bg-accent/15 text-accent",

@@ -1,19 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-
-type TaskColumn = "backlog" | "in-progress" | "review" | "done";
-
-interface Task {
-  id: string;
-  title: string;
-  description: string;
-  assignee: "user" | "agent";
-  column: TaskColumn;
-  createdAt: string;
-  updatedAt: string;
-  completedAt?: string;
-}
+import type { TaskColumn, Task } from "@/lib/types";
 
 interface ProjectProgress {
   total: number;
@@ -173,6 +161,7 @@ export default function ProjectsPage() {
   const columnColor: Record<TaskColumn, string> = {
     backlog: "bg-text-muted/15 text-text-muted",
     "in-progress": "bg-accent/15 text-accent",
+    blocked: "bg-danger/15 text-danger",
     review: "bg-warning/15 text-warning",
     done: "bg-success/15 text-success",
   };
@@ -180,6 +169,7 @@ export default function ProjectsPage() {
   const columnLabel: Record<TaskColumn, string> = {
     backlog: "Backlog",
     "in-progress": "In Progress",
+    blocked: "Blocked",
     review: "Review",
     done: "Done",
   };

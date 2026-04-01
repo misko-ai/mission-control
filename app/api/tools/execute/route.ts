@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getData, updateTool, logActivity, ActivityEntry } from "@/lib/store";
-
-function generateId() {
-  return Math.random().toString(36).substring(2, 11);
-}
+import { generateId } from "@/lib/db";
+import { getData, updateTool, logActivity } from "@/lib/store";
+import { logError } from "@/lib/logger";
+import type { ActivityEntry } from "@/lib/types";
 
 export async function POST(request: NextRequest) {
   try {
@@ -38,7 +37,8 @@ export async function POST(request: NextRequest) {
     await logActivity(activity);
 
     return NextResponse.json({ success: true, usageCount: tool.usageCount + 1 });
-  } catch {
+  } catch (err) {
+    logError("POST /api/tools/execute", err);
     return NextResponse.json({ error: "Failed to execute tool" }, { status: 500 });
   }
 }

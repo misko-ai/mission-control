@@ -1,21 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
+import { generateId } from "@/lib/db";
 import {
   getScheduledEvents,
   addScheduledEvent,
   updateScheduledEvent,
   deleteScheduledEvent,
-  ScheduledEvent,
 } from "@/lib/store";
-
-function generateId() {
-  return Math.random().toString(36).substring(2, 11);
-}
+import { logError } from "@/lib/logger";
+import {
+  requireString,
+  requireEnum,
+  optionalEnum,
+  collectErrors,
+  validationResponse,
+  VALID_SCHEDULE_TYPE,
+  VALID_SCHEDULE_STATUS,
+} from "@/lib/validation";
+import type { ScheduledEvent } from "@/lib/types";
 
 export async function GET() {
   try {
     const events = await getScheduledEvents();
     return NextResponse.json({ events });
-  } catch {
+  } catch (err) {
+    logError("GET /api/calendar", err);
     return NextResponse.json({ error: "Failed to load events" }, { status: 500 });
   }
 }
@@ -23,22 +31,23 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, description, scheduleType, schedule, cronExpression, linkedTaskId } = body;
+    const { description, cronExpression, linkedTaskId } = body;
 
-    if (!name || !scheduleType || !schedule) {
-      return NextResponse.json(
-        { error: "Name, scheduleType, and schedule are required" },
-        { status: 400 }
-      );
-    }
+    const nameResult = requireString(body.name, "name", { maxLength: 200 });
+    const scheduleTypeResult = requireEnum(body.scheduleType, "scheduleType", VALID_SCHEDULE_TYPE);
+    const scheduleResult = requireString(body.schedule, "schedule");
+
+    const errors = collectErrors(nameResult, scheduleTypeResult, scheduleResult);
+    const vRes = validationResponse(errors);
+    if (vRes) return vRes;
 
     const now = new Date().toISOString();
     const event: ScheduledEvent = {
       id: generateId(),
-      name,
+      name: nameResult as string,
       description: description || "",
-      scheduleType,
-      schedule,
+      scheduleType: scheduleTypeResult as ScheduledEvent["scheduleType"],
+      schedule: scheduleResult as string,
       cronExpression: cronExpression || undefined,
       status: "active",
       createdAt: now,
@@ -48,7 +57,8 @@ export async function POST(request: NextRequest) {
 
     await addScheduledEvent(event);
     return NextResponse.json({ success: true, event });
-  } catch {
+  } catch (err) {
+    logError("POST /api/calendar", err);
     return NextResponse.json({ error: "Failed to create event" }, { status: 500 });
   }
 }
@@ -62,10 +72,20 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "ID required" }, { status: 400 });
     }
 
-    updates.updatedAt = new Date().toISOString();
-    await updateScheduledEvent(id, updates);
+    if (updates.status !== undefined) {
+      const statusResult = optionalEnum(updates.status, "status", VALID_SCHEDULE_STATUS, updates.status);
+      const errors = collectErrors(statusResult);
+      const vRes = validationResponse(errors);
+      if (vRes) return vRes;
+    }
+
+    const found = await updateScheduledEvent(id, updates);
+    if (!found) {
+      return NextResponse.json({ error: "Event not found" }, { status: 404 });
+    }
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (err) {
+    logError("PUT /api/calendar", err);
     return NextResponse.json({ error: "Failed to update event" }, { status: 500 });
   }
 }
@@ -79,9 +99,13 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "ID required" }, { status: 400 });
     }
 
-    await deleteScheduledEvent(id);
+    const found = await deleteScheduledEvent(id);
+    if (!found) {
+      return NextResponse.json({ error: "Event not found" }, { status: 404 });
+    }
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (err) {
+    logError("DELETE /api/calendar", err);
     return NextResponse.json({ error: "Failed to delete event" }, { status: 500 });
   }
 }

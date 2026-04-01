@@ -158,3 +158,50 @@ input:focus, textarea:focus, select:focus {
 .peer:checked ~ .peer-checked\:bg-accent {
   background-color: var(--accent);
 }
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg: #0F0F1A;
+  --surface: #1A1A2E;
+  --surface-hover: #252540;
+  --surface-active: #2F2F50;
+  --border: #3A3A5C;
+  --border-subtle: #2F2F50;
+  --text: #E8E8F0;
+  --text-secondary: #A0A0B8;
+  --text-muted: #6B6B88;
+  --accent: #8B8FF0;
+  --accent-hover: #7B7FEB;
+  --success: #34D399;
+  --danger: #F87171;
+  --warning: #FBBF24;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #3A3A5C;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #4A4A6C;
+}
+
+/* Toast slide-in animation */
+@keyframes slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.animate-slide-in { animation: slide-in 0.2s ease-out; }
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pixel-typing,
+  .animate-pixel-bob,
+  .animate-pixel-idle,
+  .animate-screen-flicker,
+  .animate-cursor-blink,
+  .animate-steam,
+  .animate-slide-in {
+    animation: none !important;
+  }
+}

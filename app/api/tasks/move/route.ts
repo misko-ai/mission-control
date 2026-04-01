@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { moveTask, logTaskActivity, TaskActivityEntry, TaskColumn } from "@/lib/store";
-
-function generateId() {
-  return Math.random().toString(36).substring(2, 11);
-}
+import { generateId } from "@/lib/db";
+import { moveTask, logTaskActivity } from "@/lib/store";
+import { logError } from "@/lib/logger";
+import type { TaskActivityEntry, TaskColumn } from "@/lib/types";
 
 const validColumns: TaskColumn[] = ["backlog", "in-progress", "review", "done", "blocked"];
 
@@ -54,7 +53,8 @@ export async function POST(request: NextRequest) {
     await logTaskActivity(activity);
 
     return NextResponse.json({ success: true, task: result.task });
-  } catch {
+  } catch (err) {
+    logError("POST /api/tasks/move", err);
     return NextResponse.json({ error: "Failed to move task" }, { status: 500 });
   }
 }

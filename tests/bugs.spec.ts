@@ -122,22 +122,40 @@ test.describe("Bug Reports page", () => {
   });
 
   test("can add a note to a bug", async ({ page }) => {
-    await page.request.post("/api/bugs", {
+    const createRes = await page.request.post("/api/bugs", {
       data: {
         title: "Note test bug",
         screen: "Taskboard",
         severity: "high",
       },
     });
+    const createData = await createRes.json();
+    expect(createData.success).toBe(true);
+
+    // Verify the bug exists via GET before navigating
+    const verifyRes = await page.request.get("/api/bugs");
+    const verifyData = await verifyRes.json();
+    expect(verifyData.bugs.length).toBeGreaterThan(0);
+
     await page.goto("/bugs");
+    // Wait for page to fully load and show the bug
+    await expect(page.locator("h2")).toHaveText("Bug Reports");
 
-    await page.locator("button", { hasText: "Note test bug" }).click();
-    await page.fill('input[placeholder="Add a note..."]', "This only happens on refresh");
-    await page.getByRole("button", { name: "Add Note", exact: true }).click();
+    const bugButton = page.locator("button", { hasText: "Note test bug" });
+    await expect(bugButton).toBeVisible({ timeout: 10000 });
+    await bugButton.click();
 
+    const noteInput = page.locator('input[placeholder="Add a note..."]');
+    await expect(noteInput).toBeVisible();
+    await noteInput.fill("This only happens on refresh");
+    const addBtn = page.getByRole("button", { name: "Add Note", exact: true });
+    await expect(addBtn).toBeEnabled();
+    await addBtn.click();
+
+    // Wait for note to appear after the API call and re-fetch
     await expect(
       page.locator("text=This only happens on refresh")
-    ).toBeVisible();
+    ).toBeVisible({ timeout: 10000 });
     await expect(page.getByText("user", { exact: true }).first()).toBeVisible();
   });
 

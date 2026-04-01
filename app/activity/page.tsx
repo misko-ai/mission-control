@@ -1,15 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
-interface ActivityEntry {
-  id: string;
-  toolId: string;
-  toolName: string;
-  action: "created" | "executed" | "updated" | "deleted";
-  details: string;
-  timestamp: string;
-}
+import type { ActivityEntry } from "@/lib/types";
 
 type FilterAction = "all" | "created" | "executed" | "updated" | "deleted";
 

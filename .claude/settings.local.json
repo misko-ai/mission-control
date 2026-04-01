@@ -16,7 +16,23 @@
       "Bash(find /home/marko/mission-control -type f -name *test* -o -name *spec*)",
       "Bash(find /home/marko/mission-control -path ./node_modules -prune -o -type d -name *test* -o -type d -name *spec*)",
       "Bash(npm install:*)",
-      "Bash(npx playwright:*)"
+      "Bash(npx playwright:*)",
+      "Bash(find /home/marko/mission-control -type f \\\\\\(-name *.tsx -o -name *.ts -o -name *.jsx -o -name *.js \\\\\\))",
+      "Bash(lsof -ti:3000)",
+      "Bash(python3 -c \"import json; json.load\\(open\\(''data/store.json''\\)\\)\")",
+      "Bash(python3:*)",
+      "Bash(kill -9 103688)",
+      "Bash(fuser 3000/tcp)",
+      "Bash(git status:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(find /home/marko/mission-control -type f \\\\\\( -name \"*.tsx\" -o -name \"*.ts\" -o -name \"*.jsx\" -o -name \"*.js\" \\\\\\) ! -path \"*/node_modules/*\" ! -path \"*/.next/*\" -exec wc -l {} +)",
+      "Bash(find /home/marko/mission-control -type f -name .env* -o -name *secret* -o -name *key* -o -name *credential*)",
+      "Bash(ls:*)",
+      "Bash(wc -l /home/marko/mission-control/app/api/*/route.ts)",
+      "Bash(npx tsc:*)",
+      "Bash(git:*)"
     ]
   }
 }

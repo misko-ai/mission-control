@@ -19,13 +19,17 @@ All POST/PUT requests must include `Content-Type: application/json` and send a J
 
 All responses return JSON. Successful writes return `{ "success": true }` (and often the created object). Errors return `{ "error": "message" }` with an appropriate HTTP status code.
 
+**Validation:** All POST/PUT endpoints validate input — enum fields must be valid values, strings have length limits (titles: 200 chars, content/descriptions: 10,000 chars). Invalid input returns `{ "error": "Validation failed", "fields": [{ "field": "name", "message": "..." }] }` with HTTP 400.
+
+**Not found:** Update and delete operations return HTTP 404 with `{ "error": "<entity> not found" }` when the ID doesn't match any record.
+
 ---
 
 ## Screens & Features
 
 ### 1. Dashboard (`/`)
 
-The home screen. Shows system overview: total tools, executions, activity count, recent tools, and recent activity. Read-only — no API needed, it aggregates data from other endpoints.
+The home screen. Shows system overview: total tasks, open bugs, active projects, active agents, task column distribution, active bugs by severity, project progress bars, agent status, and recent activity feed. Read-only — no API needed, it aggregates data from other endpoints. It's a server-rendered page, so data appears on load without client-side fetching.
 
 ---
 
@@ -38,12 +42,11 @@ A Kanban board for managing work. Tasks move through five columns: **backlog →
 | Action | Method | Endpoint | Body |
 |--------|--------|----------|------|
 | List tasks | GET | `/api/tasks` | — |
-| Create task | POST | `/api/tasks` | `{ title, description, assignee: "user" \| "agent" }` |
-| Update task | PUT | `/api/tasks` | `{ id, title?, description?, assignee?, blockReason? }` |
+| Create task | POST | `/api/tasks` | `{ title, description, assignee?, priority? }` |
+| Update task | PUT | `/api/tasks` | `{ id, title?, description?, assignee?, priority?, blockReason? }` |
 | Delete task | DELETE | `/api/tasks?id=<id>` | — |
 | Move task | POST | `/api/tasks/move` | `{ taskId, toColumn }` |
 | Approve task | POST | `/api/tasks/approve` | `{ taskId }` |
-| Agent tick | POST | `/api/tasks/agent-tick` | `{}` |
 | Get activities | GET | `/api/tasks/activities` | — |
 
 **Columns:** `backlog`, `in-progress`, `blocked`, `review`, `done`
@@ -62,12 +65,27 @@ A Kanban board for managing work. Tasks move through five columns: **backlog →
   PUT  /api/tasks         { "id": "<id>", "blockReason": "" }
   ```
 
+**Assignees:** `"user"` or `"agent"` (defaults to `"user"`)
+**Priorities:** `"low"`, `"medium"`, `"high"`, `"urgent"` (defaults to `"medium"`)
+
 **Editing tasks:**
-- Tasks are fully editable via `PUT /api/tasks`. You can update `title`, `description`, `assignee`, and `blockReason`.
+- Tasks are fully editable via `PUT /api/tasks`. You can update `title`, `description`, `assignee`, `priority`, and `blockReason`.
 - Use this to refine task descriptions as you learn more about the work, or to reassign between user and agent.
+
+**Linking tasks to projects on creation:**
+- When creating a task, you can immediately link it to an existing project in a single flow:
+  ```
+  1. POST /api/tasks  { "title": "...", "description": "...", "assignee": "agent" }
+     → returns { "task": { "id": "<taskId>", ... } }
+
+  2. POST /api/projects/tasks  { "projectId": "<projectId>", "taskId": "<taskId>" }
+  ```
+- The UI includes a Project dropdown in the create form. When you create tasks via API, do both calls to keep tasks organized under their projects.
+- If a task doesn't belong to any project, skip step 2. Not every task needs a project.
 
 **How you should use it:**
 - When you start working on something, create a task assigned to `"agent"` and move it to `in-progress`.
+- If the work belongs to an existing project, link the task to it immediately after creation.
 - If you hit a blocker you cannot resolve, move the task to `blocked` and set a clear `blockReason`.
 - When you finish, move it to `review` so Marko can approve it.
 - Use task activities to log what you did.
@@ -232,11 +250,11 @@ Register and execute custom tools.
 
 | Action | Method | Endpoint | Body |
 |--------|--------|----------|------|
-| List tools | GET | `/api/tools` | — |
-| Create tool | POST | `/api/tools` | `{ name, description, parameters }` |
+| List tools | GET | `/api/tools` | — (returns `{ tools: [...] }`) |
+| Create tool | POST | `/api/tools` | `{ name, description, parameters? }` |
 | Update tool | PUT | `/api/tools` | `{ id, name?, description?, parameters? }` |
 | Delete tool | DELETE | `/api/tools?id=<id>` | — |
-| Execute tool | POST | `/api/tools/execute` | `{ toolId, arguments }` |
+| Execute tool | POST | `/api/tools/execute` | `{ id }` |
 
 **Parameter format:**
 ```json
@@ -297,9 +315,27 @@ App configuration.
 | Action | Method | Endpoint | Body |
 |--------|--------|----------|------|
 | Get settings | GET | `/api/settings` | — |
-| Update settings | PATCH | `/api/settings` | `{ autoSave?, logLevel? }` |
+| Update settings | PATCH | `/api/settings` | `{ theme?, autoSave?, logLevel? }` |
 
+**Themes:** `"light"`, `"dark"`
 **Log levels:** `"normal"`, `"verbose"`
+
+---
+
+### 13. Search (`Ctrl+K` / `Cmd+K`)
+
+Global search across all content — tasks, docs, memories, bugs, and projects. Accessible from any page via keyboard shortcut.
+
+| Action | Method | Endpoint | Query |
+|--------|--------|----------|-------|
+| Search | GET | `/api/search?q=<query>` | Minimum 2 characters |
+
+Returns results grouped by category (max 5 per category):
+```json
+{ "tasks": [...], "docs": [...], "memories": [...], "bugs": [...], "projects": [...] }
+```
+
+Each result includes `id`, `title`, `type`, and `snippet` (with match context). Clicking a result navigates to the relevant page.
 
 ---
 
@@ -345,7 +381,6 @@ PUT    /api/tasks                        Update task (title, description, assign
 DELETE /api/tasks?id=<id>                Delete task
 POST   /api/tasks/move                   Move task to column
 POST   /api/tasks/approve                Approve agent task
-POST   /api/tasks/agent-tick             Agent heartbeat
 GET    /api/tasks/activities             Task activity log
 
 GET    /api/calendar                     List events
@@ -382,23 +417,36 @@ POST   /api/team/agents                  Register agent
 PUT    /api/team/agents                  Update agent
 DELETE /api/team/agents?id=<id>          Delete agent
 
-GET    /api/tools                        List tools
-POST   /api/tools                        Create tool
-PUT    /api/tools                        Update tool
+GET    /api/tools                        List tools → { tools: [...] }
+POST   /api/tools                        Create tool { name, description, parameters? }
+PUT    /api/tools                        Update tool { id, ... }
 DELETE /api/tools?id=<id>                Delete tool
-POST   /api/tools/execute                Execute tool
+POST   /api/tools/execute                Execute tool { id }
 
 GET    /api/activities                   Activity log
 
 GET    /api/bugs                         List bugs
-POST   /api/bugs                         Report bug
-PUT    /api/bugs                         Update bug
+POST   /api/bugs                         Report bug { title, screen, severity }
+PUT    /api/bugs                         Update bug { id, ... }
 DELETE /api/bugs?id=<id>                 Delete bug
-POST   /api/bugs/notes                   Add note to bug
+POST   /api/bugs/notes                   Add note { bugId, content, author? }
 
 GET    /api/settings                     Get settings
-PATCH  /api/settings                     Update settings
+PATCH  /api/settings                     Update settings { theme?, autoSave?, logLevel? }
+
+GET    /api/search?q=<query>             Global search (min 2 chars)
 ```
+
+---
+
+## Data Reliability
+
+Mission Control stores all data in a single JSON file (`data/store.json`). The system includes several safety mechanisms:
+
+- **Atomic writes:** Data is written to a temporary file first, then atomically renamed to prevent corruption from crashes.
+- **Automatic backups:** Before each write, the current data is backed up to `store.json.bak`. If the main file is corrupted, the system automatically recovers from the backup.
+- **Input validation:** All API endpoints validate enum values and string lengths before writing. Invalid data is rejected with clear error messages.
+- **Error logging:** All API errors are logged to the console with structured context (`[MC][timestamp][endpoint]`), making it easy to diagnose issues.
 
 ---
 

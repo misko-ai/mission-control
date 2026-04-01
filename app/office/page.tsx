@@ -1,19 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-
-type AgentRole = "orchestrator" | "worker" | "specialist";
-type AgentStatus = "running" | "idle" | "offline";
-
-interface Agent {
-  id: string;
-  name: string;
-  role: AgentRole;
-  description: string;
-  model: string;
-  parentId: string | null;
-  status: AgentStatus;
-}
+import type { AgentRole, AgentStatus, Agent } from "@/lib/types";
 
 // Pixel size unit
 const PX = 4;

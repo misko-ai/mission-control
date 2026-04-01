@@ -44,7 +44,7 @@ test.describe("Team page", () => {
       'textarea[placeholder="Define the north star every agent works toward..."]',
       "Build the best AI-powered productivity system"
     );
-    await page.getByRole("button", { name: "Save", exact: true }).click();
+    await page.getByRole("button", { name: "Save", exact: true }).first().click();
 
     await expect(
       page.locator("text=Build the best AI-powered productivity system")
@@ -54,7 +54,7 @@ test.describe("Team page", () => {
     await page.getByRole("button", { name: "Edit", exact: true }).first().click();
     const textarea = page.locator("textarea");
     await textarea.fill("Updated mission: ship fast, ship well");
-    await page.getByRole("button", { name: "Save", exact: true }).click();
+    await page.getByRole("button", { name: "Save", exact: true }).first().click();
 
     await expect(
       page.locator("text=Updated mission: ship fast, ship well")
@@ -102,10 +102,11 @@ test.describe("Team page", () => {
     });
     await page.goto("/team");
 
+    // Wait for agent data to load
     const card = page
       .locator(".rounded-lg", { hasText: "Edit Agent" })
       .first();
-    await expect(card).toBeVisible();
+    await expect(card).toBeVisible({ timeout: 10000 });
     await card.getByRole("button", { name: "Edit", exact: true }).click();
 
     const nameInput = page.locator('input[value="Edit Agent"]');

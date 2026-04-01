@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { generateId } from "@/lib/db";
 import {
   getData,
   addTool,
@@ -6,19 +7,24 @@ import {
   updateTool,
   logActivity,
   updateSettings,
-  Tool,
-  ActivityEntry,
 } from "@/lib/store";
-
-function generateId() {
-  return Math.random().toString(36).substring(2, 11);
-}
+import { logError } from "@/lib/logger";
+import {
+  requireString,
+  optionalEnum,
+  collectErrors,
+  validationResponse,
+  VALID_THEME,
+  VALID_LOG_LEVEL,
+} from "@/lib/validation";
+import type { Tool, ActivityEntry } from "@/lib/types";
 
 export async function GET() {
   try {
     const data = await getData();
-    return NextResponse.json(data);
-  } catch {
+    return NextResponse.json({ tools: data.tools });
+  } catch (err) {
+    logError("GET /api/tools", err);
     return NextResponse.json({ error: "Failed to load data" }, { status: 500 });
   }
 }
@@ -28,17 +34,17 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { name, description, parameters } = body;
 
-    if (!name || !description) {
-      return NextResponse.json(
-        { error: "Name and description required" },
-        { status: 400 }
-      );
-    }
+    const vName = requireString(name, "name", { maxLength: 200 });
+    const vDescription = requireString(description, "description", { maxLength: 10000 });
+
+    const errors = collectErrors(vName, vDescription);
+    const vRes = validationResponse(errors);
+    if (vRes) return vRes;
 
     const tool: Tool = {
       id: generateId(),
-      name,
-      description,
+      name: vName as string,
+      description: vDescription as string,
       parameters: parameters || [],
       createdAt: new Date().toISOString(),
       usageCount: 0,
@@ -57,7 +63,8 @@ export async function POST(request: NextRequest) {
     await logActivity(activity);
 
     return NextResponse.json({ success: true, tool });
-  } catch {
+  } catch (err) {
+    logError("POST /api/tools", err);
     return NextResponse.json({ error: "Failed to create tool" }, { status: 500 });
   }
 }
@@ -82,7 +89,10 @@ export async function PUT(request: NextRequest) {
     if (description !== undefined) updates.description = description;
     if (parameters !== undefined) updates.parameters = parameters;
 
-    await updateTool(id, updates);
+    const found = await updateTool(id, updates);
+    if (!found) {
+      return NextResponse.json({ error: "Tool not found" }, { status: 404 });
+    }
 
     const updatedName = updates.name ?? existingTool.name;
     const activity: ActivityEntry = {
@@ -96,7 +106,8 @@ export async function PUT(request: NextRequest) {
     await logActivity(activity);
 
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (err) {
+    logError("PUT /api/tools", err);
     return NextResponse.json({ error: "Failed to update tool" }, { status: 500 });
   }
 }
@@ -126,10 +137,15 @@ export async function DELETE(request: NextRequest) {
       timestamp: new Date().toISOString(),
     };
     await logActivity(activity);
-    await deleteTool(id);
+
+    const found = await deleteTool(id);
+    if (!found) {
+      return NextResponse.json({ error: "Tool not found" }, { status: 404 });
+    }
 
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (err) {
+    logError("DELETE /api/tools", err);
     return NextResponse.json({ error: "Failed to delete tool" }, { status: 500 });
   }
 }
@@ -140,11 +156,23 @@ export async function PATCH(request: NextRequest) {
     const { settings } = body;
 
     if (settings) {
+      const checks: unknown[] = [];
+      if (settings.theme !== undefined) {
+        checks.push(optionalEnum(settings.theme, "theme", VALID_THEME, settings.theme));
+      }
+      if (settings.logLevel !== undefined) {
+        checks.push(optionalEnum(settings.logLevel, "logLevel", VALID_LOG_LEVEL, settings.logLevel));
+      }
+      const errors = collectErrors(...checks);
+      const vRes = validationResponse(errors);
+      if (vRes) return vRes;
+
       await updateSettings(settings);
     }
 
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (err) {
+    logError("PATCH /api/tools", err);
     return NextResponse.json({ error: "Failed to update settings" }, { status: 500 });
   }
 }

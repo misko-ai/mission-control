@@ -56,6 +56,8 @@ test.describe("Office page", () => {
       },
     });
     await page.goto("/office");
+    // Wait for loading to finish
+    await expect(page.locator("h2", { hasText: "Office" })).toBeVisible();
 
     const sprite = page.locator('[data-agent-name="IdleBot"]');
     await expect(sprite).toBeVisible();
@@ -165,6 +167,12 @@ test.describe("Office page", () => {
     await page.request.post("/api/team/agents", {
       data: { name: "AgentGamma", role: "specialist", status: "idle" },
     });
+
+    // Verify all 3 agents exist before navigating
+    const verifyRes = await page.request.get("/api/team/agents");
+    const verifyData = await verifyRes.json();
+    expect(verifyData.agents.length).toBe(3);
+
     await page.goto("/office");
 
     await expect(page.locator('[data-agent-name="AgentAlpha"]')).toBeVisible();

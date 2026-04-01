@@ -1,28 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-
-type BugSeverity = "low" | "medium" | "high" | "critical";
-type BugStatus = "open" | "in-progress" | "resolved";
-
-interface BugNote {
-  id: string;
-  content: string;
-  author: "user" | "agent";
-  createdAt: string;
-}
-
-interface BugReport {
-  id: string;
-  title: string;
-  screen: string;
-  severity: BugSeverity;
-  status: BugStatus;
-  stepsToReproduce: string;
-  notes: BugNote[];
-  createdAt: string;
-  updatedAt: string;
-}
+import type { BugSeverity, BugStatus, BugNote, BugReport } from "@/lib/types";
+import { formatRelativeTime } from "@/lib/utils";
 
 const severityBadge: Record<BugSeverity, string> = {
   critical: "bg-danger/15 text-danger",
@@ -36,18 +16,6 @@ const statusBadge: Record<BugStatus, string> = {
   "in-progress": "bg-warning/15 text-warning",
   resolved: "bg-success/15 text-success",
 };
-
-function formatRelativeTime(timestamp: string): string {
-  const diff = Date.now() - new Date(timestamp).getTime();
-  const seconds = Math.floor(diff / 1000);
-  if (seconds < 60) return "just now";
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  return `${days}d ago`;
-}
 
 export default function BugsPage() {
   const [bugs, setBugs] = useState<BugReport[]>([]);

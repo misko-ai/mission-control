@@ -1,382 +1,805 @@
 {
-  "tools": [
-    {
-      "id": "1bg6f1ez1",
-      "name": "exec",
-      "description": "Execute shell commands on the host system. Use for file ops, git, npm, system commands. Parameters: command (string, required)",
-      "parameters": [
-        {
-          "name": "command",
-          "type": "string",
-          "description": "Shell command to execute",
-          "required": true
-        }
-      ],
-      "createdAt": "2026-04-01T12:57:41.358Z",
-      "usageCount": 0
-    },
-    {
-      "id": "j1qpz036x",
-      "name": "read",
-      "description": "Read file contents from disk. Use for reading source code, configs, documents. Parameters: path (string, required)",
-      "parameters": [
-        {
-          "name": "path",
-          "type": "string",
-          "description": "Absolute file path to read",
-          "required": true
-        }
-      ],
-      "createdAt": "2026-04-01T12:57:49.698Z",
-      "usageCount": 0
-    },
-    {
-      "id": "er5gei785",
-      "name": "write",
-      "description": "Write or overwrite files on disk. Creates parent dirs if needed. Parameters: path (string), content (string, required)",
-      "parameters": [
-        {
-          "name": "path",
-          "type": "string",
-          "description": "Absolute file path to write",
-          "required": true
-        },
-        {
-          "name": "content",
-          "type": "string",
-          "description": "File content to write",
-          "required": true
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:07.282Z",
-      "usageCount": 0
-    },
-    {
-      "id": "brkymhiim",
-      "name": "edit",
-      "description": "Make precise text edits to files using exact replacement. Edits are matched against original, non-overlapping. Parameters: file (string, required), edits (json array, required)",
-      "parameters": [
-        {
-          "name": "file",
-          "type": "string",
-          "description": "File path to edit",
-          "required": true
-        },
-        {
-          "name": "edits",
-          "type": "json",
-          "description": "Array of {oldText, newText} replacements",
-          "required": true
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:07.307Z",
-      "usageCount": 0
-    },
-    {
-      "id": "wu5ujrfeu",
-      "name": "browser",
-      "description": "Automate web browser via Playwright. Launch Chrome at /usr/bin/google-chrome (headless:false for JS-heavy sites). Use waitForSelector instead of networkidle. Parameters: url (string, optional)",
-      "parameters": [
-        {
-          "name": "url",
-          "type": "string",
-          "description": "URL to open in browser",
-          "required": false
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:07.333Z",
-      "usageCount": 0
-    },
-    {
-      "id": "svl6u0mx2",
-      "name": "web_fetch",
-      "description": "Fetch and extract readable content from URLs. Returns markdown/text. Use for reading web pages without browser. Parameters: url (string, required)",
-      "parameters": [
-        {
-          "name": "url",
-          "type": "string",
-          "description": "HTTP URL to fetch",
-          "required": true
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:07.358Z",
-      "usageCount": 0
-    },
-    {
-      "id": "152a9w840",
-      "name": "web_search",
-      "description": "Search the web via DuckDuckGo. Returns titles, URLs, snippets. Parameters: query (string, required)",
-      "parameters": [
-        {
-          "name": "query",
-          "type": "string",
-          "description": "Search query",
-          "required": true
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:07.384Z",
-      "usageCount": 0
-    },
-    {
-      "id": "zxfqb7y92",
-      "name": "image_generate",
-      "description": "Generate images via AI. Parameters: prompt (string, required), size (string, optional), count (number, optional)",
-      "parameters": [
-        {
-          "name": "prompt",
-          "type": "string",
-          "description": "Image generation prompt",
-          "required": true
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:07.409Z",
-      "usageCount": 0
-    },
-    {
-      "id": "q7bifjhsb",
-      "name": "email_read",
-      "description": "Read emails via IMAP. Usage: python3 read_emails.py [--unread|--search QUERY]. Returns inbox messages.",
-      "parameters": [
-        {
-          "name": "query",
-          "type": "string",
-          "description": "Search query or --unread flag",
-          "required": false
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:07.434Z",
-      "usageCount": 0
-    },
-    {
-      "id": "q5n1lwd9s",
-      "name": "email_send",
-      "description": "Send emails via nodemailer. Usage: node send.js --to ADDRESS --subject SUBJECT --body TEXT",
-      "parameters": [
-        {
-          "name": "to",
-          "type": "string",
-          "description": "Recipient email address",
-          "required": true
-        },
-        {
-          "name": "subject",
-          "type": "string",
-          "description": "Email subject",
-          "required": true
-        },
-        {
-          "name": "body",
-          "type": "string",
-          "description": "Email body text",
-          "required": true
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:07.460Z",
-      "usageCount": 0
-    },
-    {
-      "id": "nwd9woequ",
-      "name": "github",
-      "description": "GitHub operations via CLI or API. Use gh CLI or GitHub API. Repos must be private.",
-      "parameters": [
-        {
-          "name": "action",
-          "type": "string",
-          "description": "Action: create-repo, push, clone, etc.",
-          "required": true
-        },
-        {
-          "name": "repo",
-          "type": "string",
-          "description": "Repository name",
-          "required": false
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:21.436Z",
-      "usageCount": 0
-    },
-    {
-      "id": "a5idixc8j",
-      "name": "cron",
-      "description": "Schedule recurring or one-time tasks. Job types: systemEvent (main session), agentTurn (isolated). Schedule: cron expression or every Ms.",
-      "parameters": [
-        {
-          "name": "name",
-          "type": "string",
-          "description": "Job name",
-          "required": false
-        },
-        {
-          "name": "schedule",
-          "type": "json",
-          "description": "Schedule object {kind: cron|every|at, expr|everyMs|at}",
-          "required": true
-        },
-        {
-          "name": "payload",
-          "type": "json",
-          "description": "Payload object {kind: systemEvent|agentTurn, text|message}",
-          "required": true
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:21.461Z",
-      "usageCount": 0
-    },
-    {
-      "id": "wbv8cwqll",
-      "name": "memory_search",
-      "description": "Search long-term memory files. Returns relevant snippets from MEMORY.md and memory/. Parameters: query (string, required)",
-      "parameters": [
-        {
-          "name": "query",
-          "type": "string",
-          "description": "Search query for memory",
-          "required": true
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:21.488Z",
-      "usageCount": 0
-    },
-    {
-      "id": "dtx3iljy0",
-      "name": "subagent_spawn",
-      "description": "Spawn a sub-agent session (Claude Code, Codex, etc.). Parameters: task (string, required), runtime (string: subagent|acp), mode (string: run|session)",
-      "parameters": [
-        {
-          "name": "task",
-          "type": "string",
-          "description": "Task prompt for sub-agent",
-          "required": true
-        },
-        {
-          "name": "runtime",
-          "type": "string",
-          "description": "Runtime: subagent or acp",
-          "required": false
-        },
-        {
-          "name": "mode",
-          "type": "string",
-          "description": "Mode: run (one-shot) or session (persistent)",
-          "required": false
-        }
-      ],
-      "createdAt": "2026-04-01T12:58:21.512Z",
-      "usageCount": 0
-    }
-  ],
+  "tools": [],
   "activities": [
     {
-      "id": "dppugzjri",
-      "toolId": "dtx3iljy0",
-      "toolName": "subagent_spawn",
-      "action": "created",
-      "details": "Tool \"subagent_spawn\" was created",
-      "timestamp": "2026-04-01T12:58:21.513Z"
+      "id": "53f1eece-9799-4a5a-bab7-f3902157edc2",
+      "toolId": "8d7cb85e-bcec-4881-8e88-9ed9d8265258",
+      "toolName": "DeleteMeTool",
+      "action": "deleted",
+      "details": "Tool \"DeleteMeTool\" was deleted",
+      "timestamp": "2026-04-01T16:34:56.170Z"
     },
     {
-      "id": "xsf6plho1",
-      "toolId": "wbv8cwqll",
-      "toolName": "memory_search",
+      "id": "3c386f20-c5b3-4403-bfc2-6ccc53b65f22",
+      "toolId": "8d7cb85e-bcec-4881-8e88-9ed9d8265258",
+      "toolName": "DeleteMeTool",
       "action": "created",
-      "details": "Tool \"memory_search\" was created",
-      "timestamp": "2026-04-01T12:58:21.489Z"
+      "details": "Tool \"DeleteMeTool\" was created",
+      "timestamp": "2026-04-01T16:34:55.473Z"
     },
     {
-      "id": "8i0u3cf0r",
-      "toolId": "a5idixc8j",
-      "toolName": "cron",
-      "action": "created",
-      "details": "Tool \"cron\" was created",
-      "timestamp": "2026-04-01T12:58:21.463Z"
+      "id": "0c255a8f-5477-47dc-809d-f95c251331ea",
+      "toolId": "860842c2-cc89-443e-bbb2-c488b6ffd29d",
+      "toolName": "RunCountTool",
+      "action": "deleted",
+      "details": "Tool \"RunCountTool\" was deleted",
+      "timestamp": "2026-04-01T16:34:55.460Z"
     },
     {
-      "id": "vg6ajlxyl",
-      "toolId": "nwd9woequ",
-      "toolName": "github",
-      "action": "created",
-      "details": "Tool \"github\" was created",
-      "timestamp": "2026-04-01T12:58:21.438Z"
+      "id": "6dad5236-004d-4823-b3dc-9e65e2580f6d",
+      "toolId": "860842c2-cc89-443e-bbb2-c488b6ffd29d",
+      "toolName": "RunCountTool",
+      "action": "executed",
+      "details": "Tool \"RunCountTool\" was executed",
+      "timestamp": "2026-04-01T16:34:54.906Z"
     },
     {
-      "id": "tw1hzbgfi",
-      "toolId": "q5n1lwd9s",
-      "toolName": "email_send",
+      "id": "dcd9ffde-609d-4a29-bb8f-bbb828d6ecf1",
+      "toolId": "860842c2-cc89-443e-bbb2-c488b6ffd29d",
+      "toolName": "RunCountTool",
       "action": "created",
-      "details": "Tool \"email_send\" was created",
-      "timestamp": "2026-04-01T12:58:07.461Z"
+      "details": "Tool \"RunCountTool\" was created",
+      "timestamp": "2026-04-01T16:34:53.985Z"
     },
     {
-      "id": "xh04yd5tn",
-      "toolId": "q7bifjhsb",
-      "toolName": "email_read",
-      "action": "created",
-      "details": "Tool \"email_read\" was created",
-      "timestamp": "2026-04-01T12:58:07.435Z"
+      "id": "872514a3-ad45-4d2a-b3e5-34f1ea94db45",
+      "toolId": "991e72bc-12c2-4b70-817b-34ae3d88a843",
+      "toolName": "Deploy Script",
+      "action": "deleted",
+      "details": "Tool \"Deploy Script\" was deleted",
+      "timestamp": "2026-04-01T16:34:53.972Z"
     },
     {
-      "id": "i2pipmpwp",
-      "toolId": "zxfqb7y92",
-      "toolName": "image_generate",
+      "id": "f35179d1-60c3-4293-8720-f074ee7b32bc",
+      "toolId": "991e72bc-12c2-4b70-817b-34ae3d88a843",
+      "toolName": "Deploy Script",
       "action": "created",
-      "details": "Tool \"image_generate\" was created",
-      "timestamp": "2026-04-01T12:58:07.410Z"
+      "details": "Tool \"Deploy Script\" was created",
+      "timestamp": "2026-04-01T16:34:53.823Z"
     },
     {
-      "id": "ql40h4v9j",
-      "toolId": "152a9w840",
-      "toolName": "web_search",
-      "action": "created",
-      "details": "Tool \"web_search\" was created",
-      "timestamp": "2026-04-01T12:58:07.385Z"
+      "id": "25c0f92c-e610-40ce-a3b7-447f6d12b942",
+      "toolId": "9f3f882f-ca91-4ef4-9056-bb925840cdb1",
+      "toolName": "DetailTestTool",
+      "action": "deleted",
+      "details": "Tool \"DetailTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:34:52.208Z"
     },
     {
-      "id": "iocno27n8",
-      "toolId": "svl6u0mx2",
-      "toolName": "web_fetch",
+      "id": "1a791457-194b-4803-b256-ff417bbf01e5",
+      "toolId": "9f3f882f-ca91-4ef4-9056-bb925840cdb1",
+      "toolName": "DetailTestTool",
       "action": "created",
-      "details": "Tool \"web_fetch\" was created",
-      "timestamp": "2026-04-01T12:58:07.360Z"
+      "details": "Tool \"DetailTestTool\" was created",
+      "timestamp": "2026-04-01T16:33:31.177Z"
     },
     {
-      "id": "2y54cg9rn",
-      "toolId": "wu5ujrfeu",
-      "toolName": "browser",
-      "action": "created",
-      "details": "Tool \"browser\" was created",
-      "timestamp": "2026-04-01T12:58:07.334Z"
+      "id": "89492294-5dc4-44e1-b49e-bb5fbf0f3ebd",
+      "toolId": "f05d3438-d326-4891-b178-2070c095345e",
+      "toolName": "FilterTestTool",
+      "action": "deleted",
+      "details": "Tool \"FilterTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:33:31.148Z"
     },
     {
-      "id": "0lhp1inpx",
-      "toolId": "brkymhiim",
-      "toolName": "edit",
-      "action": "created",
-      "details": "Tool \"edit\" was created",
-      "timestamp": "2026-04-01T12:58:07.308Z"
+      "id": "f80efbca-7d2e-4582-a146-6116c0a7657a",
+      "toolId": "f05d3438-d326-4891-b178-2070c095345e",
+      "toolName": "FilterTestTool",
+      "action": "executed",
+      "details": "Tool \"FilterTestTool\" was executed",
+      "timestamp": "2026-04-01T16:33:30.242Z"
     },
     {
-      "id": "gecl371js",
-      "toolId": "er5gei785",
-      "toolName": "write",
+      "id": "8e6ca2f7-bb59-4f82-8458-cccb92a208b2",
+      "toolId": "f05d3438-d326-4891-b178-2070c095345e",
+      "toolName": "FilterTestTool",
       "action": "created",
-      "details": "Tool \"write\" was created",
-      "timestamp": "2026-04-01T12:58:07.284Z"
+      "details": "Tool \"FilterTestTool\" was created",
+      "timestamp": "2026-04-01T16:33:30.103Z"
     },
     {
-      "id": "5up3lzfn6",
-      "toolId": "j1qpz036x",
-      "toolName": "read",
-      "action": "created",
-      "details": "Tool \"read\" was created",
-      "timestamp": "2026-04-01T12:57:49.700Z"
+      "id": "adf08ad1-9a7a-4cc1-a098-4608a3140487",
+      "toolId": "b85826d3-c106-4d69-8a58-65f20c51d938",
+      "toolName": "ActivityTestTool",
+      "action": "deleted",
+      "details": "Tool \"ActivityTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:33:30.079Z"
     },
     {
-      "id": "jgjsai22q",
-      "toolId": "1bg6f1ez1",
-      "toolName": "exec",
+      "id": "d98b3ace-70bf-4594-9435-ef85c468db77",
+      "toolId": "b85826d3-c106-4d69-8a58-65f20c51d938",
+      "toolName": "ActivityTestTool",
       "action": "created",
-      "details": "Tool \"exec\" was created",
-      "timestamp": "2026-04-01T12:57:41.359Z"
+      "details": "Tool \"ActivityTestTool\" was created",
+      "timestamp": "2026-04-01T16:33:28.709Z"
+    },
+    {
+      "id": "a365edeb-194d-48c0-8308-60bc6b7fe3ae",
+      "toolId": "86d0a411-8f9b-4c94-8887-e9577046f26b",
+      "toolName": "DeleteMeTool",
+      "action": "deleted",
+      "details": "Tool \"DeleteMeTool\" was deleted",
+      "timestamp": "2026-04-01T16:32:43.860Z"
+    },
+    {
+      "id": "d762e905-5643-4ff3-97f5-9f486aefec07",
+      "toolId": "86d0a411-8f9b-4c94-8887-e9577046f26b",
+      "toolName": "DeleteMeTool",
+      "action": "created",
+      "details": "Tool \"DeleteMeTool\" was created",
+      "timestamp": "2026-04-01T16:32:43.165Z"
+    },
+    {
+      "id": "e72b9402-04b2-4e24-96d1-5868cfc165ca",
+      "toolId": "ba065d0e-9757-45c8-984d-94473bd6c94b",
+      "toolName": "RunCountTool",
+      "action": "deleted",
+      "details": "Tool \"RunCountTool\" was deleted",
+      "timestamp": "2026-04-01T16:32:43.153Z"
+    },
+    {
+      "id": "1ead48c4-bddb-41eb-86eb-f6aaf123ea11",
+      "toolId": "ba065d0e-9757-45c8-984d-94473bd6c94b",
+      "toolName": "RunCountTool",
+      "action": "executed",
+      "details": "Tool \"RunCountTool\" was executed",
+      "timestamp": "2026-04-01T16:32:42.632Z"
+    },
+    {
+      "id": "b11f5dd3-d157-4fa9-a28c-338b71dcaf21",
+      "toolId": "ba065d0e-9757-45c8-984d-94473bd6c94b",
+      "toolName": "RunCountTool",
+      "action": "created",
+      "details": "Tool \"RunCountTool\" was created",
+      "timestamp": "2026-04-01T16:32:41.663Z"
+    },
+    {
+      "id": "3c86005d-b76b-4ab3-8c60-cc6bc44b52a6",
+      "toolId": "da68ea72-d5c3-4dc2-9bc7-2ef1bc77616b",
+      "toolName": "Deploy Script",
+      "action": "deleted",
+      "details": "Tool \"Deploy Script\" was deleted",
+      "timestamp": "2026-04-01T16:32:41.647Z"
+    },
+    {
+      "id": "e19aba0b-655c-45d2-b920-363fdce5cb92",
+      "toolId": "da68ea72-d5c3-4dc2-9bc7-2ef1bc77616b",
+      "toolName": "Deploy Script",
+      "action": "created",
+      "details": "Tool \"Deploy Script\" was created",
+      "timestamp": "2026-04-01T16:32:41.494Z"
+    },
+    {
+      "id": "442f59ed-2414-40db-bd27-5bd12d4f437c",
+      "toolId": "235125d9-8660-4049-b0ed-ec5ddf89de3a",
+      "toolName": "DetailTestTool",
+      "action": "deleted",
+      "details": "Tool \"DetailTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:32:39.839Z"
+    },
+    {
+      "id": "3fb5ccd0-379d-4ce4-a2bf-2ece86482001",
+      "toolId": "235125d9-8660-4049-b0ed-ec5ddf89de3a",
+      "toolName": "DetailTestTool",
+      "action": "created",
+      "details": "Tool \"DetailTestTool\" was created",
+      "timestamp": "2026-04-01T16:31:17.911Z"
+    },
+    {
+      "id": "72038295-86d5-4595-bc9f-6bb812bece86",
+      "toolId": "5964727b-e6e6-40d7-8257-fdf85f93a00b",
+      "toolName": "FilterTestTool",
+      "action": "deleted",
+      "details": "Tool \"FilterTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:31:17.886Z"
+    },
+    {
+      "id": "9f838ea1-8fb5-44cc-ac7b-a6aed5d5c8cf",
+      "toolId": "5964727b-e6e6-40d7-8257-fdf85f93a00b",
+      "toolName": "FilterTestTool",
+      "action": "executed",
+      "details": "Tool \"FilterTestTool\" was executed",
+      "timestamp": "2026-04-01T16:31:17.053Z"
+    },
+    {
+      "id": "5dda322f-4261-4bb8-a0b3-3ebd491094a3",
+      "toolId": "5964727b-e6e6-40d7-8257-fdf85f93a00b",
+      "toolName": "FilterTestTool",
+      "action": "created",
+      "details": "Tool \"FilterTestTool\" was created",
+      "timestamp": "2026-04-01T16:31:16.914Z"
+    },
+    {
+      "id": "47439430-4a1b-4fad-aad4-3b0e6e27cb1b",
+      "toolId": "a057e01c-7fbf-402a-a581-3750279081de",
+      "toolName": "ActivityTestTool",
+      "action": "deleted",
+      "details": "Tool \"ActivityTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:31:16.890Z"
+    },
+    {
+      "id": "88af2316-d670-49a7-be35-591ad74d72a9",
+      "toolId": "a057e01c-7fbf-402a-a581-3750279081de",
+      "toolName": "ActivityTestTool",
+      "action": "created",
+      "details": "Tool \"ActivityTestTool\" was created",
+      "timestamp": "2026-04-01T16:31:16.141Z"
+    },
+    {
+      "id": "d4df4f0f-3c97-4572-8b95-9c44313cbd14",
+      "toolId": "3d73b1aa-19b6-4aca-86be-784769a63ea1",
+      "toolName": "DeleteMeTool",
+      "action": "deleted",
+      "details": "Tool \"DeleteMeTool\" was deleted",
+      "timestamp": "2026-04-01T16:29:24.667Z"
+    },
+    {
+      "id": "3b6dd300-2a41-46ce-a3d0-40e8d617f644",
+      "toolId": "3d73b1aa-19b6-4aca-86be-784769a63ea1",
+      "toolName": "DeleteMeTool",
+      "action": "created",
+      "details": "Tool \"DeleteMeTool\" was created",
+      "timestamp": "2026-04-01T16:29:23.978Z"
+    },
+    {
+      "id": "95731720-fbf2-4142-ae10-0a6dbaa3e0d2",
+      "toolId": "b12044b2-b377-4b0d-9a71-b1b9c6234d67",
+      "toolName": "RunCountTool",
+      "action": "deleted",
+      "details": "Tool \"RunCountTool\" was deleted",
+      "timestamp": "2026-04-01T16:29:23.961Z"
+    },
+    {
+      "id": "e9f62f05-c0ad-4453-9434-904d8d4f1051",
+      "toolId": "b12044b2-b377-4b0d-9a71-b1b9c6234d67",
+      "toolName": "RunCountTool",
+      "action": "executed",
+      "details": "Tool \"RunCountTool\" was executed",
+      "timestamp": "2026-04-01T16:29:23.869Z"
+    },
+    {
+      "id": "f8bc585a-4397-4840-aa8f-6d657e17900c",
+      "toolId": "b12044b2-b377-4b0d-9a71-b1b9c6234d67",
+      "toolName": "RunCountTool",
+      "action": "created",
+      "details": "Tool \"RunCountTool\" was created",
+      "timestamp": "2026-04-01T16:29:22.972Z"
+    },
+    {
+      "id": "66ad76e0-d0ad-4d30-bd1c-fb0ef1b479d2",
+      "toolId": "48a6d651-e39b-4ce1-b638-b6213dda97fe",
+      "toolName": "Deploy Script",
+      "action": "deleted",
+      "details": "Tool \"Deploy Script\" was deleted",
+      "timestamp": "2026-04-01T16:29:22.959Z"
+    },
+    {
+      "id": "d5326c9b-9edc-4ff8-ac3c-100ca1b5079a",
+      "toolId": "48a6d651-e39b-4ce1-b638-b6213dda97fe",
+      "toolName": "Deploy Script",
+      "action": "created",
+      "details": "Tool \"Deploy Script\" was created",
+      "timestamp": "2026-04-01T16:29:22.803Z"
+    },
+    {
+      "id": "22582ae2-c42d-4084-9969-e87915e4a680",
+      "toolId": "ca7fa469-e886-4ab5-9b86-e2765fe0eaee",
+      "toolName": "DetailTestTool",
+      "action": "deleted",
+      "details": "Tool \"DetailTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:29:21.226Z"
+    },
+    {
+      "id": "4e9d9d35-1a1a-4df2-9b54-f938b213461d",
+      "toolId": "ca7fa469-e886-4ab5-9b86-e2765fe0eaee",
+      "toolName": "DetailTestTool",
+      "action": "created",
+      "details": "Tool \"DetailTestTool\" was created",
+      "timestamp": "2026-04-01T16:27:32.336Z"
+    },
+    {
+      "id": "74d8bffd-5a55-47f6-bab0-5f03e9e78a69",
+      "toolId": "cd8c4087-a078-448c-a851-1c5813bb8445",
+      "toolName": "FilterTestTool",
+      "action": "deleted",
+      "details": "Tool \"FilterTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:27:32.302Z"
+    },
+    {
+      "id": "1a4ab7ac-45ab-4a91-804c-c194709c823e",
+      "toolId": "cd8c4087-a078-448c-a851-1c5813bb8445",
+      "toolName": "FilterTestTool",
+      "action": "executed",
+      "details": "Tool \"FilterTestTool\" was executed",
+      "timestamp": "2026-04-01T16:27:31.468Z"
+    },
+    {
+      "id": "06959566-8507-4cad-888c-d37202c778ce",
+      "toolId": "cd8c4087-a078-448c-a851-1c5813bb8445",
+      "toolName": "FilterTestTool",
+      "action": "created",
+      "details": "Tool \"FilterTestTool\" was created",
+      "timestamp": "2026-04-01T16:27:31.324Z"
+    },
+    {
+      "id": "64c71a2d-4e2f-4ad5-a77f-78569aa249be",
+      "toolId": "eecc627e-2379-4688-87fc-8ca4814d13e7",
+      "toolName": "ActivityTestTool",
+      "action": "deleted",
+      "details": "Tool \"ActivityTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:27:31.300Z"
+    },
+    {
+      "id": "b8dff539-6774-4ee5-8c77-da9d42965efd",
+      "toolId": "eecc627e-2379-4688-87fc-8ca4814d13e7",
+      "toolName": "ActivityTestTool",
+      "action": "created",
+      "details": "Tool \"ActivityTestTool\" was created",
+      "timestamp": "2026-04-01T16:27:30.550Z"
+    },
+    {
+      "id": "7736e4e0-ac04-433d-a0f9-8a98a31eb619",
+      "toolId": "1f19654d-d1ae-4d46-a67d-b25afd8a8ce2",
+      "toolName": "DeleteMeTool",
+      "action": "deleted",
+      "details": "Tool \"DeleteMeTool\" was deleted",
+      "timestamp": "2026-04-01T16:27:01.956Z"
+    },
+    {
+      "id": "71545c77-4ed4-4723-aad3-1888644b5385",
+      "toolId": "1f19654d-d1ae-4d46-a67d-b25afd8a8ce2",
+      "toolName": "DeleteMeTool",
+      "action": "created",
+      "details": "Tool \"DeleteMeTool\" was created",
+      "timestamp": "2026-04-01T16:27:01.261Z"
+    },
+    {
+      "id": "8f19a0f3-9392-47ec-975a-a1edbf864d23",
+      "toolId": "2babbed0-e999-4305-8e00-7e9c1f83606f",
+      "toolName": "RunCountTool",
+      "action": "deleted",
+      "details": "Tool \"RunCountTool\" was deleted",
+      "timestamp": "2026-04-01T16:27:01.245Z"
+    },
+    {
+      "id": "d9b2bbd9-03ac-432f-aa8b-23d793cc1004",
+      "toolId": "2babbed0-e999-4305-8e00-7e9c1f83606f",
+      "toolName": "RunCountTool",
+      "action": "executed",
+      "details": "Tool \"RunCountTool\" was executed",
+      "timestamp": "2026-04-01T16:27:01.162Z"
+    },
+    {
+      "id": "1ca23761-930b-4257-b832-4dd82f8be8e9",
+      "toolId": "2babbed0-e999-4305-8e00-7e9c1f83606f",
+      "toolName": "RunCountTool",
+      "action": "created",
+      "details": "Tool \"RunCountTool\" was created",
+      "timestamp": "2026-04-01T16:27:00.277Z"
+    },
+    {
+      "id": "a06d84c0-8aa7-4488-b8d9-d9bd054c91c2",
+      "toolId": "8fef6350-5741-4ec7-b275-5fa6aee849d0",
+      "toolName": "Deploy Script",
+      "action": "deleted",
+      "details": "Tool \"Deploy Script\" was deleted",
+      "timestamp": "2026-04-01T16:27:00.262Z"
+    },
+    {
+      "id": "9629b5fb-3710-4d7e-ba5e-8dc6678a2771",
+      "toolId": "8fef6350-5741-4ec7-b275-5fa6aee849d0",
+      "toolName": "Deploy Script",
+      "action": "created",
+      "details": "Tool \"Deploy Script\" was created",
+      "timestamp": "2026-04-01T16:27:00.108Z"
+    },
+    {
+      "id": "734e9bc3-c885-4f37-8611-3820d1e62292",
+      "toolId": "efb884db-da48-462b-92ef-522546ec16ea",
+      "toolName": "DetailTestTool",
+      "action": "deleted",
+      "details": "Tool \"DetailTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:26:58.524Z"
+    },
+    {
+      "id": "cf3ec99c-0a6a-4b53-af0f-a2ac01d14a96",
+      "toolId": "efb884db-da48-462b-92ef-522546ec16ea",
+      "toolName": "DetailTestTool",
+      "action": "created",
+      "details": "Tool \"DetailTestTool\" was created",
+      "timestamp": "2026-04-01T16:25:09.457Z"
+    },
+    {
+      "id": "e05b2e21-5d2a-407e-95aa-c67d8654cce2",
+      "toolId": "3f63ba8e-c5e8-4aa2-abe6-bdbbd4cc943e",
+      "toolName": "FilterTestTool",
+      "action": "deleted",
+      "details": "Tool \"FilterTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:25:09.425Z"
+    },
+    {
+      "id": "17df48b7-2f09-4397-8e93-cfd9bf10fff5",
+      "toolId": "3f63ba8e-c5e8-4aa2-abe6-bdbbd4cc943e",
+      "toolName": "FilterTestTool",
+      "action": "executed",
+      "details": "Tool \"FilterTestTool\" was executed",
+      "timestamp": "2026-04-01T16:25:08.577Z"
+    },
+    {
+      "id": "58e1e81a-439a-44c6-9b9b-0d5263d83c81",
+      "toolId": "3f63ba8e-c5e8-4aa2-abe6-bdbbd4cc943e",
+      "toolName": "FilterTestTool",
+      "action": "created",
+      "details": "Tool \"FilterTestTool\" was created",
+      "timestamp": "2026-04-01T16:25:08.438Z"
+    },
+    {
+      "id": "bf583027-8322-4c2f-92b2-e81f32840ada",
+      "toolId": "ce08f695-74f3-4524-bacf-143beccf3404",
+      "toolName": "ActivityTestTool",
+      "action": "deleted",
+      "details": "Tool \"ActivityTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:25:08.413Z"
+    },
+    {
+      "id": "537e0a77-58bd-4147-8173-64020b0b7850",
+      "toolId": "ce08f695-74f3-4524-bacf-143beccf3404",
+      "toolName": "ActivityTestTool",
+      "action": "created",
+      "details": "Tool \"ActivityTestTool\" was created",
+      "timestamp": "2026-04-01T16:25:07.668Z"
+    },
+    {
+      "id": "da5ce441-03d6-42a5-af1e-4382cfa0e785",
+      "toolId": "761c4c9e-86d6-4fb3-9a73-f1efc5687447",
+      "toolName": "DeleteMeTool",
+      "action": "deleted",
+      "details": "Tool \"DeleteMeTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:57.611Z"
+    },
+    {
+      "id": "ee95a2a5-b077-4c1c-a96c-0e44e2a16018",
+      "toolId": "761c4c9e-86d6-4fb3-9a73-f1efc5687447",
+      "toolName": "DeleteMeTool",
+      "action": "created",
+      "details": "Tool \"DeleteMeTool\" was created",
+      "timestamp": "2026-04-01T16:24:56.995Z"
+    },
+    {
+      "id": "e2fa14b7-1aba-4d2b-8456-6e554c0e4e2b",
+      "toolId": "f5a2740f-ea6e-498e-906d-7ea643bbc921",
+      "toolName": "RunCountTool",
+      "action": "deleted",
+      "details": "Tool \"RunCountTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:56.983Z"
+    },
+    {
+      "id": "76603ee3-2ec1-4eeb-a5af-2d308cad652b",
+      "toolId": "f5a2740f-ea6e-498e-906d-7ea643bbc921",
+      "toolName": "RunCountTool",
+      "action": "executed",
+      "details": "Tool \"RunCountTool\" was executed",
+      "timestamp": "2026-04-01T16:24:56.834Z"
+    },
+    {
+      "id": "f75298f2-99e6-45d5-867d-a8f76eaa6366",
+      "toolId": "f5a2740f-ea6e-498e-906d-7ea643bbc921",
+      "toolName": "RunCountTool",
+      "action": "created",
+      "details": "Tool \"RunCountTool\" was created",
+      "timestamp": "2026-04-01T16:24:56.265Z"
+    },
+    {
+      "id": "0abf7403-96cf-42b7-b2c2-f928cfd1af68",
+      "toolId": "5930f4ce-4696-4427-b4ee-75c580c265e4",
+      "toolName": "Deploy Script",
+      "action": "deleted",
+      "details": "Tool \"Deploy Script\" was deleted",
+      "timestamp": "2026-04-01T16:24:56.252Z"
+    },
+    {
+      "id": "431301d4-8878-4284-b6ca-3262f0e07ad5",
+      "toolId": "5930f4ce-4696-4427-b4ee-75c580c265e4",
+      "toolName": "Deploy Script",
+      "action": "created",
+      "details": "Tool \"Deploy Script\" was created",
+      "timestamp": "2026-04-01T16:24:56.097Z"
+    },
+    {
+      "id": "203e506a-d51f-4d38-bc0c-08dd6989fb7c",
+      "toolId": "f0fa039d-8474-4fd6-84f2-e517c7aaf8e1",
+      "toolName": "DetailTestTool",
+      "action": "deleted",
+      "details": "Tool \"DetailTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:54.717Z"
+    },
+    {
+      "id": "9eca5ddd-34f2-49a8-bff7-e81cf89a0130",
+      "toolId": "f0fa039d-8474-4fd6-84f2-e517c7aaf8e1",
+      "toolName": "DetailTestTool",
+      "action": "created",
+      "details": "Tool \"DetailTestTool\" was created",
+      "timestamp": "2026-04-01T16:24:54.068Z"
+    },
+    {
+      "id": "1d8624c4-926d-4a03-ad3c-6c5065520e1e",
+      "toolId": "99a2a8ce-04d1-4ad9-b9ac-2ddf012c1d46",
+      "toolName": "FilterTestTool",
+      "action": "deleted",
+      "details": "Tool \"FilterTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:54.037Z"
+    },
+    {
+      "id": "35f69e82-3ab1-493e-aec6-d56b19c1dd02",
+      "toolId": "99a2a8ce-04d1-4ad9-b9ac-2ddf012c1d46",
+      "toolName": "FilterTestTool",
+      "action": "executed",
+      "details": "Tool \"FilterTestTool\" was executed",
+      "timestamp": "2026-04-01T16:24:53.239Z"
+    },
+    {
+      "id": "28b3ecf4-f6ec-4596-aa8d-5884976bbc1f",
+      "toolId": "99a2a8ce-04d1-4ad9-b9ac-2ddf012c1d46",
+      "toolName": "FilterTestTool",
+      "action": "created",
+      "details": "Tool \"FilterTestTool\" was created",
+      "timestamp": "2026-04-01T16:24:53.099Z"
+    },
+    {
+      "id": "6b6ef661-9f0a-4f70-9f06-7acfd18c344c",
+      "toolId": "3be1afa5-7951-45af-b4f8-2f83d0b8e351",
+      "toolName": "ActivityTestTool",
+      "action": "deleted",
+      "details": "Tool \"ActivityTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:53.074Z"
+    },
+    {
+      "id": "93b24f3a-34ea-4eba-9b53-7ae7bd9708a6",
+      "toolId": "3be1afa5-7951-45af-b4f8-2f83d0b8e351",
+      "toolName": "ActivityTestTool",
+      "action": "created",
+      "details": "Tool \"ActivityTestTool\" was created",
+      "timestamp": "2026-04-01T16:24:52.337Z"
+    },
+    {
+      "id": "add441ea-c5c9-4b4e-a5ba-9c93cb85c5cc",
+      "toolId": "8e70f59e-026e-4857-85f2-3c4eedfa9eb1",
+      "toolName": "DetailTestTool",
+      "action": "deleted",
+      "details": "Tool \"DetailTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:50.351Z"
+    },
+    {
+      "id": "31c853fe-738b-48c3-8ecd-fbd79d383723",
+      "toolId": "8e70f59e-026e-4857-85f2-3c4eedfa9eb1",
+      "toolName": "DetailTestTool",
+      "action": "created",
+      "details": "Tool \"DetailTestTool\" was created",
+      "timestamp": "2026-04-01T16:24:41.941Z"
+    },
+    {
+      "id": "59ee71e5-e235-4820-89fa-211390b81b53",
+      "toolId": "d2f9ac52-ca9d-4a0c-b572-d9b3fb69be84",
+      "toolName": "FilterTestTool",
+      "action": "deleted",
+      "details": "Tool \"FilterTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:41.918Z"
+    },
+    {
+      "id": "e9b78aef-9b85-4635-bb69-d77114d36211",
+      "toolId": "d2f9ac52-ca9d-4a0c-b572-d9b3fb69be84",
+      "toolName": "FilterTestTool",
+      "action": "executed",
+      "details": "Tool \"FilterTestTool\" was executed",
+      "timestamp": "2026-04-01T16:24:41.092Z"
+    },
+    {
+      "id": "60ae6557-e09b-43c4-b934-3565e58f1bcc",
+      "toolId": "d2f9ac52-ca9d-4a0c-b572-d9b3fb69be84",
+      "toolName": "FilterTestTool",
+      "action": "created",
+      "details": "Tool \"FilterTestTool\" was created",
+      "timestamp": "2026-04-01T16:24:40.962Z"
+    },
+    {
+      "id": "14850a04-b587-49cc-8417-9a1f6d26fc6b",
+      "toolId": "383388de-f1e6-4e0b-a59f-2585905f6b7d",
+      "toolName": "ActivityTestTool",
+      "action": "deleted",
+      "details": "Tool \"ActivityTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:40.941Z"
+    },
+    {
+      "id": "8d5d5884-5101-4e03-880a-699a4dcf1699",
+      "toolId": "383388de-f1e6-4e0b-a59f-2585905f6b7d",
+      "toolName": "ActivityTestTool",
+      "action": "created",
+      "details": "Tool \"ActivityTestTool\" was created",
+      "timestamp": "2026-04-01T16:24:40.108Z"
+    },
+    {
+      "id": "6937a67c-49c5-477f-8ae6-3f2a9d3ad8c8",
+      "toolId": "02781c89-1b1a-4a8a-895b-08c0bfd0cb6a",
+      "toolName": "DetailTestTool",
+      "action": "deleted",
+      "details": "Tool \"DetailTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:38.171Z"
+    },
+    {
+      "id": "109bfdc8-eb6f-457b-b011-f3017919a9fa",
+      "toolId": "02781c89-1b1a-4a8a-895b-08c0bfd0cb6a",
+      "toolName": "DetailTestTool",
+      "action": "created",
+      "details": "Tool \"DetailTestTool\" was created",
+      "timestamp": "2026-04-01T16:24:02.002Z"
+    },
+    {
+      "id": "f8060ced-d9ef-4c5c-a860-393f989b9a31",
+      "toolId": "7864f4db-2b92-4752-9576-cfe522609147",
+      "toolName": "FilterTestTool",
+      "action": "deleted",
+      "details": "Tool \"FilterTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:01.979Z"
+    },
+    {
+      "id": "905ecc12-4000-4194-8f06-1463c8118526",
+      "toolId": "7864f4db-2b92-4752-9576-cfe522609147",
+      "toolName": "FilterTestTool",
+      "action": "executed",
+      "details": "Tool \"FilterTestTool\" was executed",
+      "timestamp": "2026-04-01T16:24:00.696Z"
+    },
+    {
+      "id": "c4816dff-fdbe-40bd-91d4-17c4e48b6882",
+      "toolId": "7864f4db-2b92-4752-9576-cfe522609147",
+      "toolName": "FilterTestTool",
+      "action": "created",
+      "details": "Tool \"FilterTestTool\" was created",
+      "timestamp": "2026-04-01T16:24:00.546Z"
+    },
+    {
+      "id": "f20d1366-c42d-484f-be3b-64b5d3b811aa",
+      "toolId": "ddeb8593-cde1-473a-9cd4-87b55b126673",
+      "toolName": "ActivityTestTool",
+      "action": "deleted",
+      "details": "Tool \"ActivityTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:24:00.531Z"
+    },
+    {
+      "id": "7f396191-8b33-496d-bc1f-f4b8f01cbda8",
+      "toolId": "ddeb8593-cde1-473a-9cd4-87b55b126673",
+      "toolName": "ActivityTestTool",
+      "action": "created",
+      "details": "Tool \"ActivityTestTool\" was created",
+      "timestamp": "2026-04-01T16:23:58.619Z"
+    },
+    {
+      "id": "3d415c6e-27e0-422d-b8f8-36760184995c",
+      "toolId": "36c269ea-34d7-4e56-98d4-06ef74082382",
+      "toolName": "DeleteMeTool",
+      "action": "deleted",
+      "details": "Tool \"DeleteMeTool\" was deleted",
+      "timestamp": "2026-04-01T16:23:35.314Z"
+    },
+    {
+      "id": "661ae80f-8452-4cdc-be32-e01d487179b2",
+      "toolId": "36c269ea-34d7-4e56-98d4-06ef74082382",
+      "toolName": "DeleteMeTool",
+      "action": "created",
+      "details": "Tool \"DeleteMeTool\" was created",
+      "timestamp": "2026-04-01T16:23:34.606Z"
+    },
+    {
+      "id": "44997b62-e045-4746-ba45-e9c73c303b87",
+      "toolId": "9097f12a-692d-42df-8b35-2e1687b0b765",
+      "toolName": "RunCountTool",
+      "action": "deleted",
+      "details": "Tool \"RunCountTool\" was deleted",
+      "timestamp": "2026-04-01T16:23:34.588Z"
+    },
+    {
+      "id": "df56b72b-09f9-4f2f-9da2-662531a654ba",
+      "toolId": "9097f12a-692d-42df-8b35-2e1687b0b765",
+      "toolName": "RunCountTool",
+      "action": "executed",
+      "details": "Tool \"RunCountTool\" was executed",
+      "timestamp": "2026-04-01T16:23:34.501Z"
+    },
+    {
+      "id": "241be0be-7c23-4beb-ad55-8598bca22d74",
+      "toolId": "9097f12a-692d-42df-8b35-2e1687b0b765",
+      "toolName": "RunCountTool",
+      "action": "created",
+      "details": "Tool \"RunCountTool\" was created",
+      "timestamp": "2026-04-01T16:23:33.611Z"
+    },
+    {
+      "id": "7a277e30-ddc9-4b18-a525-ed310f5fe1e4",
+      "toolId": "567cb863-c00c-4763-8748-78d615709604",
+      "toolName": "Deploy Script",
+      "action": "deleted",
+      "details": "Tool \"Deploy Script\" was deleted",
+      "timestamp": "2026-04-01T16:23:33.598Z"
+    },
+    {
+      "id": "e23586b6-f220-4d0c-88b3-da2aeb698897",
+      "toolId": "567cb863-c00c-4763-8748-78d615709604",
+      "toolName": "Deploy Script",
+      "action": "created",
+      "details": "Tool \"Deploy Script\" was created",
+      "timestamp": "2026-04-01T16:23:33.450Z"
+    },
+    {
+      "id": "0a3dfad9-2872-4863-812e-6d27e92e51a7",
+      "toolId": "97722791-833c-4a2d-b06e-c24e8f653663",
+      "toolName": "DetailTestTool",
+      "action": "deleted",
+      "details": "Tool \"DetailTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:23:31.838Z"
+    },
+    {
+      "id": "3153e49d-cd83-4f99-a82c-612c2c4927b6",
+      "toolId": "97722791-833c-4a2d-b06e-c24e8f653663",
+      "toolName": "DetailTestTool",
+      "action": "created",
+      "details": "Tool \"DetailTestTool\" was created",
+      "timestamp": "2026-04-01T16:21:41.185Z"
+    },
+    {
+      "id": "717f97c7-32d3-4215-800b-ed2107e97ba7",
+      "toolId": "2e34f8bb-482b-41a7-9d0a-6acdc389dec0",
+      "toolName": "FilterTestTool",
+      "action": "deleted",
+      "details": "Tool \"FilterTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:21:41.166Z"
+    },
+    {
+      "id": "18e6ec66-d7bf-4a84-bcd9-23de0e06ee6e",
+      "toolId": "2e34f8bb-482b-41a7-9d0a-6acdc389dec0",
+      "toolName": "FilterTestTool",
+      "action": "executed",
+      "details": "Tool \"FilterTestTool\" was executed",
+      "timestamp": "2026-04-01T16:21:39.834Z"
+    },
+    {
+      "id": "5f3f3ec9-13cc-452a-93ec-0c2a14ebd596",
+      "toolId": "2e34f8bb-482b-41a7-9d0a-6acdc389dec0",
+      "toolName": "FilterTestTool",
+      "action": "created",
+      "details": "Tool \"FilterTestTool\" was created",
+      "timestamp": "2026-04-01T16:21:39.629Z"
+    },
+    {
+      "id": "ee896ffb-f9e4-4c58-afaa-d32192e4d3ae",
+      "toolId": "22b66ffd-c12b-477d-a44a-802e4f437929",
+      "toolName": "ActivityTestTool",
+      "action": "deleted",
+      "details": "Tool \"ActivityTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:21:39.611Z"
+    },
+    {
+      "id": "41afbc54-4bbf-47b8-bf12-80dc0557cd0f",
+      "toolId": "22b66ffd-c12b-477d-a44a-802e4f437929",
+      "toolName": "ActivityTestTool",
+      "action": "created",
+      "details": "Tool \"ActivityTestTool\" was created",
+      "timestamp": "2026-04-01T16:21:37.717Z"
+    },
+    {
+      "id": "9bd5bd6b-9520-4620-a60e-d5adeef6517d",
+      "toolId": "7389eff3-a2f5-4ad6-a264-8bc50e3eb4d3",
+      "toolName": "DetailTestTool",
+      "action": "deleted",
+      "details": "Tool \"DetailTestTool\" was deleted",
+      "timestamp": "2026-04-01T16:21:36.021Z"
+    },
+    {
+      "id": "df704307-62f7-4faf-ac01-0712c944f1b6",
+      "toolId": "7389eff3-a2f5-4ad6-a264-8bc50e3eb4d3",
+      "toolName": "DetailTestTool",
+      "action": "created",
+      "details": "Tool \"DetailTestTool\" was created",
+      "timestamp": "2026-04-01T16:21:27.967Z"
     }
   ],
   "settings": {
@@ -386,890 +809,1102 @@
   },
   "tasks": [
     {
-      "id": "uty4sh1og",
+      "id": "a797eafb-4941-4167-b15c-336e491b5dc3",
       "title": "API updated title",
       "description": "After update",
       "assignee": "user",
+      "priority": "medium",
       "column": "backlog",
-      "createdAt": "2026-04-01T14:07:24.460Z",
-      "updatedAt": "2026-04-01T14:07:24.472Z"
+      "createdAt": "2026-04-01T16:34:43.470Z",
+      "updatedAt": "2026-04-01T16:34:43.480Z"
     }
   ],
   "taskActivities": [
     {
-      "id": "l8vhs7rrn",
-      "taskId": "uty4sh1og",
+      "id": "3925c7e1-ce15-462f-9b1d-cae16f1542c6",
+      "taskId": "a797eafb-4941-4167-b15c-336e491b5dc3",
       "taskTitle": "API update test",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"API update test\" created and assigned to User",
-      "timestamp": "2026-04-01T14:07:24.460Z"
+      "timestamp": "2026-04-01T16:34:43.470Z"
     },
     {
-      "id": "yfd4qfj7a",
-      "taskId": "kkvt2mri7",
+      "id": "62093352-2ed5-4f53-ad00-889a26d46922",
+      "taskId": "93bc286e-978f-4874-be59-b6a91f5da9a6",
+      "taskTitle": "Unlinked task xyz",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Unlinked task xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T16:34:43.389Z"
+    },
+    {
+      "id": "b7be7980-ae1f-4d6f-baf8-af7349ef1b41",
+      "taskId": "979aaae2-6605-4f23-8d31-924bf5e9c11e",
+      "taskTitle": "Linked task xyz",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linked task xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T16:34:42.537Z"
+    },
+    {
+      "id": "89c77808-c83a-4427-9786-66d32646972a",
+      "taskId": "daf16b0b-a4f0-4421-ba6a-4bc1f9eb8221",
       "taskTitle": "DeleteMeXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"DeleteMeXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T14:07:24.380Z"
+      "timestamp": "2026-04-01T16:34:41.777Z"
     },
     {
-      "id": "zxp9m9sf8",
-      "taskId": "y4pbnf0yl",
+      "id": "3cb1b1cd-b7f6-4e63-a1c2-c771be84fcd9",
+      "taskId": "eb96024a-94c5-4963-827b-86946f2c9860",
       "taskTitle": "BlockedReasonXYZ",
       "action": "moved",
       "fromColumn": "backlog",
       "toColumn": "blocked",
       "actor": "user",
       "details": "\"BlockedReasonXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T14:07:23.766Z"
+      "timestamp": "2026-04-01T16:34:41.160Z"
     },
     {
-      "id": "xji8357fw",
-      "taskId": "y4pbnf0yl",
+      "id": "9865051a-bfb8-4f65-ae6c-81c33d30d799",
+      "taskId": "eb96024a-94c5-4963-827b-86946f2c9860",
       "taskTitle": "BlockedReasonXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"BlockedReasonXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T14:07:23.753Z"
+      "timestamp": "2026-04-01T16:34:41.134Z"
     },
     {
-      "id": "5p756avds",
-      "taskId": "ss0rl6lr9",
+      "id": "0411e4a2-d352-4328-a4f1-c9427799b635",
+      "taskId": "3809b358-ac6f-4d04-af55-3e05f6a080e7",
       "taskTitle": "BlockMeXYZ",
       "action": "moved",
       "fromColumn": "backlog",
       "toColumn": "blocked",
       "actor": "user",
       "details": "\"BlockMeXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T14:07:23.684Z"
+      "timestamp": "2026-04-01T16:34:41.066Z"
     },
     {
-      "id": "rhed4d8bm",
-      "taskId": "ss0rl6lr9",
+      "id": "5419de80-048e-4617-8620-87eb0c909836",
+      "taskId": "3809b358-ac6f-4d04-af55-3e05f6a080e7",
       "taskTitle": "BlockMeXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"BlockMeXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T14:07:23.668Z"
+      "timestamp": "2026-04-01T16:34:41.051Z"
     },
     {
-      "id": "hrg543iq8",
-      "taskId": "q80cnrv4m",
+      "id": "cc99dfc1-6acd-4d60-bb00-185e61c4d702",
+      "taskId": "aaef7bf7-9dca-40a1-9d57-1f6b2fee4a92",
       "taskTitle": "CancelEditXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"CancelEditXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T14:07:22.956Z"
+      "timestamp": "2026-04-01T16:34:40.302Z"
     },
     {
-      "id": "u2yj2ufl0",
-      "taskId": "ov3qv4j4m",
+      "id": "237b456b-4b44-4961-9a73-9e2976222df4",
+      "taskId": "949d6f44-fcdf-40ee-afeb-a370a501de70",
       "taskTitle": "EditableXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"EditableXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T14:07:22.230Z"
+      "timestamp": "2026-04-01T16:34:39.525Z"
     },
     {
-      "id": "1f3f2h2xb",
-      "taskId": "wseg0ph1d",
+      "id": "89b2d3cc-4b8c-40de-9287-89a839f1424e",
+      "taskId": "2d27ee45-316c-4824-a867-e44b622dd064",
       "taskTitle": "Unique create test xyz",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Unique create test xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T14:07:22.074Z"
+      "timestamp": "2026-04-01T16:34:39.354Z"
     },
     {
-      "id": "k5czfbh1q",
-      "taskId": "jtxf1hwso",
+      "id": "e4d805bf-78dc-4806-a82e-639eefc0bc23",
+      "taskId": "f2bf3d42-ac28-4241-84a1-cc6858ad3915",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:34:33.382Z"
+    },
+    {
+      "id": "c9a71084-e08f-429b-824a-600fa2c509bb",
+      "taskId": "c176ff3b-d5b3-4277-9aa0-e0c0c3a418d7",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:34:32.335Z"
+    },
+    {
+      "id": "f3c83608-6660-4b59-825e-82db5f63ddfa",
+      "taskId": "1041654e-f16f-476a-888c-4cfbf7c17e83",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:34:30.830Z"
+    },
+    {
+      "id": "0244b26b-9785-4940-bf3a-5b230db97e1c",
+      "taskId": "12a9a049-eb46-4431-8376-cbb46ff43563",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:34:30.199Z"
+    },
+    {
+      "id": "c3b3fd5c-23c3-402e-a559-ba1431ca7a34",
+      "taskId": "176dbebe-f9b9-46b4-9096-60efa0f2dc8a",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:34:29.601Z"
+    },
+    {
+      "id": "bebb8f08-966f-4df5-a70a-0849c1d9889d",
+      "taskId": "73514e1f-43b8-4203-aeb2-bb68b3a9c094",
       "taskTitle": "Backlog task for progress",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T14:07:18.626Z"
+      "timestamp": "2026-04-01T16:34:28.167Z"
     },
     {
-      "id": "qdxyy8pf4",
-      "taskId": "44s0s2uzv",
+      "id": "75f4c661-7ab7-4661-887a-cd9466ee3396",
+      "taskId": "8d167814-aff4-4875-87a2-26b8420e9b29",
       "taskTitle": "Done task for progress",
       "action": "moved",
       "fromColumn": "backlog",
       "toColumn": "done",
       "actor": "user",
       "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T14:07:18.614Z"
+      "timestamp": "2026-04-01T16:34:28.151Z"
     },
     {
-      "id": "sq8bh0o5d",
-      "taskId": "44s0s2uzv",
+      "id": "83acf790-1b7d-4418-aff6-4883af5a1872",
+      "taskId": "8d167814-aff4-4875-87a2-26b8420e9b29",
       "taskTitle": "Done task for progress",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T14:07:18.274Z"
+      "timestamp": "2026-04-01T16:34:27.869Z"
     },
     {
-      "id": "cnfz918av",
-      "taskId": "4nyarvzyy",
+      "id": "6005f9d1-0cc5-47f5-8882-8b6f860dc32e",
+      "taskId": "ab3d2509-120a-4a2b-aa0f-1e9fa32e516a",
       "taskTitle": "Linkable task",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T14:07:17.235Z"
+      "timestamp": "2026-04-01T16:34:26.599Z"
     },
     {
-      "id": "wo6r4ayh3",
-      "taskId": "xpn61d445",
+      "id": "e47bf17d-1d55-4357-bb69-bd33495fb0f9",
+      "taskId": "8a5b5dba-8c98-4b91-9187-69aa531d1412",
+      "taskTitle": "Overview Task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Overview Task\" created and assigned to User",
+      "timestamp": "2026-04-01T16:33:50.289Z"
+    },
+    {
+      "id": "2d00105e-4f9c-4518-a9b3-1ba71fd3feee",
+      "taskId": "c159a11e-e964-4c19-acdd-357191359f94",
+      "taskTitle": "Task B",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Task B\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T16:33:49.656Z"
+    },
+    {
+      "id": "cc4c7a9f-5692-413b-97ab-97f28c992f9d",
+      "taskId": "7853c527-58d3-494e-94f4-bb11e0f6cb47",
+      "taskTitle": "Task A",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Task A\" created and assigned to User",
+      "timestamp": "2026-04-01T16:33:49.642Z"
+    },
+    {
+      "id": "d20cdd3c-c81a-4f62-b3a5-71a5fdc997b3",
+      "taskId": "01d8259f-8486-427e-bf7d-926a6d4a02e9",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:33:15.225Z"
+    },
+    {
+      "id": "91372c03-955c-40d1-89e6-b3bb8fcf38c2",
+      "taskId": "59048224-dbc6-448f-b165-84586bae511c",
       "taskTitle": "API update test",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"API update test\" created and assigned to User",
-      "timestamp": "2026-04-01T14:05:42.770Z"
+      "timestamp": "2026-04-01T16:32:30.712Z"
     },
     {
-      "id": "9mapfbly0",
-      "taskId": "oziu1pjj8",
+      "id": "58d7020a-4684-4f93-9c7f-c055bab22027",
+      "taskId": "f778fba3-67d6-4544-a81f-24831f8a5058",
+      "taskTitle": "Unlinked task xyz",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Unlinked task xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T16:32:30.611Z"
+    },
+    {
+      "id": "6bc83659-c7c2-4768-bf07-d184f34bbf5b",
+      "taskId": "46b72f45-7888-4035-92dd-ea7416c651a1",
+      "taskTitle": "Linked task xyz",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linked task xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T16:32:29.793Z"
+    },
+    {
+      "id": "b1bfecb8-e3f6-4dea-ad54-9ab4d57b83ce",
+      "taskId": "848cc798-9b2b-4c3b-ab11-8d1f550282c8",
       "taskTitle": "DeleteMeXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"DeleteMeXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T14:05:42.689Z"
+      "timestamp": "2026-04-01T16:32:28.957Z"
     },
     {
-      "id": "cgm7gw1dd",
-      "taskId": "eiij8chyc",
+      "id": "d900efae-4345-4f22-8a95-85ec88233f2d",
+      "taskId": "b572e900-6fb8-4796-a746-61d020f8ff5e",
       "taskTitle": "BlockedReasonXYZ",
       "action": "moved",
       "fromColumn": "backlog",
       "toColumn": "blocked",
       "actor": "user",
       "details": "\"BlockedReasonXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T14:05:41.997Z"
+      "timestamp": "2026-04-01T16:32:28.324Z"
     },
     {
-      "id": "ooce26taw",
-      "taskId": "eiij8chyc",
+      "id": "b459b7c0-c902-4031-8356-51a90a7d43c4",
+      "taskId": "b572e900-6fb8-4796-a746-61d020f8ff5e",
       "taskTitle": "BlockedReasonXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"BlockedReasonXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T14:05:41.984Z"
+      "timestamp": "2026-04-01T16:32:28.311Z"
     },
     {
-      "id": "ht6v9s01q",
-      "taskId": "c4iuus5q8",
+      "id": "fb5b6746-65c7-4256-91ba-2976f828db2d",
+      "taskId": "74ec935f-ad30-4e0f-9764-eee984db541e",
       "taskTitle": "BlockMeXYZ",
       "action": "moved",
       "fromColumn": "backlog",
       "toColumn": "blocked",
       "actor": "user",
       "details": "\"BlockMeXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T14:05:41.910Z"
+      "timestamp": "2026-04-01T16:32:28.233Z"
     },
     {
-      "id": "qin6ftlh0",
-      "taskId": "c4iuus5q8",
+      "id": "eb31a1e2-ac1e-47ca-9c85-b58256084b8d",
+      "taskId": "74ec935f-ad30-4e0f-9764-eee984db541e",
       "taskTitle": "BlockMeXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"BlockMeXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T14:05:41.681Z"
+      "timestamp": "2026-04-01T16:32:28.215Z"
     },
     {
-      "id": "wfzp4vqgl",
-      "taskId": "bgr1gaxmh",
+      "id": "e50cc633-db30-4323-83f8-6be000874309",
+      "taskId": "d1dbbfb4-ee8f-4e56-aaef-31ba128d355a",
       "taskTitle": "CancelEditXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"CancelEditXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T14:05:40.967Z"
+      "timestamp": "2026-04-01T16:32:27.439Z"
     },
     {
-      "id": "je3woedjc",
-      "taskId": "9r5cdqj2w",
+      "id": "938f131b-d837-4b67-ade6-4b1449104526",
+      "taskId": "ad7c10af-f212-4803-8bf7-c085f400420d",
       "taskTitle": "EditableXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"EditableXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T14:05:40.237Z"
+      "timestamp": "2026-04-01T16:32:26.668Z"
     },
     {
-      "id": "w9fraxshf",
-      "taskId": "v4zdsjyto",
+      "id": "d9dad25c-93d1-4c2c-8835-cdf525fc4dc6",
+      "taskId": "0ed6c644-2400-4093-b23f-6a831f7741d3",
       "taskTitle": "Unique create test xyz",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Unique create test xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T14:05:40.064Z"
+      "timestamp": "2026-04-01T16:32:26.508Z"
     },
     {
-      "id": "fd1v3e9uf",
-      "taskId": "pd4jbaqo9",
+      "id": "76c0a240-eb5f-44e1-9461-d21449188ae2",
+      "taskId": "f4ffe699-e414-47d1-a37a-295ccaab63c9",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:32:20.410Z"
+    },
+    {
+      "id": "8233626f-c32a-4c80-ac62-b58dd9c318ea",
+      "taskId": "19bbf347-1c3b-466a-bb3e-65d24530609d",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:32:19.335Z"
+    },
+    {
+      "id": "c9b91aa1-3652-481f-acd5-a3f1b71ca7d6",
+      "taskId": "25dedbd9-06d3-4938-a005-8a0accb73e68",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:32:17.306Z"
+    },
+    {
+      "id": "706019d5-de45-456b-925e-5f18c711860a",
+      "taskId": "eb9dcd1b-8dc4-4ac6-a90d-67bc5b07a95c",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:32:16.686Z"
+    },
+    {
+      "id": "22660e57-2e04-41e0-a57a-373eb99ff89e",
+      "taskId": "723ee9fa-6bf5-4a50-98bc-c7c0813eb1d1",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:32:16.073Z"
+    },
+    {
+      "id": "2626bb1a-4a35-464b-9eba-237d0c9707b7",
+      "taskId": "723da1d9-3147-47e8-b8e2-98834c326195",
+      "taskTitle": "Backlog task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Backlog task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T16:32:14.687Z"
+    },
+    {
+      "id": "f187ebc7-3f20-48f6-a138-a27ee20498a6",
+      "taskId": "22576850-c8f5-49b0-9fc9-503edba1ca0d",
+      "taskTitle": "Done task for progress",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Done task for progress\" moved from Backlog to Done",
+      "timestamp": "2026-04-01T16:32:14.672Z"
+    },
+    {
+      "id": "50e799af-6082-4956-b85f-dfd28e32bfe7",
+      "taskId": "22576850-c8f5-49b0-9fc9-503edba1ca0d",
+      "taskTitle": "Done task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Done task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T16:32:14.403Z"
+    },
+    {
+      "id": "674881a5-c3c7-48c6-9ff5-927df16c75fb",
+      "taskId": "61be5c3e-a600-487f-8170-761c6c203a6d",
+      "taskTitle": "Linkable task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linkable task\" created and assigned to User",
+      "timestamp": "2026-04-01T16:32:13.121Z"
+    },
+    {
+      "id": "eb059bac-5691-434d-9d8c-aed0145bc115",
+      "taskId": "13d056d5-889c-491c-8e60-e0380d6c90b4",
+      "taskTitle": "Overview Task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Overview Task\" created and assigned to User",
+      "timestamp": "2026-04-01T16:31:37.357Z"
+    },
+    {
+      "id": "b9afe02a-1898-4897-a95c-ac088f9037ea",
+      "taskId": "9fd293da-4690-4c24-a888-d396b138474c",
+      "taskTitle": "Task B",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Task B\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T16:31:36.728Z"
+    },
+    {
+      "id": "6e1a21af-820d-435f-9106-e493e0bf9d4a",
+      "taskId": "fad19537-23b0-40d2-8968-04a91d32454d",
+      "taskTitle": "Task A",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Task A\" created and assigned to User",
+      "timestamp": "2026-04-01T16:31:36.716Z"
+    },
+    {
+      "id": "68e31821-3b00-4946-830e-18141d3bb123",
+      "taskId": "f4df87d3-67e3-47c4-b232-ddfcc8746653",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:30:48.351Z"
+    },
+    {
+      "id": "ebba5011-1d33-486a-98d4-9cd8aa8ce5a8",
+      "taskId": "3751801d-751d-4393-b838-a06cd850ab2d",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:30:46.839Z"
+    },
+    {
+      "id": "1ae1e71d-67b0-4740-9724-16b37e6dcfde",
+      "taskId": "d406cc5e-17b5-4c91-b698-f4362d9d5007",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:30:45.675Z"
+    },
+    {
+      "id": "38f3a26e-18c4-4014-a103-91f69028464a",
+      "taskId": "15536bc7-8418-4d71-a1ef-4ef8eb4fbc85",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:30:45.042Z"
+    },
+    {
+      "id": "5da97aad-5d31-4e88-b9b2-ef1026188dee",
+      "taskId": "396f373f-c96e-4cce-a201-acace2591159",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:30:44.336Z"
+    },
+    {
+      "id": "bd813286-4ef2-4a31-850c-2c4651b14c82",
+      "taskId": "b526c8a4-96c5-4815-9a4a-0ea07b575a3c",
+      "taskTitle": "Overview Task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Overview Task\" created and assigned to User",
+      "timestamp": "2026-04-01T16:30:40.136Z"
+    },
+    {
+      "id": "eb4eebef-ab80-48cb-8cab-333bf37d18f9",
+      "taskId": "005b5776-e1ec-427f-9ab7-ba5b6a204b18",
+      "taskTitle": "Task B",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Task B\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T16:30:39.158Z"
+    },
+    {
+      "id": "d2a17824-1482-4336-be16-e06da4c71715",
+      "taskId": "f46ad970-9db3-4304-836f-88734f03a4a8",
+      "taskTitle": "Task A",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Task A\" created and assigned to User",
+      "timestamp": "2026-04-01T16:30:39.147Z"
+    },
+    {
+      "id": "b34f1836-24fd-429e-a21a-d2f08d1fc79f",
+      "taskId": "eae7bc01-9163-40ee-8a8b-074c9fc2cd52",
       "taskTitle": "API update test",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"API update test\" created and assigned to User",
-      "timestamp": "2026-04-01T14:04:58.506Z"
+      "timestamp": "2026-04-01T16:29:12.452Z"
     },
     {
-      "id": "p8gbbbgs2",
-      "taskId": "v0aq04wbh",
-      "taskTitle": "Delete me task",
+      "id": "67f9b366-f5b5-49a9-b966-44c7b43b6283",
+      "taskId": "8cbc890a-e340-4603-800c-c8b3308eb3cc",
+      "taskTitle": "Unlinked task xyz",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
-      "details": "Task \"Delete me task\" created and assigned to User",
-      "timestamp": "2026-04-01T14:04:42.720Z"
+      "details": "Task \"Unlinked task xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T16:29:12.355Z"
     },
     {
-      "id": "i5jvrmmhn",
-      "taskId": "lwlybh3z9",
-      "taskTitle": "Blocked with reason",
+      "id": "3c2f9b69-d52c-4c81-adcf-8d48221a0e08",
+      "taskId": "b56f70dd-d9d0-4517-bb32-119a5532f233",
+      "taskTitle": "Linked task xyz",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linked task xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T16:29:11.501Z"
+    },
+    {
+      "id": "eba47234-7acb-40b2-ae54-b3a6d5e21716",
+      "taskId": "9a7b8079-4af9-491b-bf90-b7d200079bc0",
+      "taskTitle": "DeleteMeXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"DeleteMeXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T16:29:10.733Z"
+    },
+    {
+      "id": "6427a346-b095-402f-9b70-eccd0cf7f241",
+      "taskId": "20260970-b0f0-4e98-b504-f0b24da8c7ec",
+      "taskTitle": "BlockedReasonXYZ",
       "action": "moved",
       "fromColumn": "backlog",
       "toColumn": "blocked",
       "actor": "user",
-      "details": "\"Blocked with reason\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T14:04:41.995Z"
+      "details": "\"BlockedReasonXYZ\" moved from Backlog to Blocked",
+      "timestamp": "2026-04-01T16:29:10.089Z"
     },
     {
-      "id": "a6ojojzyq",
-      "taskId": "lwlybh3z9",
-      "taskTitle": "Blocked with reason",
+      "id": "8819abc5-8b63-4d63-b678-d0f180b7529c",
+      "taskId": "20260970-b0f0-4e98-b504-f0b24da8c7ec",
+      "taskTitle": "BlockedReasonXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
-      "details": "Task \"Blocked with reason\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T14:04:41.743Z"
+      "details": "Task \"BlockedReasonXYZ\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T16:29:10.067Z"
     },
     {
-      "id": "n9czq8k40",
-      "taskId": "tsyyubq8z",
-      "taskTitle": "Block me task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Block me task\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T14:04:25.967Z"
-    },
-    {
-      "id": "urxel1l1v",
-      "taskId": "7o6h2mp81",
-      "taskTitle": "Cancel edit task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Cancel edit task\" created and assigned to User",
-      "timestamp": "2026-04-01T14:04:24.764Z"
-    },
-    {
-      "id": "kzjmnu5aq",
-      "taskId": "hq6wvqst9",
-      "taskTitle": "Editable task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Editable task\" created and assigned to User",
-      "timestamp": "2026-04-01T14:04:08.974Z"
-    },
-    {
-      "id": "nd5b4kjyz",
-      "taskId": "t7iy7zxnk",
-      "taskTitle": "Test task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Test task\" created and assigned to User",
-      "timestamp": "2026-04-01T14:04:08.333Z"
-    },
-    {
-      "id": "9ew2lzx77",
-      "taskId": "xa85i978a",
-      "taskTitle": "Send a discord message",
-      "action": "moved",
-      "fromColumn": "review",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Send a discord message\" moved from Review to Done",
-      "timestamp": "2026-04-01T13:59:42.832Z"
-    },
-    {
-      "id": "6vosqknrm",
-      "taskId": "xa85i978a",
-      "taskTitle": "Send a discord message",
+      "id": "a7c87424-4ce0-4c45-9b65-3d83f00c9f44",
+      "taskId": "d6a357db-b9d6-4758-b335-58b59c779128",
+      "taskTitle": "BlockMeXYZ",
       "action": "moved",
       "fromColumn": "backlog",
-      "toColumn": "review",
+      "toColumn": "blocked",
       "actor": "user",
-      "details": "\"Send a discord message\" moved from Backlog to Review",
-      "timestamp": "2026-04-01T13:59:42.010Z"
+      "details": "\"BlockMeXYZ\" moved from Backlog to Blocked",
+      "timestamp": "2026-04-01T16:29:09.989Z"
     },
     {
-      "id": "ajuvvn9cm",
-      "taskId": "xa85i978a",
-      "taskTitle": "Send a discord message",
-      "action": "moved",
-      "fromColumn": "review",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "\"Send a discord message\" moved from Review to Backlog",
-      "timestamp": "2026-04-01T13:56:38.095Z"
-    },
-    {
-      "id": "z8u1cajm5",
-      "taskId": "xa85i978a",
-      "taskTitle": "Send a discord message",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "review",
-      "actor": "user",
-      "details": "\"Send a discord message\" moved from Backlog to Review",
-      "timestamp": "2026-04-01T13:52:57.158Z"
-    },
-    {
-      "id": "ynys2gwly",
-      "taskId": "xa85i978a",
-      "taskTitle": "Send a discord message",
+      "id": "74f61e3e-8400-45d9-b6ec-3998432b3cb0",
+      "taskId": "d6a357db-b9d6-4758-b335-58b59c779128",
+      "taskTitle": "BlockMeXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
-      "details": "Task \"Send a discord message\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T13:52:15.345Z"
+      "details": "Task \"BlockMeXYZ\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T16:29:09.970Z"
     },
     {
-      "id": "hpud3ivl7",
-      "taskId": "pm6fcczhr",
-      "taskTitle": "send me a hello Marko  Test task",
-      "action": "moved",
-      "fromColumn": "review",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"send me a hello Marko  Test task\" moved from Review to Done",
-      "timestamp": "2026-04-01T13:51:32.970Z"
-    },
-    {
-      "id": "ozvqpp5v9",
-      "taskId": "pm6fcczhr",
-      "taskTitle": "send me a hello Marko  Test task",
-      "action": "moved",
-      "fromColumn": "done",
-      "toColumn": "review",
-      "actor": "user",
-      "details": "\"send me a hello Marko  Test task\" moved from Done to Review",
-      "timestamp": "2026-04-01T13:51:19.926Z"
-    },
-    {
-      "id": "8ca6kfaqt",
-      "taskId": "873eqxf32",
-      "taskTitle": "Test email task",
-      "action": "approved",
-      "fromColumn": "review",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Test email task\" approved and moved to Done",
-      "timestamp": "2026-04-01T13:51:10.547Z"
-    },
-    {
-      "id": "u40yxu1m8",
-      "taskId": "pm6fcczhr",
-      "taskTitle": "send me a hello Marko  Test task",
-      "action": "approved",
-      "fromColumn": "review",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"send me a hello Marko  Test task\" approved and moved to Done",
-      "timestamp": "2026-04-01T13:51:09.315Z"
-    },
-    {
-      "id": "twfd7cp3e",
-      "taskId": "873eqxf32",
-      "taskTitle": "Test email task",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "review",
-      "actor": "user",
-      "details": "\"Test email task\" moved from Backlog to Review",
-      "timestamp": "2026-04-01T13:49:51.259Z"
-    },
-    {
-      "id": "a3aspkiug",
-      "taskId": "pm6fcczhr",
-      "taskTitle": "send me a hello Marko  Test task",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "review",
-      "actor": "user",
-      "details": "\"send me a hello Marko  Test task\" moved from Backlog to Review",
-      "timestamp": "2026-04-01T13:49:41.330Z"
-    },
-    {
-      "id": "de2xveaht",
-      "taskId": "873eqxf32",
-      "taskTitle": "Test email task",
+      "id": "9870d62c-260d-43d9-a89a-50be5449ff69",
+      "taskId": "837d09f5-f203-4dbd-97e6-1dde45554d9c",
+      "taskTitle": "CancelEditXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
-      "details": "Task \"Test email task\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T13:45:03.261Z"
+      "details": "Task \"CancelEditXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T16:29:09.196Z"
     },
     {
-      "id": "zdsotpa61",
-      "taskId": "pm6fcczhr",
-      "taskTitle": "send me a hello Marko  Test task",
+      "id": "b8c5362d-53e8-4f01-8c2b-09ee0d65c975",
+      "taskId": "d3fada35-b5ab-4f30-8aae-a4cc20691aab",
+      "taskTitle": "EditableXYZ",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
-      "details": "Task \"send me a hello Marko  Test task\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T13:40:33.096Z"
+      "details": "Task \"EditableXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T16:29:08.426Z"
     },
     {
-      "id": "k7o48o877",
-      "taskId": "6m8fr9wwy",
-      "taskTitle": "Test Task",
-      "action": "approved",
-      "fromColumn": "review",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Test Task\" approved and moved to Done",
-      "timestamp": "2026-04-01T13:39:54.591Z"
-    },
-    {
-      "id": "rzlwm4h31",
-      "taskId": "6m8fr9wwy",
-      "taskTitle": "Test Task",
-      "action": "moved",
-      "fromColumn": "in-progress",
-      "toColumn": "review",
-      "actor": "user",
-      "details": "\"Test Task\" moved from In Progress to Review",
-      "timestamp": "2026-04-01T13:38:39.494Z"
-    },
-    {
-      "id": "0rjgad1sg",
-      "taskId": "6m8fr9wwy",
-      "taskTitle": "Test Task",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "in-progress",
-      "actor": "user",
-      "details": "\"Test Task\" moved from Backlog to In Progress",
-      "timestamp": "2026-04-01T13:36:58.910Z"
-    },
-    {
-      "id": "t1domuzat",
-      "taskId": "6m8fr9wwy",
-      "taskTitle": "Test Task",
-      "action": "moved",
-      "fromColumn": "review",
+      "id": "38d17a00-6c4c-4776-b59d-f74163f970ef",
+      "taskId": "55ae611f-5769-45b3-ad70-c9060e2696be",
+      "taskTitle": "Unique create test xyz",
+      "action": "created",
       "toColumn": "backlog",
       "actor": "user",
-      "details": "\"Test Task\" moved from Review to Backlog",
-      "timestamp": "2026-04-01T13:31:00.870Z"
+      "details": "Task \"Unique create test xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T16:29:08.253Z"
     },
     {
-      "id": "z1hbfwt9o",
-      "taskId": "k3o77k8wj",
+      "id": "f3c16573-6884-4bb8-8cce-8696027fdb54",
+      "taskId": "6936b025-9068-49a6-8abb-cdf6f9bbc7a2",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:28:46.404Z"
+    },
+    {
+      "id": "8dc28c3c-52af-409f-899e-f5ba49a7c609",
+      "taskId": "b9fe272c-9662-4b02-a7ef-1222b537c2cb",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:28:44.869Z"
+    },
+    {
+      "id": "4fbf6df5-68ff-4f80-b304-544c3a497227",
+      "taskId": "b79d28a1-b7bb-493a-81e7-6f8a7bafeae1",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:28:43.712Z"
+    },
+    {
+      "id": "5cfbfe21-6236-4f94-b225-8399908181ea",
+      "taskId": "e2542503-aca7-4035-9f74-92e1967ed9c4",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:28:43.083Z"
+    },
+    {
+      "id": "9ad8be25-5114-48d6-af6f-311cc38b730a",
+      "taskId": "183e2324-ce72-4085-beb3-25b041b2bd36",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:28:42.467Z"
+    },
+    {
+      "id": "74bfab4b-8358-4633-be26-bdeffc234434",
+      "taskId": "d06655ca-6b66-44dd-9891-a281ca9a75a3",
       "taskTitle": "Backlog task for progress",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T13:25:24.683Z"
+      "timestamp": "2026-04-01T16:28:41.044Z"
     },
     {
-      "id": "18d9o2d7p",
-      "taskId": "e555jegwz",
+      "id": "42fb2aea-d842-45e7-a014-f863535568ff",
+      "taskId": "344768b7-7dc7-4b93-bfa1-8d458bb1599f",
       "taskTitle": "Done task for progress",
       "action": "moved",
       "fromColumn": "backlog",
       "toColumn": "done",
       "actor": "user",
       "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T13:25:24.670Z"
+      "timestamp": "2026-04-01T16:28:41.031Z"
     },
     {
-      "id": "7dhgmntpb",
-      "taskId": "e555jegwz",
+      "id": "491c260c-c5f2-4767-a60a-b01c58784151",
+      "taskId": "344768b7-7dc7-4b93-bfa1-8d458bb1599f",
       "taskTitle": "Done task for progress",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T13:25:24.512Z"
+      "timestamp": "2026-04-01T16:28:40.759Z"
     },
     {
-      "id": "myx3um6jw",
-      "taskId": "3d9zpves4",
+      "id": "7eab239f-dda0-40e3-8c6c-ebe4e31ed8ad",
+      "taskId": "46279dcd-9ef9-4603-8192-e9d6b4ac691b",
       "taskTitle": "Linkable task",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T13:25:23.370Z"
+      "timestamp": "2026-04-01T16:28:39.519Z"
     },
     {
-      "id": "yifccq8ir",
-      "taskId": "6m8fr9wwy",
-      "taskTitle": "Test Task",
-      "action": "completed",
-      "fromColumn": "in-progress",
-      "toColumn": "review",
-      "actor": "agent",
-      "details": "Agent completed \"Test Task\", awaiting review",
-      "timestamp": "2026-04-01T13:04:20.677Z"
-    },
-    {
-      "id": "lx2lbdkda",
-      "taskId": "6m8fr9wwy",
-      "taskTitle": "Test Task",
-      "action": "picked-up",
-      "fromColumn": "backlog",
-      "toColumn": "in-progress",
-      "actor": "agent",
-      "details": "Agent picked up \"Test Task\"",
-      "timestamp": "2026-04-01T13:04:15.938Z"
-    },
-    {
-      "id": "k1sjp3653",
-      "taskId": "6m8fr9wwy",
-      "taskTitle": "Test Task",
-      "action": "moved",
-      "fromColumn": "review",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "\"Test Task\" moved from Review to Backlog",
-      "timestamp": "2026-04-01T13:04:15.646Z"
-    },
-    {
-      "id": "7ke301o3e",
-      "taskId": "6m8fr9wwy",
-      "taskTitle": "Test Task",
-      "action": "completed",
-      "fromColumn": "in-progress",
-      "toColumn": "review",
-      "actor": "agent",
-      "details": "Agent completed \"Test Task\", awaiting review",
-      "timestamp": "2026-04-01T12:59:20.787Z"
-    },
-    {
-      "id": "ytzeexjl9",
-      "taskId": "6m8fr9wwy",
-      "taskTitle": "Test Task",
-      "action": "picked-up",
-      "fromColumn": "backlog",
-      "toColumn": "in-progress",
-      "actor": "agent",
-      "details": "Agent picked up \"Test Task\"",
-      "timestamp": "2026-04-01T12:59:15.780Z"
-    },
-    {
-      "id": "xruaq6h6e",
-      "taskId": "6m8fr9wwy",
-      "taskTitle": "Test Task",
+      "id": "909b49ac-84cf-43a8-8f1f-30fe0d2b42d3",
+      "taskId": "437f394f-1f4d-4911-9963-9bd4cc2c6b5f",
+      "taskTitle": "Overview Task",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
-      "details": "Task \"Test Task\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T12:59:14.102Z"
+      "details": "Task \"Overview Task\" created and assigned to User",
+      "timestamp": "2026-04-01T16:27:51.618Z"
     },
     {
-      "id": "tkv624lz9",
-      "taskId": "3whg45yj1",
+      "id": "85f1e580-ff24-4d60-a303-5b3d2d1dcead",
+      "taskId": "f2dfe542-92dc-4821-8843-934ec6f83e04",
+      "taskTitle": "Task B",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Task B\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T16:27:51.012Z"
+    },
+    {
+      "id": "73d0eb5d-972a-4f4f-9a18-580456cc7afa",
+      "taskId": "4d7fd899-e21c-433f-92b2-93b35596df01",
+      "taskTitle": "Task A",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Task A\" created and assigned to User",
+      "timestamp": "2026-04-01T16:27:50.998Z"
+    },
+    {
+      "id": "e23746aa-bc00-462c-9c7d-9d7f3c7a7b07",
+      "taskId": "003ddeaa-5744-49a8-9a24-66578d527dda",
+      "taskTitle": "API update test",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"API update test\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:49.730Z"
+    },
+    {
+      "id": "bd7f4a14-9172-41d4-acfb-1c2a20f99749",
+      "taskId": "39a86511-a3dc-4051-b42d-ef42487f8457",
+      "taskTitle": "Unlinked task xyz",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Unlinked task xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:49.627Z"
+    },
+    {
+      "id": "a365def6-35ab-4549-bdaa-0f99944840ad",
+      "taskId": "48f421b5-2197-4a87-893e-221121daa08f",
+      "taskTitle": "Linked task xyz",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linked task xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:48.774Z"
+    },
+    {
+      "id": "087a0864-35bf-40bd-8d00-d16d474d602a",
+      "taskId": "5196da8d-2ba0-4d2b-a518-fe2c7e67d45c",
+      "taskTitle": "DeleteMeXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"DeleteMeXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:48.003Z"
+    },
+    {
+      "id": "3613cd4f-2f2f-47a4-a620-5ab13a5aa933",
+      "taskId": "03b9cfca-87c0-4067-8648-edf11386ddda",
+      "taskTitle": "BlockedReasonXYZ",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "blocked",
+      "actor": "user",
+      "details": "\"BlockedReasonXYZ\" moved from Backlog to Blocked",
+      "timestamp": "2026-04-01T16:26:47.372Z"
+    },
+    {
+      "id": "c5aed1e8-59ec-4f0e-8c68-2df739587913",
+      "taskId": "03b9cfca-87c0-4067-8648-edf11386ddda",
+      "taskTitle": "BlockedReasonXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"BlockedReasonXYZ\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T16:26:47.352Z"
+    },
+    {
+      "id": "012eb2cb-48fe-4707-ab47-cacaa130b15c",
+      "taskId": "2f782b5c-0805-4801-9c3c-e8f2c6e6ce27",
+      "taskTitle": "BlockMeXYZ",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "blocked",
+      "actor": "user",
+      "details": "\"BlockMeXYZ\" moved from Backlog to Blocked",
+      "timestamp": "2026-04-01T16:26:47.277Z"
+    },
+    {
+      "id": "f7b3a96d-1b6d-4861-8fc2-2dd30c00893f",
+      "taskId": "2f782b5c-0805-4801-9c3c-e8f2c6e6ce27",
+      "taskTitle": "BlockMeXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"BlockMeXYZ\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T16:26:47.260Z"
+    },
+    {
+      "id": "af3572c5-e170-4b58-b15f-7081baa8aaf1",
+      "taskId": "9c3bd5d9-6346-48bf-ad53-f2240c82cedc",
+      "taskTitle": "CancelEditXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"CancelEditXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:46.500Z"
+    },
+    {
+      "id": "796a252d-f878-429e-8451-28a69ea2fa7e",
+      "taskId": "c205c16f-df75-4f65-9bbc-00653ac9a532",
+      "taskTitle": "EditableXYZ",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"EditableXYZ\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:45.732Z"
+    },
+    {
+      "id": "f7aa1eb8-8bc4-4af2-bd9a-9d6f5bac2585",
+      "taskId": "59a6a462-a105-4930-be28-aca426e55846",
+      "taskTitle": "Unique create test xyz",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Unique create test xyz\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:45.559Z"
+    },
+    {
+      "id": "ccc8b6c2-522f-4977-8c92-4cba69e3cc73",
+      "taskId": "9bf7b346-5d13-45c4-8fea-276ee36b2711",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:23.531Z"
+    },
+    {
+      "id": "51968a2b-8722-43ec-84d8-a14afaeaef34",
+      "taskId": "118c855b-5af2-495f-93ca-0d22091ecebd",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:21.984Z"
+    },
+    {
+      "id": "188c44c6-6b71-4dea-b64b-ad2ed53200aa",
+      "taskId": "a8491662-38c9-4ddf-8dd0-ca2a719e0b50",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:20.817Z"
+    },
+    {
+      "id": "8fb64fa0-2776-4817-93e0-54dc156ddc76",
+      "taskId": "9c04d1e0-2864-4adb-9b1f-ddd4cece84c6",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:20.203Z"
+    },
+    {
+      "id": "962dbf56-1715-476c-84cc-9822b8bc84b3",
+      "taskId": "9f417687-858b-473b-bcaf-f9bdf31b58e5",
+      "taskTitle": "Fix zyphor alignment issue",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
+      "timestamp": "2026-04-01T16:26:19.591Z"
+    },
+    {
+      "id": "386eb0e3-7254-4834-83a3-c2dc5a7e668e",
+      "taskId": "76f5942a-a045-4745-9baa-4b48ddc2cad4",
       "taskTitle": "Backlog task for progress",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T12:40:55.608Z"
+      "timestamp": "2026-04-01T16:26:18.139Z"
     },
     {
-      "id": "metqtbbju",
-      "taskId": "534xwdexc",
+      "id": "0649a39c-08c3-4233-94d1-9a3cdf505de1",
+      "taskId": "f4d6320b-10dd-4ef0-b171-9b7b1ff71986",
       "taskTitle": "Done task for progress",
       "action": "moved",
       "fromColumn": "backlog",
       "toColumn": "done",
       "actor": "user",
       "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T12:40:55.596Z"
+      "timestamp": "2026-04-01T16:26:18.124Z"
     },
     {
-      "id": "xn9wu6bt5",
-      "taskId": "534xwdexc",
+      "id": "ea8eb8b0-1f68-450b-9724-94c31fd4359f",
+      "taskId": "f4d6320b-10dd-4ef0-b171-9b7b1ff71986",
       "taskTitle": "Done task for progress",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T12:40:55.397Z"
+      "timestamp": "2026-04-01T16:26:17.865Z"
     },
     {
-      "id": "hngcddd6h",
-      "taskId": "clvbzzxcp",
+      "id": "59a15150-4a9a-4df0-b506-f9cf765ac53e",
+      "taskId": "43359ba0-8199-49af-8836-7afb437d51a4",
       "taskTitle": "Linkable task",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
       "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T12:40:54.393Z"
+      "timestamp": "2026-04-01T16:26:16.553Z"
     },
     {
-      "id": "crot27p2n",
-      "taskId": "heycuf6mo",
-      "taskTitle": "Backlog task for progress",
+      "id": "5c4c26a2-f03b-48d4-ab2f-e9e837097d49",
+      "taskId": "ee5c0472-556d-4cc2-94cc-4b66f705f7a3",
+      "taskTitle": "Overview Task",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
-      "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T12:29:26.978Z"
+      "details": "Task \"Overview Task\" created and assigned to User",
+      "timestamp": "2026-04-01T16:25:28.607Z"
     },
     {
-      "id": "qdymwt7t3",
-      "taskId": "pq1ifyumr",
-      "taskTitle": "Done task for progress",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T12:29:26.966Z"
-    },
-    {
-      "id": "3x3zue0m8",
-      "taskId": "pq1ifyumr",
-      "taskTitle": "Done task for progress",
+      "id": "1a6d1a8d-8615-40a3-b3f3-21a9213398ed",
+      "taskId": "db189324-8d26-4012-a9eb-bd02d272a74f",
+      "taskTitle": "Task B",
       "action": "created",
       "toColumn": "backlog",
       "actor": "user",
-      "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T12:29:26.769Z"
-    },
-    {
-      "id": "yv7qfv1qs",
-      "taskId": "h57c7jxfi",
-      "taskTitle": "Linkable task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T12:29:25.591Z"
-    },
-    {
-      "id": "49ud6z7ph",
-      "taskId": "pdxssv7l4",
-      "taskTitle": "Backlog task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T12:21:06.024Z"
-    },
-    {
-      "id": "8qffi672s",
-      "taskId": "gygs0zez7",
-      "taskTitle": "Done task for progress",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T12:21:06.010Z"
-    },
-    {
-      "id": "ieiwiw835",
-      "taskId": "gygs0zez7",
-      "taskTitle": "Done task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T12:21:05.807Z"
-    },
-    {
-      "id": "b1lbcptmb",
-      "taskId": "fmu8wpohu",
-      "taskTitle": "Linkable task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T12:21:04.618Z"
-    },
-    {
-      "id": "vb6lnocol",
-      "taskId": "wlnkx4fhl",
-      "taskTitle": "Backlog task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T12:15:44.650Z"
-    },
-    {
-      "id": "4vbxu97h0",
-      "taskId": "uvb3erf0u",
-      "taskTitle": "Done task for progress",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T12:15:44.639Z"
-    },
-    {
-      "id": "tfmn5otka",
-      "taskId": "uvb3erf0u",
-      "taskTitle": "Done task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T12:15:44.465Z"
-    },
-    {
-      "id": "yeunzaaob",
-      "taskId": "9pfjac22p",
-      "taskTitle": "Linkable task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T12:15:43.337Z"
-    },
-    {
-      "id": "gnhoameds",
-      "taskId": "ehg34p3dr",
-      "taskTitle": "Backlog task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T12:04:13.809Z"
-    },
-    {
-      "id": "2s4wexl5q",
-      "taskId": "otnt77l0u",
-      "taskTitle": "Done task for progress",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T12:04:13.797Z"
-    },
-    {
-      "id": "uv1l8dthx",
-      "taskId": "otnt77l0u",
-      "taskTitle": "Done task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T12:04:13.615Z"
-    },
-    {
-      "id": "4kwph7e0e",
-      "taskId": "wr9m69lat",
-      "taskTitle": "Linkable task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T12:04:12.533Z"
+      "details": "Task \"Task B\" created and assigned to AI Agent",
+      "timestamp": "2026-04-01T16:25:27.989Z"
     }
   ],
   "scheduledEvents": [
     {
-      "id": "7j43ekd65",
+      "id": "b7f45ded-d502-4e7e-bbb6-91d233c58a93",
       "name": "Filter recurring",
       "description": "",
       "scheduleType": "recurring",
       "schedule": "Daily",
       "status": "active",
-      "createdAt": "2026-04-01T14:06:46.238Z",
-      "updatedAt": "2026-04-01T14:06:46.238Z"
+      "createdAt": "2026-04-01T16:33:47.037Z",
+      "updatedAt": "2026-04-01T16:33:47.037Z"
     },
     {
-      "id": "bq756me9q",
+      "id": "b302cb4d-036e-4523-9c7d-4a65dd682e57",
       "name": "Filter onetime",
       "description": "",
       "scheduleType": "one-time",
       "schedule": "Tomorrow",
       "status": "active",
-      "createdAt": "2026-04-01T14:06:46.249Z",
-      "updatedAt": "2026-04-01T14:06:46.249Z"
+      "createdAt": "2026-04-01T16:33:47.048Z",
+      "updatedAt": "2026-04-01T16:33:47.048Z"
     }
   ],
   "projects": [
     {
-      "id": "u1qqg7opt",
+      "id": "4d517348-d3f5-4201-81fb-f28458c5a48d",
       "name": "Active filter project",
       "description": "",
       "status": "active",
       "linkedTaskIds": [],
-      "createdAt": "2026-04-01T14:07:19.351Z",
-      "updatedAt": "2026-04-01T14:07:19.351Z",
-      "lastActiveAt": "2026-04-01T14:07:19.351Z"
+      "createdAt": "2026-04-01T16:34:28.896Z",
+      "updatedAt": "2026-04-01T16:34:28.896Z",
+      "lastActiveAt": "2026-04-01T16:34:28.896Z"
     },
     {
-      "id": "ox8rqpdnh",
+      "id": "e7302230-ce70-492c-bed4-02439087303e",
       "name": "Archived filter project",
       "description": "",
       "status": "archived",
       "linkedTaskIds": [],
-      "createdAt": "2026-04-01T14:07:19.360Z",
-      "updatedAt": "2026-04-01T14:07:19.369Z",
-      "lastActiveAt": "2026-04-01T14:07:19.369Z"
+      "createdAt": "2026-04-01T16:34:28.905Z",
+      "updatedAt": "2026-04-01T16:34:28.916Z",
+      "lastActiveAt": "2026-04-01T16:34:28.905Z"
     }
   ],
   "conversationMemories": [],
   "longTermMemories": [
     {
-      "id": "02ualbc3a",
+      "id": "54bd0ec5-719a-4273-9163-5e07a1b04a5f",
       "title": "A preference",
       "content": "Likes dark mode",
       "category": "preference",
-      "createdAt": "2026-04-01T14:07:02.715Z",
-      "updatedAt": "2026-04-01T14:07:02.715Z"
+      "createdAt": "2026-04-01T16:34:12.442Z",
+      "updatedAt": "2026-04-01T16:34:12.442Z"
     },
     {
-      "id": "axr4q6kai",
+      "id": "8ca4c075-c3f4-4a38-9be8-17f8f780d0b9",
       "title": "A decision",
       "content": "Use Next.js",
       "category": "decision",
-      "createdAt": "2026-04-01T14:07:02.726Z",
-      "updatedAt": "2026-04-01T14:07:02.726Z"
+      "createdAt": "2026-04-01T16:34:12.450Z",
+      "updatedAt": "2026-04-01T16:34:12.450Z"
     }
   ],
   "docs": [
     {
-      "id": "ivilt5csx",
-      "title": "Badged doc",
-      "content": "Content here",
-      "category": "newsletter",
-      "format": "markdown",
-      "createdAt": "2026-04-01T14:06:53.663Z",
-      "updatedAt": "2026-04-01T14:06:53.663Z"
+      "id": "eb9ad86e-9c64-4d5f-b948-6b61cbf51d13",
+      "title": "Zyphor integration guide",
+      "content": "How to integrate the zyphor system",
+      "category": "other",
+      "format": "plain text",
+      "createdAt": "2026-04-01T16:34:33.392Z",
+      "updatedAt": "2026-04-01T16:34:33.392Z"
     }
   ],
   "team": {
@@ -1278,15 +1913,15 @@
   },
   "bugs": [
     {
-      "id": "nem0moy4l",
-      "title": "Badge test bug",
-      "screen": "Calendar",
-      "severity": "critical",
+      "id": "f5398068-babf-43a2-b913-3bad30540eef",
+      "title": "Zyphor crashes on startup",
+      "screen": "Dashboard",
+      "severity": "high",
       "status": "open",
       "stepsToReproduce": "",
       "notes": [],
-      "createdAt": "2026-04-01T14:06:39.679Z",
-      "updatedAt": "2026-04-01T14:06:39.679Z"
+      "createdAt": "2026-04-01T16:34:33.400Z",
+      "updatedAt": "2026-04-01T16:34:33.400Z"
     }
   ]
 }

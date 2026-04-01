@@ -1,19 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-
-type DocCategory = "planning" | "newsletter" | "technical" | "research" | "draft" | "other";
-type DocFormat = "markdown" | "plain text" | "structured";
-
-interface Doc {
-  id: string;
-  title: string;
-  content: string;
-  category: DocCategory;
-  format: DocFormat;
-  createdAt: string;
-  updatedAt: string;
-}
+import type { DocCategory, DocFormat, Doc } from "@/lib/types";
+import { formatRelativeTime } from "@/lib/utils";
 
 const categoryBadge: Record<string, string> = {
   planning: "bg-accent/15 text-accent",
@@ -29,18 +18,6 @@ const formatBadge: Record<string, string> = {
   "plain text": "bg-surface-hover text-text-secondary",
   structured: "bg-success/10 text-success",
 };
-
-function formatRelativeTime(timestamp: string): string {
-  const diff = Date.now() - new Date(timestamp).getTime();
-  const seconds = Math.floor(diff / 1000);
-  if (seconds < 60) return "just now";
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  return `${days}d ago`;
-}
 
 export default function DocsPage() {
   const [docs, setDocs] = useState<Doc[]>([]);

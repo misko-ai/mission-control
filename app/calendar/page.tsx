@@ -1,26 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import type { ScheduleType, ScheduleStatus, ScheduledEvent } from "@/lib/types";
 
-type ScheduleType = "recurring" | "one-time";
-type ScheduleStatus = "active" | "paused" | "completed" | "failed";
 type TypeFilter = "all" | "recurring" | "one-time";
 type StatusFilter = "all" | "active" | "paused" | "completed" | "failed";
-
-interface ScheduledEvent {
-  id: string;
-  name: string;
-  description: string;
-  scheduleType: ScheduleType;
-  schedule: string;
-  cronExpression?: string;
-  status: ScheduleStatus;
-  createdAt: string;
-  updatedAt: string;
-  lastRunAt?: string;
-  nextRunAt?: string;
-  linkedTaskId?: string;
-}
 
 export default function CalendarPage() {
   const [events, setEvents] = useState<ScheduledEvent[]>([]);

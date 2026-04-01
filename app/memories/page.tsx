@@ -1,27 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-
-interface ConversationMemory {
-  id: string;
-  date: string;
-  title: string;
-  content: string;
-  tags: string[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-type LongTermMemoryCategory = "preference" | "decision" | "fact" | "context" | "other";
-
-interface LongTermMemory {
-  id: string;
-  title: string;
-  content: string;
-  category: LongTermMemoryCategory;
-  createdAt: string;
-  updatedAt: string;
-}
+import type { ConversationMemory, LongTermMemoryCategory, LongTermMemory } from "@/lib/types";
 
 type MemoryTab = "conversation" | "longterm";
 

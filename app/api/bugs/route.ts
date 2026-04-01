@@ -1,15 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getBugs, addBug, updateBug, deleteBug, BugReport } from "@/lib/store";
-
-function generateId() {
-  return Math.random().toString(36).substring(2, 11);
-}
+import { generateId } from "@/lib/db";
+import { getBugs, addBug, updateBug, deleteBug } from "@/lib/store";
+import { logError } from "@/lib/logger";
+import {
+  requireString,
+  requireEnum,
+  optionalEnum,
+  collectErrors,
+  validationResponse,
+  VALID_BUG_SEVERITY,
+  VALID_BUG_STATUS,
+} from "@/lib/validation";
+import type { BugReport } from "@/lib/types";
 
 export async function GET() {
   try {
     const bugs = await getBugs();
     return NextResponse.json({ bugs });
-  } catch {
+  } catch (err) {
+    logError("GET /api/bugs", err);
     return NextResponse.json(
       { error: "Failed to load bugs" },
       { status: 500 }
@@ -20,21 +29,22 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, screen, severity, stepsToReproduce, status } = body;
+    const { stepsToReproduce, status } = body;
 
-    if (!title || !screen || !severity) {
-      return NextResponse.json(
-        { error: "Title, screen, and severity are required" },
-        { status: 400 }
-      );
-    }
+    const titleResult = requireString(body.title, "title", { maxLength: 200 });
+    const screenResult = requireString(body.screen, "screen", { maxLength: 200 });
+    const severityResult = requireEnum(body.severity, "severity", VALID_BUG_SEVERITY);
+
+    const errors = collectErrors(titleResult, screenResult, severityResult);
+    const vRes = validationResponse(errors);
+    if (vRes) return vRes;
 
     const now = new Date().toISOString();
     const bug: BugReport = {
       id: generateId(),
-      title,
-      screen,
-      severity,
+      title: titleResult as string,
+      screen: screenResult as string,
+      severity: severityResult as BugReport["severity"],
       status: status || "open",
       stepsToReproduce: stepsToReproduce || "",
       notes: [],
@@ -44,7 +54,8 @@ export async function POST(request: NextRequest) {
 
     await addBug(bug);
     return NextResponse.json({ success: true, bug });
-  } catch {
+  } catch (err) {
+    logError("POST /api/bugs", err);
     return NextResponse.json(
       { error: "Failed to create bug" },
       { status: 500 }
@@ -61,10 +72,27 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "ID required" }, { status: 400 });
     }
 
-    updates.updatedAt = new Date().toISOString();
-    await updateBug(id, updates);
+    if (updates.severity !== undefined) {
+      const sevResult = optionalEnum(updates.severity, "severity", VALID_BUG_SEVERITY, updates.severity);
+      const errors = collectErrors(sevResult);
+      const vRes = validationResponse(errors);
+      if (vRes) return vRes;
+    }
+
+    if (updates.status !== undefined) {
+      const statusResult = optionalEnum(updates.status, "status", VALID_BUG_STATUS, updates.status);
+      const errors = collectErrors(statusResult);
+      const vRes = validationResponse(errors);
+      if (vRes) return vRes;
+    }
+
+    const found = await updateBug(id, updates);
+    if (!found) {
+      return NextResponse.json({ error: "Bug not found" }, { status: 404 });
+    }
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (err) {
+    logError("PUT /api/bugs", err);
     return NextResponse.json(
       { error: "Failed to update bug" },
       { status: 500 }
@@ -81,9 +109,13 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "ID required" }, { status: 400 });
     }
 
-    await deleteBug(id);
+    const found = await deleteBug(id);
+    if (!found) {
+      return NextResponse.json({ error: "Bug not found" }, { status: 404 });
+    }
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (err) {
+    logError("DELETE /api/bugs", err);
     return NextResponse.json(
       { error: "Failed to delete bug" },
       { status: 500 }

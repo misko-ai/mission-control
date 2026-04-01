@@ -1,12 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
-interface AppSettings {
-  theme: "light";
-  autoSave: boolean;
-  logLevel: "verbose" | "normal";
-}
+import type { AppSettings } from "@/lib/types";
+import { CheckIcon, SunIcon, MoonIcon } from "@/components/icons";
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<AppSettings>({
@@ -116,11 +112,41 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-text">Theme</p>
-                <p className="text-xs text-text-muted mt-0.5">Light theme for clarity</p>
+                <p className="text-xs text-text-muted mt-0.5">Switch between light and dark mode</p>
               </div>
-              <div className="flex items-center gap-1 px-2 py-1 bg-background border border-border rounded-md">
-                <SunIcon />
-                <span className="text-sm text-text">Light</span>
+              <div className="flex items-center gap-1 bg-background border border-border rounded-md p-0.5">
+                <button
+                  onClick={() => {
+                    const newSettings = { ...settings, theme: "light" as const };
+                    setSettings(newSettings);
+                    document.documentElement.setAttribute("data-theme", "light");
+                    handleSave({ theme: "light" });
+                  }}
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-sm transition-colors ${
+                    settings.theme === "light"
+                      ? "bg-surface text-text shadow-sm"
+                      : "text-text-muted hover:text-text-secondary"
+                  }`}
+                >
+                  <SunIcon />
+                  Light
+                </button>
+                <button
+                  onClick={() => {
+                    const newSettings = { ...settings, theme: "dark" as const };
+                    setSettings(newSettings);
+                    document.documentElement.setAttribute("data-theme", "dark");
+                    handleSave({ theme: "dark" });
+                  }}
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-sm transition-colors ${
+                    settings.theme === "dark"
+                      ? "bg-surface text-text shadow-sm"
+                      : "text-text-muted hover:text-text-secondary"
+                  }`}
+                >
+                  <MoonIcon />
+                  Dark
+                </button>
               </div>
             </div>
           </div>
@@ -246,26 +272,3 @@ export default function SettingsPage() {
   );
 }
 
-function CheckIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
-
-function SunIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-text-secondary">
-      <circle cx="12" cy="12" r="5" />
-      <line x1="12" y1="1" x2="12" y2="3" />
-      <line x1="12" y1="21" x2="12" y2="23" />
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-      <line x1="1" y1="12" x2="3" y2="12" />
-      <line x1="21" y1="12" x2="23" y2="12" />
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-    </svg>
-  );
-}

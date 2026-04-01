@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getTasks, moveTask, logTaskActivity, TaskActivityEntry } from "@/lib/store";
-
-function generateId() {
-  return Math.random().toString(36).substring(2, 11);
-}
+import { generateId } from "@/lib/db";
+import { getTasks, moveTask, logTaskActivity } from "@/lib/store";
+import { logError } from "@/lib/logger";
+import type { TaskActivityEntry } from "@/lib/types";
 
 export async function POST(request: NextRequest) {
   try {
@@ -43,7 +42,8 @@ export async function POST(request: NextRequest) {
     await logTaskActivity(activity);
 
     return NextResponse.json({ success: true, task: result?.task });
-  } catch {
+  } catch (err) {
+    logError("POST /api/tasks/approve", err);
     return NextResponse.json({ error: "Failed to approve task" }, { status: 500 });
   }
 }

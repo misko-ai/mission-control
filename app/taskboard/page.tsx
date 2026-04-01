@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-
-type TaskColumn = "backlog" | "in-progress" | "blocked" | "review" | "done";
-type TaskAssignee = "user" | "agent";
+import type { TaskColumn, TaskAssignee, TaskPriority, TaskActivityEntry } from "@/lib/types";
+import { PriorityBadge } from "@/components/ui/Badge";
+import { PlusIcon, EditIcon, MoveIcon, TrashIcon } from "@/components/icons";
+import { formatRelativeTime } from "@/lib/utils";
 
 interface Task {
   id: string;
@@ -11,22 +12,17 @@ interface Task {
   description: string;
   assignee: TaskAssignee;
   column: TaskColumn;
+  priority: TaskPriority;
   createdAt: string;
   updatedAt: string;
   blockReason?: string;
   completedAt?: string;
 }
 
-interface TaskActivityEntry {
+interface Project {
   id: string;
-  taskId: string;
-  taskTitle: string;
-  action: "created" | "moved" | "picked-up" | "completed" | "approved";
-  fromColumn?: TaskColumn;
-  toColumn?: TaskColumn;
-  actor: "user" | "agent";
-  details: string;
-  timestamp: string;
+  name: string;
+  status: string;
 }
 
 const columns: { key: TaskColumn; label: string; borderClass: string; bgClass: string }[] = [
@@ -45,20 +41,10 @@ const columnLabels: Record<TaskColumn, string> = {
   done: "Done",
 };
 
-function formatRelativeTime(timestamp: string): string {
-  const now = Date.now();
-  const then = new Date(timestamp).getTime();
-  const diff = Math.floor((now - then) / 1000);
-  if (diff < 5) return "just now";
-  if (diff < 60) return `${diff}s ago`;
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-  return `${Math.floor(diff / 86400)}d ago`;
-}
-
 export default function TaskboardPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [activities, setActivities] = useState<TaskActivityEntry[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [dragOverColumn, setDragOverColumn] = useState<TaskColumn | null>(null);
   const [moveMenuTaskId, setMoveMenuTaskId] = useState<string | null>(null);
@@ -67,6 +53,8 @@ export default function TaskboardPage() {
   const [formTitle, setFormTitle] = useState("");
   const [formDescription, setFormDescription] = useState("");
   const [formAssignee, setFormAssignee] = useState<TaskAssignee>("user");
+  const [formPriority, setFormPriority] = useState<TaskPriority>("medium");
+  const [formProjectId, setFormProjectId] = useState<string>("");
 
   const feedRef = useRef<HTMLDivElement>(null);
 
@@ -86,11 +74,20 @@ export default function TaskboardPage() {
     } catch { /* ignore */ }
   }, []);
 
+  const fetchProjects = useCallback(async () => {
+    try {
+      const res = await fetch("/api/projects");
+      const data = await res.json();
+      setProjects((data.projects || []).filter((p: Project) => p.status !== "archived"));
+    } catch { /* ignore */ }
+  }, []);
+
   // Initial fetch
   useEffect(() => {
     fetchTasks();
     fetchActivities();
-  }, [fetchTasks, fetchActivities]);
+    fetchProjects();
+  }, [fetchTasks, fetchActivities, fetchProjects]);
 
   // Activity polling (3s)
   useEffect(() => {
@@ -102,19 +99,36 @@ export default function TaskboardPage() {
     e.preventDefault();
     if (!formTitle.trim() || !formDescription.trim()) return;
 
-    await fetch("/api/tasks", {
+    const res = await fetch("/api/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: formTitle.trim(),
         description: formDescription.trim(),
         assignee: formAssignee,
+        priority: formPriority,
       }),
     });
+
+    if (formProjectId) {
+      const data = await res.json();
+      if (data.task?.id) {
+        await fetch("/api/projects/tasks", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            projectId: formProjectId,
+            taskId: data.task.id,
+          }),
+        });
+      }
+    }
 
     setFormTitle("");
     setFormDescription("");
     setFormAssignee("user");
+    setFormPriority("medium");
+    setFormProjectId("");
     setShowForm(false);
     fetchTasks();
     fetchActivities();
@@ -293,6 +307,32 @@ export default function TaskboardPage() {
                   </label>
                 </div>
               </div>
+              <div>
+                <label className="block text-xs font-medium text-text-secondary mb-1">Priority</label>
+                <select value={formPriority} onChange={(e) => setFormPriority(e.target.value as TaskPriority)} className="w-full px-3 py-1.5 text-sm bg-background border border-border rounded-md text-text">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="urgent">Urgent</option>
+                </select>
+              </div>
+              {projects.length > 0 && (
+                <div>
+                  <label className="block text-xs font-medium text-text-secondary mb-1">Project</label>
+                  <select
+                    value={formProjectId}
+                    onChange={(e) => setFormProjectId(e.target.value)}
+                    className="w-full px-3 py-1.5 text-sm bg-background border border-border rounded-md text-text"
+                  >
+                    <option value="">No project</option>
+                    {projects.map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {p.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
               <div className="flex gap-2 pt-1">
                 <button
                   type="submit"
@@ -316,7 +356,10 @@ export default function TaskboardPage() {
         <div className="flex-1 overflow-x-auto overflow-y-hidden px-6 pb-6">
           <div className="flex gap-4 h-full min-w-0">
             {columns.map((col) => {
-              const colTasks = tasks.filter((t) => t.column === col.key);
+              const priorityOrder = { urgent: 0, high: 1, medium: 2, low: 3 };
+              const colTasks = tasks
+                .filter((t) => t.column === col.key)
+                .sort((a, b) => (priorityOrder[a.priority] ?? 2) - (priorityOrder[b.priority] ?? 2));
               const isDragOver = dragOverColumn === col.key;
 
               return (
@@ -410,6 +453,7 @@ function TaskCard({
   const [editTitle, setEditTitle] = useState(task.title);
   const [editDescription, setEditDescription] = useState(task.description);
   const [editAssignee, setEditAssignee] = useState<TaskAssignee>(task.assignee);
+  const [editPriority, setEditPriority] = useState<TaskPriority>(task.priority);
 
   const isDone = task.column === "done";
   const isBlocked = task.column === "blocked";
@@ -462,6 +506,15 @@ function TaskCard({
             </label>
           </div>
         </div>
+        <div>
+          <label className="block text-xs text-text-muted mb-1">Priority</label>
+          <select value={editPriority} onChange={(e) => setEditPriority(e.target.value as TaskPriority)} className="w-full px-2 py-1 text-sm bg-background border border-border rounded text-text">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="urgent">Urgent</option>
+          </select>
+        </div>
         <div className="flex gap-1.5 pt-1">
           <button
             onClick={() =>
@@ -469,6 +522,7 @@ function TaskCard({
                 title: editTitle,
                 description: editDescription,
                 assignee: editAssignee,
+                priority: editPriority,
               })
             }
             disabled={!editTitle.trim()}
@@ -500,6 +554,7 @@ function TaskCard({
           {task.title}
         </h4>
         <AssigneeBadge assignee={task.assignee} />
+        <PriorityBadge priority={task.priority} />
       </div>
       <p className="text-xs text-text-secondary mt-1.5 line-clamp-2 leading-relaxed">
         {task.description}
@@ -528,6 +583,7 @@ function TaskCard({
             setEditTitle(task.title);
             setEditDescription(task.description);
             setEditAssignee(task.assignee);
+            setEditPriority(task.priority);
             onToggleEdit(task.id);
           }}
           className="text-xs px-1.5 py-0.5 rounded bg-surface-hover text-text-muted hover:text-text-secondary transition-colors"
@@ -595,37 +651,3 @@ function ActivityDot({ action, actor }: { action: string; actor: string }) {
   return <div className={`w-2 h-2 rounded-full shrink-0 mt-1 ${colorClass}`} />;
 }
 
-function PlusIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="12" y1="5" x2="12" y2="19" />
-      <line x1="5" y1="12" x2="19" y2="12" />
-    </svg>
-  );
-}
-
-function EditIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-    </svg>
-  );
-}
-
-function MoveIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="9 18 15 12 9 6" />
-    </svg>
-  );
-}
-
-function TrashIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="3 6 5 6 21 6" />
-      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-    </svg>
-  );
-}

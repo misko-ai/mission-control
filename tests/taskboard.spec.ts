@@ -105,10 +105,13 @@ test.describe("Taskboard page", () => {
       },
     });
     const created = await createRes.json();
+    expect(created.success).toBe(true);
 
-    await page.request.post("/api/tasks/move", {
+    const moveRes = await page.request.post("/api/tasks/move", {
       data: { taskId: created.task.id, toColumn: "blocked" },
     });
+    const moveData = await moveRes.json();
+    expect(moveData.success).toBe(true);
 
     const getRes = await page.request.get("/api/tasks");
     const getData = await getRes.json();
@@ -166,6 +169,78 @@ test.describe("Taskboard page", () => {
       (t: { id: string }) => t.id === created.task.id
     );
     expect(found).toBeUndefined();
+  });
+
+  test("can link a task to a project when creating", async ({ page }) => {
+    // Create a project first
+    const projRes = await page.request.post("/api/projects", {
+      data: { name: "Link Target Project" },
+    });
+    const projData = await projRes.json();
+
+    await page.goto("/taskboard");
+    await page.getByRole("button", { name: "New Task" }).click();
+    await page.fill('input[placeholder="Task title"]', "Linked task xyz");
+    await page.fill(
+      'textarea[placeholder="What needs to be done?"]',
+      "This task belongs to a project"
+    );
+
+    // Wait for project dropdown to render (projects fetched async)
+    const projectLabel = page.locator('label:has-text("Project")');
+    await expect(projectLabel).toBeVisible({ timeout: 5000 });
+    const projectSelect = projectLabel.locator('..').locator('select');
+    await projectSelect.selectOption(projData.project.id);
+
+    await page.getByRole("button", { name: "Create Task" }).click();
+
+    // Wait for the task to appear on the board
+    await expect(
+      page.locator("h4", { hasText: "Linked task xyz" })
+    ).toBeVisible();
+
+    // Poll the API until the link is confirmed instead of a fixed timeout
+    await expect.poll(async () => {
+      const getRes = await page.request.get("/api/projects");
+      const getData = await getRes.json();
+      const project = getData.projects.find(
+        (p: { id: string }) => p.id === projData.project.id
+      );
+      return project?.linkedTaskIds?.length ?? 0;
+    }, { timeout: 5000 }).toBe(1);
+
+    // Clean up project
+    await page.request.delete(`/api/projects?id=${projData.project.id}`);
+  });
+
+  test("can create a task without linking to a project", async ({ page }) => {
+    // Create a project to ensure the dropdown shows
+    const projRes = await page.request.post("/api/projects", {
+      data: { name: "Unlinked Project" },
+    });
+    const projData = await projRes.json();
+
+    await page.goto("/taskboard");
+    await page.getByRole("button", { name: "New Task" }).click();
+    await page.fill('input[placeholder="Task title"]', "Unlinked task xyz");
+    await page.fill(
+      'textarea[placeholder="What needs to be done?"]',
+      "Not linked to any project"
+    );
+
+    // Leave project as "No project" (default)
+    await page.getByRole("button", { name: "Create Task" }).click();
+
+    // Verify project has no linked tasks
+    const getRes = await page.request.get("/api/projects");
+    const getData = await getRes.json();
+    const project = getData.projects.find(
+      (p: { id: string }) => p.id === projData.project.id
+    );
+    expect(project.linkedTaskIds.length).toBe(0);
+
+    // Clean up
+    await page.request.delete(`/api/projects?id=${projData.project.id}`);
   });
 
   test("PUT endpoint updates task fields", async ({ page }) => {
