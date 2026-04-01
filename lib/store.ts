@@ -519,3 +519,47 @@ export async function deleteAgent(id: string): Promise<void> {
     .map((a) => (a.parentId === id ? { ...a, parentId: null } : a));
   await saveData(data);
 }
+
+// Bug report helpers
+
+export async function getBugs(): Promise<BugReport[]> {
+  const data = await getData();
+  return data.bugs;
+}
+
+export async function addBug(bug: BugReport): Promise<void> {
+  const data = await getData();
+  data.bugs.unshift(bug);
+  await saveData(data);
+}
+
+export async function updateBug(
+  id: string,
+  updates: Partial<BugReport>
+): Promise<void> {
+  const data = await getData();
+  const idx = data.bugs.findIndex((b) => b.id === id);
+  if (idx !== -1) {
+    data.bugs[idx] = { ...data.bugs[idx], ...updates };
+    await saveData(data);
+  }
+}
+
+export async function deleteBug(id: string): Promise<void> {
+  const data = await getData();
+  data.bugs = data.bugs.filter((b) => b.id !== id);
+  await saveData(data);
+}
+
+export async function addBugNote(
+  bugId: string,
+  note: BugNote
+): Promise<void> {
+  const data = await getData();
+  const bug = data.bugs.find((b) => b.id === bugId);
+  if (bug) {
+    bug.notes.push(note);
+    bug.updatedAt = new Date().toISOString();
+    await saveData(data);
+  }
+}

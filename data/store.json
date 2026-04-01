@@ -9,6 +9,47 @@
   "tasks": [],
   "taskActivities": [
     {
+      "id": "tkv624lz9",
+      "taskId": "3whg45yj1",
+      "taskTitle": "Backlog task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Backlog task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T12:40:55.608Z"
+    },
+    {
+      "id": "metqtbbju",
+      "taskId": "534xwdexc",
+      "taskTitle": "Done task for progress",
+      "action": "moved",
+      "fromColumn": "backlog",
+      "toColumn": "done",
+      "actor": "user",
+      "details": "\"Done task for progress\" moved from Backlog to Done",
+      "timestamp": "2026-04-01T12:40:55.596Z"
+    },
+    {
+      "id": "xn9wu6bt5",
+      "taskId": "534xwdexc",
+      "taskTitle": "Done task for progress",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Done task for progress\" created and assigned to User",
+      "timestamp": "2026-04-01T12:40:55.397Z"
+    },
+    {
+      "id": "hngcddd6h",
+      "taskId": "clvbzzxcp",
+      "taskTitle": "Linkable task",
+      "action": "created",
+      "toColumn": "backlog",
+      "actor": "user",
+      "details": "Task \"Linkable task\" created and assigned to User",
+      "timestamp": "2026-04-01T12:40:54.393Z"
+    },
+    {
       "id": "crot27p2n",
       "taskId": "heycuf6mo",
       "taskTitle": "Backlog task for progress",
@@ -175,80 +216,128 @@
   ],
   "scheduledEvents": [
     {
-      "id": "5p6i1j8nz",
+      "id": "doznr2x3y",
       "name": "Filter recurring",
       "description": "",
       "scheduleType": "recurring",
       "schedule": "Daily",
       "status": "active",
-      "createdAt": "2026-04-01T12:28:53.925Z",
-      "updatedAt": "2026-04-01T12:28:53.925Z"
+      "createdAt": "2026-04-01T12:40:23.664Z",
+      "updatedAt": "2026-04-01T12:40:23.664Z"
     },
     {
-      "id": "6ckpu5mv5",
+      "id": "c56afdtik",
       "name": "Filter onetime",
       "description": "",
       "scheduleType": "one-time",
       "schedule": "Tomorrow",
       "status": "active",
-      "createdAt": "2026-04-01T12:28:53.935Z",
-      "updatedAt": "2026-04-01T12:28:53.935Z"
+      "createdAt": "2026-04-01T12:40:23.672Z",
+      "updatedAt": "2026-04-01T12:40:23.672Z"
     }
   ],
   "projects": [
     {
-      "id": "q780ixudv",
+      "id": "xekqi8t2u",
       "name": "Active filter project",
       "description": "",
       "status": "active",
       "linkedTaskIds": [],
-      "createdAt": "2026-04-01T12:29:27.697Z",
-      "updatedAt": "2026-04-01T12:29:27.697Z",
-      "lastActiveAt": "2026-04-01T12:29:27.697Z"
+      "createdAt": "2026-04-01T12:40:56.339Z",
+      "updatedAt": "2026-04-01T12:40:56.339Z",
+      "lastActiveAt": "2026-04-01T12:40:56.339Z"
     },
     {
-      "id": "2am8n7ibh",
+      "id": "vo9b0i7a7",
       "name": "Archived filter project",
       "description": "",
       "status": "archived",
       "linkedTaskIds": [],
-      "createdAt": "2026-04-01T12:29:27.705Z",
-      "updatedAt": "2026-04-01T12:29:27.715Z",
-      "lastActiveAt": "2026-04-01T12:29:27.715Z"
+      "createdAt": "2026-04-01T12:40:56.347Z",
+      "updatedAt": "2026-04-01T12:40:56.357Z",
+      "lastActiveAt": "2026-04-01T12:40:56.357Z"
     }
   ],
-  "conversationMemories": [],
+  "conversationMemories": [
+    {
+      "id": "8tkcstxmi",
+      "date": "2026-04-01",
+      "title": "Mission Control setup session",
+      "content": "First session with Marko. Set up Misko as primary orchestrator agent. Confirmed Mission Control is a Next.js app at localhost:3000. Created GitHub repo for mission-control. Fixed exec approval spam. Browser automation (Playwright) is working. Registered Misko as orchestrator agent with ID e2j0z7yss.",
+      "tags": [
+        "setup",
+        "mission-control",
+        "agent",
+        "github"
+      ],
+      "createdAt": "2026-04-01T12:52:46.071Z",
+      "updatedAt": "2026-04-01T12:52:46.071Z"
+    }
+  ],
   "longTermMemories": [
     {
-      "id": "dw0xyz90w",
+      "id": "fm96020iq",
       "title": "A preference",
       "content": "Likes dark mode",
       "category": "preference",
-      "createdAt": "2026-04-01T12:29:11.067Z",
-      "updatedAt": "2026-04-01T12:29:11.067Z"
+      "createdAt": "2026-04-01T12:40:40.055Z",
+      "updatedAt": "2026-04-01T12:40:40.055Z"
     },
     {
-      "id": "pg8pnyim5",
+      "id": "8uibbk02v",
       "title": "A decision",
       "content": "Use Next.js",
       "category": "decision",
-      "createdAt": "2026-04-01T12:29:11.076Z",
-      "updatedAt": "2026-04-01T12:29:11.076Z"
+      "createdAt": "2026-04-01T12:40:40.064Z",
+      "updatedAt": "2026-04-01T12:40:40.064Z"
+    },
+    {
+      "id": "etplbmshl",
+      "title": "Mission Control API",
+      "content": "Mission Control runs at localhost:3000. REST API at /api/. Must register as agent on startup (POST /api/team/agents). Log conversation memories after sessions. Create tasks for work. Use Docs for documents. Use Bugs for errors.",
+      "category": "context",
+      "createdAt": "2026-04-01T12:52:53.803Z",
+      "updatedAt": "2026-04-01T12:52:53.803Z"
     }
   ],
   "docs": [
     {
-      "id": "zcs32k1qe",
+      "id": "8d0yzyc6x",
       "title": "Badged doc",
       "content": "Content here",
       "category": "newsletter",
       "format": "markdown",
-      "createdAt": "2026-04-01T12:29:01.584Z",
-      "updatedAt": "2026-04-01T12:29:01.584Z"
+      "createdAt": "2026-04-01T12:40:30.916Z",
+      "updatedAt": "2026-04-01T12:40:30.916Z"
     }
   ],
   "team": {
     "missionStatement": "",
-    "agents": []
-  }
+    "agents": [
+      {
+        "id": "e2j0z7yss",
+        "name": "Misko",
+        "role": "orchestrator",
+        "description": "Primary AI agent — setting up and learning Mission Control",
+        "model": "",
+        "parentId": null,
+        "status": "running",
+        "createdAt": "2026-04-01T12:52:32.649Z",
+        "updatedAt": "2026-04-01T12:52:32.649Z"
+      }
+    ]
+  },
+  "bugs": [
+    {
+      "id": "w20m9ksql",
+      "title": "Badge test bug",
+      "screen": "Calendar",
+      "severity": "critical",
+      "status": "open",
+      "stepsToReproduce": "",
+      "notes": [],
+      "createdAt": "2026-04-01T12:40:17.138Z",
+      "updatedAt": "2026-04-01T12:40:17.138Z"
+    }
+  ]
 }
