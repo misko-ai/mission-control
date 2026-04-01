@@ -20,12 +20,13 @@ test.describe("Taskboard page", () => {
   test("renders all columns including blocked", async ({ page }) => {
     await page.goto("/taskboard");
     await expect(page.locator("h2")).toHaveText("Taskboard");
-    // Column headers are uppercase
-    await expect(page.getByText("BACKLOG")).toBeVisible();
-    await expect(page.getByText("IN PROGRESS")).toBeVisible();
-    await expect(page.getByText("BLOCKED")).toBeVisible();
-    await expect(page.getByText("REVIEW")).toBeVisible();
-    await expect(page.getByText("DONE")).toBeVisible();
+    // Column headers are rendered with CSS uppercase, so DOM text is capitalized
+    const headers = page.locator("span.uppercase");
+    await expect(headers.getByText("Backlog")).toBeVisible();
+    await expect(headers.getByText("In Progress")).toBeVisible();
+    await expect(headers.getByText("Blocked")).toBeVisible();
+    await expect(headers.getByText("Review")).toBeVisible();
+    await expect(headers.getByText("Done")).toBeVisible();
   });
 
   test("can create a task", async ({ page }) => {

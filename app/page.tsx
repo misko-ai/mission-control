@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { getData } from "@/lib/store";
-import type { Task, BugReport, Project, Agent, ActivityEntry, TaskActivityEntry } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
+import type { Task, BugReport, Project, Agent, ActivityEntry, TaskActivityEntry, ScheduledEvent, EventType } from "@/lib/types";
 import { formatRelativeTime } from "@/lib/utils";
 import {
   TaskboardIcon,
@@ -8,6 +10,7 @@ import {
   ProjectsIcon,
   TeamIcon,
   ActivityIcon,
+  CalendarIcon,
 } from "@/components/icons";
 
 export default async function Dashboard() {
@@ -254,6 +257,9 @@ export default async function Dashboard() {
         </div>
       </div>
 
+      {/* Upcoming Schedule — full width */}
+      <UpcomingSchedule events={data.scheduledEvents} />
+
       {/* Recent Activity — full width */}
       <div className="bg-surface border border-border rounded-lg p-5">
         <div className="flex items-center justify-between mb-4">
@@ -348,6 +354,80 @@ function SeverityRow({ label, count, colorClass, dotClass }: {
       <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${dotClass}`} />
       <span className="text-sm text-text flex-1">{label}</span>
       <span className={`text-lg font-semibold ${colorClass}`}>{count}</span>
+    </div>
+  );
+}
+
+const eventTypeBadgeMap: Record<string, string> = {
+  automation: "bg-accent/10 text-accent",
+  reminder: "bg-warning/10 text-warning",
+  deadline: "bg-danger/10 text-danger",
+  review: "bg-success/10 text-success",
+};
+
+const eventTypeLabelMap: Record<string, string> = {
+  automation: "automation",
+  reminder: "reminder",
+  deadline: "deadline",
+  review: "review",
+};
+
+function UpcomingSchedule({ events }: { events: ScheduledEvent[] }) {
+  const activeEvents = events
+    .filter((e: ScheduledEvent) => e.status === "active" || e.status === "draft")
+    .sort((a: ScheduledEvent, b: ScheduledEvent) => {
+      const aDate = a.dueDate || a.nextRunAt || a.createdAt;
+      const bDate = b.dueDate || b.nextRunAt || b.createdAt;
+      return new Date(aDate).getTime() - new Date(bDate).getTime();
+    })
+    .slice(0, 5);
+
+  return (
+    <div className="bg-surface border border-border rounded-lg p-5 mb-6">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-medium text-text">Upcoming Schedule</h3>
+        <Link href="/calendar" className="text-xs text-accent hover:text-accent-hover transition-colors">
+          View all →
+        </Link>
+      </div>
+      {activeEvents.length > 0 ? (
+        <div className="space-y-2">
+          {activeEvents.map((event: ScheduledEvent) => {
+            const type = (event.eventType || "automation") as string;
+            return (
+              <div key={event.id} className="flex items-center gap-3 px-3 py-2.5 rounded-md bg-surface-hover">
+                <span className={`w-2 h-2 rounded-full shrink-0 ${
+                  event.status === "active" ? "bg-success" : "bg-border"
+                }`} />
+                <span className="text-sm text-text flex-1 truncate">{event.name}</span>
+                <span className={`text-xs px-1.5 py-0.5 rounded shrink-0 font-medium ${
+                  eventTypeBadgeMap[type] || "bg-surface-active text-text-secondary"
+                }`}>
+                  {eventTypeLabelMap[type] || type}
+                </span>
+                {event.dueDate && (
+                  <span className="text-xs text-text-muted shrink-0">
+                    Due {formatRelativeTime(event.dueDate)}
+                  </span>
+                )}
+                {event.schedule && !event.dueDate && (
+                  <span className="text-xs text-text-muted shrink-0 max-w-[180px] truncate">{event.schedule}</span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="text-center py-8">
+          <p className="text-text-secondary text-sm">No upcoming events</p>
+          <Link
+            href="/calendar"
+            className="inline-flex items-center gap-1 mt-2 text-xs text-accent hover:text-accent-hover transition-colors"
+          >
+            Schedule events →
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

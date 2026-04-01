@@ -64,7 +64,11 @@ export interface TaskActivityEntry {
 // --- Calendar ---
 
 export type ScheduleType = "recurring" | "one-time";
-export type ScheduleStatus = "active" | "paused" | "completed" | "failed";
+export type ScheduleStatus = "active" | "paused" | "completed" | "failed" | "draft";
+export type EventType = "automation" | "reminder" | "deadline" | "review";
+export type EventOwner = "user" | "agent";
+export type EventPriority = "low" | "medium" | "high";
+export type EventOutcome = "ok" | "failed" | "skipped";
 
 export interface ScheduledEvent {
   id: string;
@@ -79,6 +83,13 @@ export interface ScheduledEvent {
   lastRunAt?: string;
   nextRunAt?: string;
   linkedTaskId?: string;
+  eventType?: EventType;
+  owner?: EventOwner;
+  priority?: EventPriority;
+  dueDate?: string;
+  linkedCronId?: string;
+  linkedDocId?: string;
+  lastOutcome?: EventOutcome;
 }
 
 // --- Projects ---
