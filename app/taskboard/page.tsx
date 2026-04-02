@@ -5,6 +5,8 @@ import type { TaskColumn, TaskAssignee, TaskPriority, TaskActivityEntry } from "
 import { PriorityBadge } from "@/components/ui/Badge";
 import { PlusIcon, EditIcon, MoveIcon, TrashIcon } from "@/components/icons";
 import { formatRelativeTime } from "@/lib/utils";
+import { useToast } from "@/components/ui/Toast";
+import { apiFetch } from "@/lib/fetch";
 
 interface Task {
   id: string;
@@ -42,6 +44,7 @@ const columnLabels: Record<TaskColumn, string> = {
 };
 
 export default function TaskboardPage() {
+  const { toast } = useToast();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [activities, setActivities] = useState<TaskActivityEntry[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -99,7 +102,7 @@ export default function TaskboardPage() {
     e.preventDefault();
     if (!formTitle.trim() || !formDescription.trim()) return;
 
-    const res = await fetch("/api/tasks", {
+    const result = await apiFetch("/api/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -109,17 +112,15 @@ export default function TaskboardPage() {
         priority: formPriority,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
 
-    if (formProjectId) {
-      const data = await res.json();
-      if (data.task?.id) {
-        await fetch("/api/projects/tasks", {
+    if (formProjectId && result.data) {
+      const taskId = (result.data as { task?: { id?: string } }).task?.id;
+      if (taskId) {
+        await apiFetch("/api/projects/tasks", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            projectId: formProjectId,
-            taskId: data.task.id,
-          }),
+          body: JSON.stringify({ projectId: formProjectId, taskId }),
         });
       }
     }
@@ -140,11 +141,12 @@ export default function TaskboardPage() {
     );
     setMoveMenuTaskId(null);
 
-    await fetch("/api/tasks/move", {
+    const result = await apiFetch("/api/tasks/move", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ taskId, toColumn, actor: "user" }),
     });
+    if (!result.ok) { toast(result.error, "error"); }
 
     fetchTasks();
     fetchActivities();
@@ -155,11 +157,12 @@ export default function TaskboardPage() {
       prev.map((t) => (t.id === taskId ? { ...t, column: "done" as TaskColumn } : t))
     );
 
-    await fetch("/api/tasks/approve", {
+    const result = await apiFetch("/api/tasks/approve", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ taskId }),
     });
+    if (!result.ok) { toast(result.error, "error"); }
 
     fetchTasks();
     fetchActivities();
@@ -170,17 +173,19 @@ export default function TaskboardPage() {
       prev.map((t) => (t.id === taskId ? { ...t, ...updates } : t))
     );
     setEditingTaskId(null);
-    await fetch("/api/tasks", {
+    const result = await apiFetch("/api/tasks", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: taskId, ...updates }),
     });
+    if (!result.ok) { toast(result.error, "error"); }
     fetchTasks();
   }
 
   async function handleDeleteTask(taskId: string) {
     setTasks((prev) => prev.filter((t) => t.id !== taskId));
-    await fetch(`/api/tasks?id=${taskId}`, { method: "DELETE" });
+    const result = await apiFetch(`/api/tasks?id=${taskId}`, { method: "DELETE" });
+    if (!result.ok) { toast(result.error, "error"); }
     fetchTasks();
   }
 

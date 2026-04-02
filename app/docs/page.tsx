@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import type { DocCategory, DocFormat, Doc } from "@/lib/types";
 import { formatRelativeTime } from "@/lib/utils";
+import { useToast } from "@/components/ui/Toast";
+import { apiFetch } from "@/lib/fetch";
 
 const categoryBadge: Record<string, string> = {
   planning: "bg-accent/15 text-accent",
@@ -20,6 +22,7 @@ const formatBadge: Record<string, string> = {
 };
 
 export default function DocsPage() {
+  const { toast } = useToast();
   const [docs, setDocs] = useState<Doc[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,6 +45,7 @@ export default function DocsPage() {
 
   // Delete confirmation
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const fetchData = useCallback(async () => {
     try {
@@ -61,10 +65,56 @@ export default function DocsPage() {
     return () => clearInterval(interval);
   }, [fetchData]);
 
+  function renderMarkdown(text: string): string {
+    let html = text
+      // Code blocks first (before other processing)
+      .replace(/```([\s\S]*?)```/g, "<pre><code>$1</code></pre>")
+      // Inline code
+      .replace(/`([^`]+)`/g, "<code>$1</code>")
+      // Headers
+      .replace(/^#### (.+)$/gm, "<h4 class=\"text-xs font-semibold text-text mt-3 mb-1\">$1</h4>")
+      .replace(/^### (.+)$/gm, "<h3 class=\"text-xs font-semibold text-text mt-3 mb-1\">$1</h3>")
+      .replace(/^## (.+)$/gm, "<h2 class=\"text-sm font-semibold text-text mt-3 mb-1\">$1</h2>")
+      .replace(/^# (.+)$/gm, "<h1 class=\"text-sm font-semibold text-text mt-3 mb-1\">$1</h1>")
+      // Bold
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/__(.+?)__/g, "<strong>$1</strong>")
+      // Italic
+      .replace(/\*(.+?)\*/g, "<em>$1</em>")
+      .replace(/_(.+?)_/g, "<em>$1</em>")
+      // Blockquotes
+      .replace(/^&gt; (.+)$/gm, "<blockquote class=\"border-l-2 border-border-subtle pl-3 my-1 text-xs text-text-secondary\">$1</blockquote>")
+      // Unordered lists
+      .replace(/^[\-\*] (.+)$/gm, "<li class=\"text-xs text-text-secondary ml-3\">$1</li>")
+      // Links
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-accent underline" target="_blank" rel="noopener">$1</a>')
+      // Paragraphs
+      .split(/\n\n+/)
+      .map((block) => {
+        block = block.trim();
+        if (!block) return "";
+        if (block.startsWith("<")) return block;
+        // Convert single newlines within blocks to <br>
+        return `<p class=\"text-xs text-text-secondary leading-relaxed mb-2\">${block.replace(/\n/g, "<br>")}</p>`;
+      })
+      .join("\n");
+    return html;
+  }
+
+  async function copyToClipboard(text: string, id: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 1500);
+    } catch {
+      // clipboard not available
+    }
+  }
+
   async function createDoc(e: React.FormEvent) {
     e.preventDefault();
     if (!formTitle || !formContent) return;
-    await fetch("/api/docs", {
+    const result = await apiFetch("/api/docs", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -74,6 +124,7 @@ export default function DocsPage() {
         format: formFormat,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setFormTitle("");
     setFormContent("");
     setFormCategory("other");
@@ -83,7 +134,7 @@ export default function DocsPage() {
   }
 
   async function saveEdit(id: string) {
-    await fetch("/api/docs", {
+    const result = await apiFetch("/api/docs", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -94,12 +145,14 @@ export default function DocsPage() {
         format: editFormat,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setEditingId(null);
     fetchData();
   }
 
   async function deleteDocument(id: string) {
-    await fetch(`/api/docs?id=${id}`, { method: "DELETE" });
+    const result = await apiFetch(`/api/docs?id=${id}`, { method: "DELETE" });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setConfirmDelete(null);
     if (expandedId === id) setExpandedId(null);
     fetchData();
@@ -385,11 +438,27 @@ export default function DocsPage() {
                   {expandedId === doc.id && (
                     <div className="px-5 pb-5 border-t border-border-subtle">
                       <div className="pt-4 mb-4">
-                        <pre className="text-sm text-text-secondary whitespace-pre-wrap font-mono bg-background rounded-md p-4 border border-border-subtle overflow-x-auto">
-                          {doc.content}
-                        </pre>
+                        {doc.format === "markdown" ? (
+                          <div
+                            className="text-sm text-text-secondary bg-background rounded-md p-4 border border-border-subtle overflow-x-auto prose-xs"
+                            dangerouslySetInnerHTML={{ __html: renderMarkdown(doc.content) }}
+                          />
+                        ) : (
+                          <pre className="text-sm text-text-secondary whitespace-pre-wrap font-mono bg-background rounded-md p-4 border border-border-subtle overflow-x-auto">
+                            {doc.content}
+                          </pre>
+                        )}
                       </div>
                       <div className="flex items-center gap-1.5">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            copyToClipboard(doc.content, doc.id);
+                          }}
+                          className="px-2.5 py-1 text-xs rounded-md text-text-secondary hover:bg-surface-hover transition-colors"
+                        >
+                          {copiedId === doc.id ? "Copied!" : "Copy"}
+                        </button>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();

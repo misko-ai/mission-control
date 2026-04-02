@@ -4,8 +4,11 @@ import { useState, useEffect } from "react";
 import type { Parameter, Tool } from "@/lib/types";
 import { PlusIcon, CloseIcon, TrashIcon, EditIcon, CheckIcon, PlayIcon, ToolsIcon } from "@/components/icons";
 import { formatRelativeTime } from "@/lib/utils";
+import { useToast } from "@/components/ui/Toast";
+import { apiFetch } from "@/lib/fetch";
 
 export default function ToolsPage() {
+  const { toast } = useToast();
   const [tools, setTools] = useState<Tool[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [editingTool, setEditingTool] = useState<Tool | null>(null);
@@ -109,7 +112,8 @@ export default function ToolsPage() {
   }
 
   async function handleDelete(id: string) {
-    await fetch(`/api/tools?id=${id}`, { method: "DELETE" });
+    const result = await apiFetch(`/api/tools?id=${id}`, { method: "DELETE" });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setDeleteConfirm(null);
     fetchTools();
   }
@@ -117,11 +121,12 @@ export default function ToolsPage() {
   async function handleExecute(tool: Tool) {
     setExecuting(tool.id);
     try {
-      await fetch("/api/tools/execute", {
+      const result = await apiFetch("/api/tools/execute", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: tool.id }),
       });
+      if (!result.ok) { toast(result.error, "error"); }
       fetchTools();
     } finally {
       setExecuting(null);

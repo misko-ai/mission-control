@@ -35,7 +35,7 @@ export default async function Dashboard() {
   };
 
   // --- Active projects with progress ---
-  const activeProjects = data.projects.filter((p: Project) => p.status === "active");
+  const activeProjects = data.projects.filter((p: Project) => p.status === "active" || p.status === "idea" || p.status === "planned");
   const projectsWithProgress = activeProjects.map((project: Project) => {
     const linkedTasks = project.linkedTaskIds
       .map((id: string) => data.tasks.find((t: Task) => t.id === id))
@@ -185,11 +185,26 @@ export default async function Dashboard() {
               {projectsWithProgress.slice(0, 5).map((project) => (
                 <div key={project.id}>
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-sm text-text truncate mr-3">{project.name}</span>
+                    <div className="flex items-center gap-1.5 min-w-0 mr-3">
+                      <span className="text-sm text-text truncate">{project.name}</span>
+                      {project.type && project.type !== "other" && (
+                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-surface-hover text-text-muted shrink-0">{project.type}</span>
+                      )}
+                      {project.priority && project.priority !== "medium" && (
+                        <span className={`text-[10px] px-1.5 py-0.5 rounded shrink-0 ${
+                          project.priority === "critical" ? "bg-danger/15 text-danger" :
+                          project.priority === "high" ? "bg-warning/15 text-warning" :
+                          "bg-text-muted/15 text-text-muted"
+                        }`}>{project.priority}</span>
+                      )}
+                    </div>
                     <span className="text-xs text-text-muted shrink-0">
                       {project.doneCount}/{project.totalLinked} tasks ({project.percent}%)
                     </span>
                   </div>
+                  {project.goal && (
+                    <p className="text-xs text-text-secondary mb-1.5 truncate">{project.goal}</p>
+                  )}
                   <div className="w-full h-2 rounded-full bg-surface-hover overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all ${

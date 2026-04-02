@@ -128,10 +128,14 @@ export async function GET(request: NextRequest) {
   const projects: SearchResult[] = [];
   for (const project of data.projects) {
     if (projects.length >= 5) break;
-    if (matches(project.name, query) || matches(project.description, query)) {
+    if (matches(project.name, query) || matches(project.description, query) || matches(project.goal, query) || matches(project.desiredOutcome, query)) {
       const matchField = matches(project.name, query)
         ? project.name
-        : project.description;
+        : matches(project.description, query)
+        ? project.description
+        : matches(project.goal, query)
+        ? project.goal!
+        : project.desiredOutcome!;
       projects.push({
         id: project.id,
         title: project.name,

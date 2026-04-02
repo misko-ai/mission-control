@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import type { BugSeverity, BugStatus, BugNote, BugReport } from "@/lib/types";
 import { formatRelativeTime } from "@/lib/utils";
+import { useToast } from "@/components/ui/Toast";
+import { apiFetch } from "@/lib/fetch";
 
 const severityBadge: Record<BugSeverity, string> = {
   critical: "bg-danger/15 text-danger",
@@ -18,6 +20,7 @@ const statusBadge: Record<BugStatus, string> = {
 };
 
 export default function BugsPage() {
+  const { toast } = useToast();
   const [bugs, setBugs] = useState<BugReport[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState<string>("all");
@@ -58,7 +61,7 @@ export default function BugsPage() {
   async function createBug(e: React.FormEvent) {
     e.preventDefault();
     if (!formTitle || !formScreen) return;
-    await fetch("/api/bugs", {
+    const result = await apiFetch("/api/bugs", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -68,6 +71,7 @@ export default function BugsPage() {
         stepsToReproduce: formSteps,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setFormTitle("");
     setFormScreen("");
     setFormSeverity("medium");
@@ -77,27 +81,30 @@ export default function BugsPage() {
   }
 
   async function updateStatus(id: string, status: BugStatus) {
-    await fetch("/api/bugs", {
+    const result = await apiFetch("/api/bugs", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status }),
     });
+    if (!result.ok) { toast(result.error, "error"); }
     fetchData();
   }
 
   async function addNote(bugId: string) {
     if (!noteContent.trim()) return;
-    await fetch("/api/bugs/notes", {
+    const result = await apiFetch("/api/bugs/notes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ bugId, content: noteContent }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setNoteContent("");
     fetchData();
   }
 
   async function deleteBugById(id: string) {
-    await fetch(`/api/bugs?id=${id}`, { method: "DELETE" });
+    const result = await apiFetch(`/api/bugs?id=${id}`, { method: "DELETE" });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setConfirmDelete(null);
     if (expandedId === id) setExpandedId(null);
     fetchData();

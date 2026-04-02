@@ -10,6 +10,8 @@ import type {
   EventPriority,
 } from "@/lib/types";
 import { EditIcon, TrashIcon } from "@/components/icons";
+import { useToast } from "@/components/ui/Toast";
+import { apiFetch } from "@/lib/fetch";
 
 type EventTypeFilter = "all" | EventType;
 type StatusFilter = "all" | ScheduleStatus;
@@ -77,6 +79,7 @@ function emptyForm() {
 }
 
 export default function CalendarPage() {
+  const { toast } = useToast();
   const [events, setEvents] = useState<ScheduledEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [eventTypeFilter, setEventTypeFilter] = useState<EventTypeFilter>("all");
@@ -107,7 +110,7 @@ export default function CalendarPage() {
     e.preventDefault();
     if (!form.name || !form.schedule) return;
 
-    await fetch("/api/calendar", {
+    const result = await apiFetch("/api/calendar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -126,6 +129,7 @@ export default function CalendarPage() {
         status: form.status,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
 
     setForm(emptyForm());
     setShowForm(false);
@@ -133,7 +137,7 @@ export default function CalendarPage() {
   }
 
   async function updateEvent(id: string) {
-    await fetch("/api/calendar", {
+    const result = await apiFetch("/api/calendar", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -153,22 +157,25 @@ export default function CalendarPage() {
         status: editForm.status,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setEditingId(null);
     fetchEvents();
   }
 
   async function togglePause(event: ScheduledEvent) {
     const newStatus = event.status === "active" ? "paused" : "active";
-    await fetch("/api/calendar", {
+    const result = await apiFetch("/api/calendar", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: event.id, status: newStatus }),
     });
+    if (!result.ok) { toast(result.error, "error"); }
     fetchEvents();
   }
 
   async function deleteEvent(id: string) {
-    await fetch(`/api/calendar?id=${id}`, { method: "DELETE" });
+    const result = await apiFetch(`/api/calendar?id=${id}`, { method: "DELETE" });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setConfirmDelete(null);
     fetchEvents();
   }

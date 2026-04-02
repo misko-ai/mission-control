@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import type { AgentRole, AgentStatus, Agent } from "@/lib/types";
+import { useToast } from "@/components/ui/Toast";
+import { apiFetch } from "@/lib/fetch";
 
 const roleBadge: Record<AgentRole, string> = {
   orchestrator: "bg-accent/15 text-accent",
@@ -22,6 +24,7 @@ const statusLabel: Record<AgentStatus, string> = {
 };
 
 export default function TeamPage() {
+  const { toast } = useToast();
   const [agents, setAgents] = useState<Agent[]>([]);
   const [missionStatement, setMissionStatement] = useState("");
   const [loading, setLoading] = useState(true);
@@ -77,11 +80,12 @@ export default function TeamPage() {
   // Mission CRUD
 
   async function saveMission() {
-    await fetch("/api/team/mission", {
+    const result = await apiFetch("/api/team/mission", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ missionStatement: missionDraft }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setEditingMission(false);
     fetchData();
   }
@@ -91,7 +95,7 @@ export default function TeamPage() {
   async function createAgent(e: React.FormEvent) {
     e.preventDefault();
     if (!formName || !formRole) return;
-    await fetch("/api/team/agents", {
+    const result = await apiFetch("/api/team/agents", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -103,6 +107,7 @@ export default function TeamPage() {
         status: formStatus,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setFormName("");
     setFormRole("worker");
     setFormDescription("");
@@ -114,7 +119,7 @@ export default function TeamPage() {
   }
 
   async function saveAgentEdit(id: string) {
-    await fetch("/api/team/agents", {
+    const result = await apiFetch("/api/team/agents", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -127,12 +132,14 @@ export default function TeamPage() {
         status: editStatus,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setEditingId(null);
     fetchData();
   }
 
   async function deleteAgentById(id: string) {
-    await fetch(`/api/team/agents?id=${id}`, { method: "DELETE" });
+    const result = await apiFetch(`/api/team/agents?id=${id}`, { method: "DELETE" });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setConfirmDelete(null);
     fetchData();
   }

@@ -17,7 +17,14 @@ export const VALID_EVENT_OUTCOME = ["ok", "failed", "skipped"] as const;
 export const VALID_DOC_CATEGORY = ["planning", "newsletter", "technical", "research", "draft", "other"] as const;
 export const VALID_DOC_FORMAT = ["markdown", "plain text", "structured"] as const;
 export const VALID_MEMORY_CATEGORY = ["preference", "decision", "fact", "context", "other"] as const;
-export const VALID_PROJECT_STATUS = ["active", "completed", "archived"] as const;
+export const VALID_PROJECT_STATUS = ["idea", "planned", "active", "blocked", "completed", "archived", "canceled"] as const;
+export const VALID_PROJECT_PRIORITY = ["low", "medium", "high", "critical"] as const;
+export const VALID_PROJECT_TYPE = ["idea", "initiative", "maintenance", "automation", "research", "product", "other"] as const;
+export const VALID_PROJECT_OWNER = ["user", "agent", "shared"] as const;
+export const VALID_PLANNING_STATE = ["not-started", "in-progress", "ready"] as const;
+export const VALID_EXECUTION_MODE = ["manual", "assistive", "autonomous-with-review"] as const;
+export const VALID_MILESTONE_STATUS = ["pending", "in-progress", "completed"] as const;
+export const VALID_SUGGESTED_TASK_STATUS = ["proposed", "accepted", "rejected"] as const;
 export const VALID_THEME = ["light", "dark"] as const;
 export const VALID_LOG_LEVEL = ["verbose", "normal"] as const;
 export const VALID_NOTE_AUTHOR = ["user", "agent"] as const;
@@ -77,6 +84,29 @@ export function optionalString(
   }
   if (opts?.maxLength && value.length > opts.maxLength) {
     return { field: fieldName, message: `${fieldName} must be at most ${opts.maxLength} characters` };
+  }
+  return value;
+}
+
+export function optionalStringArray(
+  value: unknown,
+  fieldName: string,
+  opts?: { maxItems?: number; maxItemLength?: number }
+): string[] | undefined | ValidationError {
+  if (value === undefined || value === null) return undefined;
+  if (!Array.isArray(value)) {
+    return { field: fieldName, message: `${fieldName} must be an array` };
+  }
+  if (opts?.maxItems && value.length > opts.maxItems) {
+    return { field: fieldName, message: `${fieldName} must have at most ${opts.maxItems} items` };
+  }
+  for (const item of value) {
+    if (typeof item !== "string") {
+      return { field: fieldName, message: `${fieldName} must contain only strings` };
+    }
+    if (opts?.maxItemLength && item.length > opts.maxItemLength) {
+      return { field: fieldName, message: `Each item in ${fieldName} must be at most ${opts.maxItemLength} characters` };
+    }
   }
   return value;
 }

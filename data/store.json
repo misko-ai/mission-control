@@ -1,1927 +1,360 @@
 {
   "tools": [],
-  "activities": [
-    {
-      "id": "53f1eece-9799-4a5a-bab7-f3902157edc2",
-      "toolId": "8d7cb85e-bcec-4881-8e88-9ed9d8265258",
-      "toolName": "DeleteMeTool",
-      "action": "deleted",
-      "details": "Tool \"DeleteMeTool\" was deleted",
-      "timestamp": "2026-04-01T16:34:56.170Z"
-    },
-    {
-      "id": "3c386f20-c5b3-4403-bfc2-6ccc53b65f22",
-      "toolId": "8d7cb85e-bcec-4881-8e88-9ed9d8265258",
-      "toolName": "DeleteMeTool",
-      "action": "created",
-      "details": "Tool \"DeleteMeTool\" was created",
-      "timestamp": "2026-04-01T16:34:55.473Z"
-    },
-    {
-      "id": "0c255a8f-5477-47dc-809d-f95c251331ea",
-      "toolId": "860842c2-cc89-443e-bbb2-c488b6ffd29d",
-      "toolName": "RunCountTool",
-      "action": "deleted",
-      "details": "Tool \"RunCountTool\" was deleted",
-      "timestamp": "2026-04-01T16:34:55.460Z"
-    },
-    {
-      "id": "6dad5236-004d-4823-b3dc-9e65e2580f6d",
-      "toolId": "860842c2-cc89-443e-bbb2-c488b6ffd29d",
-      "toolName": "RunCountTool",
-      "action": "executed",
-      "details": "Tool \"RunCountTool\" was executed",
-      "timestamp": "2026-04-01T16:34:54.906Z"
-    },
-    {
-      "id": "dcd9ffde-609d-4a29-bb8f-bbb828d6ecf1",
-      "toolId": "860842c2-cc89-443e-bbb2-c488b6ffd29d",
-      "toolName": "RunCountTool",
-      "action": "created",
-      "details": "Tool \"RunCountTool\" was created",
-      "timestamp": "2026-04-01T16:34:53.985Z"
-    },
-    {
-      "id": "872514a3-ad45-4d2a-b3e5-34f1ea94db45",
-      "toolId": "991e72bc-12c2-4b70-817b-34ae3d88a843",
-      "toolName": "Deploy Script",
-      "action": "deleted",
-      "details": "Tool \"Deploy Script\" was deleted",
-      "timestamp": "2026-04-01T16:34:53.972Z"
-    },
-    {
-      "id": "f35179d1-60c3-4293-8720-f074ee7b32bc",
-      "toolId": "991e72bc-12c2-4b70-817b-34ae3d88a843",
-      "toolName": "Deploy Script",
-      "action": "created",
-      "details": "Tool \"Deploy Script\" was created",
-      "timestamp": "2026-04-01T16:34:53.823Z"
-    },
-    {
-      "id": "25c0f92c-e610-40ce-a3b7-447f6d12b942",
-      "toolId": "9f3f882f-ca91-4ef4-9056-bb925840cdb1",
-      "toolName": "DetailTestTool",
-      "action": "deleted",
-      "details": "Tool \"DetailTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:34:52.208Z"
-    },
-    {
-      "id": "1a791457-194b-4803-b256-ff417bbf01e5",
-      "toolId": "9f3f882f-ca91-4ef4-9056-bb925840cdb1",
-      "toolName": "DetailTestTool",
-      "action": "created",
-      "details": "Tool \"DetailTestTool\" was created",
-      "timestamp": "2026-04-01T16:33:31.177Z"
-    },
-    {
-      "id": "89492294-5dc4-44e1-b49e-bb5fbf0f3ebd",
-      "toolId": "f05d3438-d326-4891-b178-2070c095345e",
-      "toolName": "FilterTestTool",
-      "action": "deleted",
-      "details": "Tool \"FilterTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:33:31.148Z"
-    },
-    {
-      "id": "f80efbca-7d2e-4582-a146-6116c0a7657a",
-      "toolId": "f05d3438-d326-4891-b178-2070c095345e",
-      "toolName": "FilterTestTool",
-      "action": "executed",
-      "details": "Tool \"FilterTestTool\" was executed",
-      "timestamp": "2026-04-01T16:33:30.242Z"
-    },
-    {
-      "id": "8e6ca2f7-bb59-4f82-8458-cccb92a208b2",
-      "toolId": "f05d3438-d326-4891-b178-2070c095345e",
-      "toolName": "FilterTestTool",
-      "action": "created",
-      "details": "Tool \"FilterTestTool\" was created",
-      "timestamp": "2026-04-01T16:33:30.103Z"
-    },
-    {
-      "id": "adf08ad1-9a7a-4cc1-a098-4608a3140487",
-      "toolId": "b85826d3-c106-4d69-8a58-65f20c51d938",
-      "toolName": "ActivityTestTool",
-      "action": "deleted",
-      "details": "Tool \"ActivityTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:33:30.079Z"
-    },
-    {
-      "id": "d98b3ace-70bf-4594-9435-ef85c468db77",
-      "toolId": "b85826d3-c106-4d69-8a58-65f20c51d938",
-      "toolName": "ActivityTestTool",
-      "action": "created",
-      "details": "Tool \"ActivityTestTool\" was created",
-      "timestamp": "2026-04-01T16:33:28.709Z"
-    },
-    {
-      "id": "a365edeb-194d-48c0-8308-60bc6b7fe3ae",
-      "toolId": "86d0a411-8f9b-4c94-8887-e9577046f26b",
-      "toolName": "DeleteMeTool",
-      "action": "deleted",
-      "details": "Tool \"DeleteMeTool\" was deleted",
-      "timestamp": "2026-04-01T16:32:43.860Z"
-    },
-    {
-      "id": "d762e905-5643-4ff3-97f5-9f486aefec07",
-      "toolId": "86d0a411-8f9b-4c94-8887-e9577046f26b",
-      "toolName": "DeleteMeTool",
-      "action": "created",
-      "details": "Tool \"DeleteMeTool\" was created",
-      "timestamp": "2026-04-01T16:32:43.165Z"
-    },
-    {
-      "id": "e72b9402-04b2-4e24-96d1-5868cfc165ca",
-      "toolId": "ba065d0e-9757-45c8-984d-94473bd6c94b",
-      "toolName": "RunCountTool",
-      "action": "deleted",
-      "details": "Tool \"RunCountTool\" was deleted",
-      "timestamp": "2026-04-01T16:32:43.153Z"
-    },
-    {
-      "id": "1ead48c4-bddb-41eb-86eb-f6aaf123ea11",
-      "toolId": "ba065d0e-9757-45c8-984d-94473bd6c94b",
-      "toolName": "RunCountTool",
-      "action": "executed",
-      "details": "Tool \"RunCountTool\" was executed",
-      "timestamp": "2026-04-01T16:32:42.632Z"
-    },
-    {
-      "id": "b11f5dd3-d157-4fa9-a28c-338b71dcaf21",
-      "toolId": "ba065d0e-9757-45c8-984d-94473bd6c94b",
-      "toolName": "RunCountTool",
-      "action": "created",
-      "details": "Tool \"RunCountTool\" was created",
-      "timestamp": "2026-04-01T16:32:41.663Z"
-    },
-    {
-      "id": "3c86005d-b76b-4ab3-8c60-cc6bc44b52a6",
-      "toolId": "da68ea72-d5c3-4dc2-9bc7-2ef1bc77616b",
-      "toolName": "Deploy Script",
-      "action": "deleted",
-      "details": "Tool \"Deploy Script\" was deleted",
-      "timestamp": "2026-04-01T16:32:41.647Z"
-    },
-    {
-      "id": "e19aba0b-655c-45d2-b920-363fdce5cb92",
-      "toolId": "da68ea72-d5c3-4dc2-9bc7-2ef1bc77616b",
-      "toolName": "Deploy Script",
-      "action": "created",
-      "details": "Tool \"Deploy Script\" was created",
-      "timestamp": "2026-04-01T16:32:41.494Z"
-    },
-    {
-      "id": "442f59ed-2414-40db-bd27-5bd12d4f437c",
-      "toolId": "235125d9-8660-4049-b0ed-ec5ddf89de3a",
-      "toolName": "DetailTestTool",
-      "action": "deleted",
-      "details": "Tool \"DetailTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:32:39.839Z"
-    },
-    {
-      "id": "3fb5ccd0-379d-4ce4-a2bf-2ece86482001",
-      "toolId": "235125d9-8660-4049-b0ed-ec5ddf89de3a",
-      "toolName": "DetailTestTool",
-      "action": "created",
-      "details": "Tool \"DetailTestTool\" was created",
-      "timestamp": "2026-04-01T16:31:17.911Z"
-    },
-    {
-      "id": "72038295-86d5-4595-bc9f-6bb812bece86",
-      "toolId": "5964727b-e6e6-40d7-8257-fdf85f93a00b",
-      "toolName": "FilterTestTool",
-      "action": "deleted",
-      "details": "Tool \"FilterTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:31:17.886Z"
-    },
-    {
-      "id": "9f838ea1-8fb5-44cc-ac7b-a6aed5d5c8cf",
-      "toolId": "5964727b-e6e6-40d7-8257-fdf85f93a00b",
-      "toolName": "FilterTestTool",
-      "action": "executed",
-      "details": "Tool \"FilterTestTool\" was executed",
-      "timestamp": "2026-04-01T16:31:17.053Z"
-    },
-    {
-      "id": "5dda322f-4261-4bb8-a0b3-3ebd491094a3",
-      "toolId": "5964727b-e6e6-40d7-8257-fdf85f93a00b",
-      "toolName": "FilterTestTool",
-      "action": "created",
-      "details": "Tool \"FilterTestTool\" was created",
-      "timestamp": "2026-04-01T16:31:16.914Z"
-    },
-    {
-      "id": "47439430-4a1b-4fad-aad4-3b0e6e27cb1b",
-      "toolId": "a057e01c-7fbf-402a-a581-3750279081de",
-      "toolName": "ActivityTestTool",
-      "action": "deleted",
-      "details": "Tool \"ActivityTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:31:16.890Z"
-    },
-    {
-      "id": "88af2316-d670-49a7-be35-591ad74d72a9",
-      "toolId": "a057e01c-7fbf-402a-a581-3750279081de",
-      "toolName": "ActivityTestTool",
-      "action": "created",
-      "details": "Tool \"ActivityTestTool\" was created",
-      "timestamp": "2026-04-01T16:31:16.141Z"
-    },
-    {
-      "id": "d4df4f0f-3c97-4572-8b95-9c44313cbd14",
-      "toolId": "3d73b1aa-19b6-4aca-86be-784769a63ea1",
-      "toolName": "DeleteMeTool",
-      "action": "deleted",
-      "details": "Tool \"DeleteMeTool\" was deleted",
-      "timestamp": "2026-04-01T16:29:24.667Z"
-    },
-    {
-      "id": "3b6dd300-2a41-46ce-a3d0-40e8d617f644",
-      "toolId": "3d73b1aa-19b6-4aca-86be-784769a63ea1",
-      "toolName": "DeleteMeTool",
-      "action": "created",
-      "details": "Tool \"DeleteMeTool\" was created",
-      "timestamp": "2026-04-01T16:29:23.978Z"
-    },
-    {
-      "id": "95731720-fbf2-4142-ae10-0a6dbaa3e0d2",
-      "toolId": "b12044b2-b377-4b0d-9a71-b1b9c6234d67",
-      "toolName": "RunCountTool",
-      "action": "deleted",
-      "details": "Tool \"RunCountTool\" was deleted",
-      "timestamp": "2026-04-01T16:29:23.961Z"
-    },
-    {
-      "id": "e9f62f05-c0ad-4453-9434-904d8d4f1051",
-      "toolId": "b12044b2-b377-4b0d-9a71-b1b9c6234d67",
-      "toolName": "RunCountTool",
-      "action": "executed",
-      "details": "Tool \"RunCountTool\" was executed",
-      "timestamp": "2026-04-01T16:29:23.869Z"
-    },
-    {
-      "id": "f8bc585a-4397-4840-aa8f-6d657e17900c",
-      "toolId": "b12044b2-b377-4b0d-9a71-b1b9c6234d67",
-      "toolName": "RunCountTool",
-      "action": "created",
-      "details": "Tool \"RunCountTool\" was created",
-      "timestamp": "2026-04-01T16:29:22.972Z"
-    },
-    {
-      "id": "66ad76e0-d0ad-4d30-bd1c-fb0ef1b479d2",
-      "toolId": "48a6d651-e39b-4ce1-b638-b6213dda97fe",
-      "toolName": "Deploy Script",
-      "action": "deleted",
-      "details": "Tool \"Deploy Script\" was deleted",
-      "timestamp": "2026-04-01T16:29:22.959Z"
-    },
-    {
-      "id": "d5326c9b-9edc-4ff8-ac3c-100ca1b5079a",
-      "toolId": "48a6d651-e39b-4ce1-b638-b6213dda97fe",
-      "toolName": "Deploy Script",
-      "action": "created",
-      "details": "Tool \"Deploy Script\" was created",
-      "timestamp": "2026-04-01T16:29:22.803Z"
-    },
-    {
-      "id": "22582ae2-c42d-4084-9969-e87915e4a680",
-      "toolId": "ca7fa469-e886-4ab5-9b86-e2765fe0eaee",
-      "toolName": "DetailTestTool",
-      "action": "deleted",
-      "details": "Tool \"DetailTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:29:21.226Z"
-    },
-    {
-      "id": "4e9d9d35-1a1a-4df2-9b54-f938b213461d",
-      "toolId": "ca7fa469-e886-4ab5-9b86-e2765fe0eaee",
-      "toolName": "DetailTestTool",
-      "action": "created",
-      "details": "Tool \"DetailTestTool\" was created",
-      "timestamp": "2026-04-01T16:27:32.336Z"
-    },
-    {
-      "id": "74d8bffd-5a55-47f6-bab0-5f03e9e78a69",
-      "toolId": "cd8c4087-a078-448c-a851-1c5813bb8445",
-      "toolName": "FilterTestTool",
-      "action": "deleted",
-      "details": "Tool \"FilterTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:27:32.302Z"
-    },
-    {
-      "id": "1a4ab7ac-45ab-4a91-804c-c194709c823e",
-      "toolId": "cd8c4087-a078-448c-a851-1c5813bb8445",
-      "toolName": "FilterTestTool",
-      "action": "executed",
-      "details": "Tool \"FilterTestTool\" was executed",
-      "timestamp": "2026-04-01T16:27:31.468Z"
-    },
-    {
-      "id": "06959566-8507-4cad-888c-d37202c778ce",
-      "toolId": "cd8c4087-a078-448c-a851-1c5813bb8445",
-      "toolName": "FilterTestTool",
-      "action": "created",
-      "details": "Tool \"FilterTestTool\" was created",
-      "timestamp": "2026-04-01T16:27:31.324Z"
-    },
-    {
-      "id": "64c71a2d-4e2f-4ad5-a77f-78569aa249be",
-      "toolId": "eecc627e-2379-4688-87fc-8ca4814d13e7",
-      "toolName": "ActivityTestTool",
-      "action": "deleted",
-      "details": "Tool \"ActivityTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:27:31.300Z"
-    },
-    {
-      "id": "b8dff539-6774-4ee5-8c77-da9d42965efd",
-      "toolId": "eecc627e-2379-4688-87fc-8ca4814d13e7",
-      "toolName": "ActivityTestTool",
-      "action": "created",
-      "details": "Tool \"ActivityTestTool\" was created",
-      "timestamp": "2026-04-01T16:27:30.550Z"
-    },
-    {
-      "id": "7736e4e0-ac04-433d-a0f9-8a98a31eb619",
-      "toolId": "1f19654d-d1ae-4d46-a67d-b25afd8a8ce2",
-      "toolName": "DeleteMeTool",
-      "action": "deleted",
-      "details": "Tool \"DeleteMeTool\" was deleted",
-      "timestamp": "2026-04-01T16:27:01.956Z"
-    },
-    {
-      "id": "71545c77-4ed4-4723-aad3-1888644b5385",
-      "toolId": "1f19654d-d1ae-4d46-a67d-b25afd8a8ce2",
-      "toolName": "DeleteMeTool",
-      "action": "created",
-      "details": "Tool \"DeleteMeTool\" was created",
-      "timestamp": "2026-04-01T16:27:01.261Z"
-    },
-    {
-      "id": "8f19a0f3-9392-47ec-975a-a1edbf864d23",
-      "toolId": "2babbed0-e999-4305-8e00-7e9c1f83606f",
-      "toolName": "RunCountTool",
-      "action": "deleted",
-      "details": "Tool \"RunCountTool\" was deleted",
-      "timestamp": "2026-04-01T16:27:01.245Z"
-    },
-    {
-      "id": "d9b2bbd9-03ac-432f-aa8b-23d793cc1004",
-      "toolId": "2babbed0-e999-4305-8e00-7e9c1f83606f",
-      "toolName": "RunCountTool",
-      "action": "executed",
-      "details": "Tool \"RunCountTool\" was executed",
-      "timestamp": "2026-04-01T16:27:01.162Z"
-    },
-    {
-      "id": "1ca23761-930b-4257-b832-4dd82f8be8e9",
-      "toolId": "2babbed0-e999-4305-8e00-7e9c1f83606f",
-      "toolName": "RunCountTool",
-      "action": "created",
-      "details": "Tool \"RunCountTool\" was created",
-      "timestamp": "2026-04-01T16:27:00.277Z"
-    },
-    {
-      "id": "a06d84c0-8aa7-4488-b8d9-d9bd054c91c2",
-      "toolId": "8fef6350-5741-4ec7-b275-5fa6aee849d0",
-      "toolName": "Deploy Script",
-      "action": "deleted",
-      "details": "Tool \"Deploy Script\" was deleted",
-      "timestamp": "2026-04-01T16:27:00.262Z"
-    },
-    {
-      "id": "9629b5fb-3710-4d7e-ba5e-8dc6678a2771",
-      "toolId": "8fef6350-5741-4ec7-b275-5fa6aee849d0",
-      "toolName": "Deploy Script",
-      "action": "created",
-      "details": "Tool \"Deploy Script\" was created",
-      "timestamp": "2026-04-01T16:27:00.108Z"
-    },
-    {
-      "id": "734e9bc3-c885-4f37-8611-3820d1e62292",
-      "toolId": "efb884db-da48-462b-92ef-522546ec16ea",
-      "toolName": "DetailTestTool",
-      "action": "deleted",
-      "details": "Tool \"DetailTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:26:58.524Z"
-    },
-    {
-      "id": "cf3ec99c-0a6a-4b53-af0f-a2ac01d14a96",
-      "toolId": "efb884db-da48-462b-92ef-522546ec16ea",
-      "toolName": "DetailTestTool",
-      "action": "created",
-      "details": "Tool \"DetailTestTool\" was created",
-      "timestamp": "2026-04-01T16:25:09.457Z"
-    },
-    {
-      "id": "e05b2e21-5d2a-407e-95aa-c67d8654cce2",
-      "toolId": "3f63ba8e-c5e8-4aa2-abe6-bdbbd4cc943e",
-      "toolName": "FilterTestTool",
-      "action": "deleted",
-      "details": "Tool \"FilterTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:25:09.425Z"
-    },
-    {
-      "id": "17df48b7-2f09-4397-8e93-cfd9bf10fff5",
-      "toolId": "3f63ba8e-c5e8-4aa2-abe6-bdbbd4cc943e",
-      "toolName": "FilterTestTool",
-      "action": "executed",
-      "details": "Tool \"FilterTestTool\" was executed",
-      "timestamp": "2026-04-01T16:25:08.577Z"
-    },
-    {
-      "id": "58e1e81a-439a-44c6-9b9b-0d5263d83c81",
-      "toolId": "3f63ba8e-c5e8-4aa2-abe6-bdbbd4cc943e",
-      "toolName": "FilterTestTool",
-      "action": "created",
-      "details": "Tool \"FilterTestTool\" was created",
-      "timestamp": "2026-04-01T16:25:08.438Z"
-    },
-    {
-      "id": "bf583027-8322-4c2f-92b2-e81f32840ada",
-      "toolId": "ce08f695-74f3-4524-bacf-143beccf3404",
-      "toolName": "ActivityTestTool",
-      "action": "deleted",
-      "details": "Tool \"ActivityTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:25:08.413Z"
-    },
-    {
-      "id": "537e0a77-58bd-4147-8173-64020b0b7850",
-      "toolId": "ce08f695-74f3-4524-bacf-143beccf3404",
-      "toolName": "ActivityTestTool",
-      "action": "created",
-      "details": "Tool \"ActivityTestTool\" was created",
-      "timestamp": "2026-04-01T16:25:07.668Z"
-    },
-    {
-      "id": "da5ce441-03d6-42a5-af1e-4382cfa0e785",
-      "toolId": "761c4c9e-86d6-4fb3-9a73-f1efc5687447",
-      "toolName": "DeleteMeTool",
-      "action": "deleted",
-      "details": "Tool \"DeleteMeTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:57.611Z"
-    },
-    {
-      "id": "ee95a2a5-b077-4c1c-a96c-0e44e2a16018",
-      "toolId": "761c4c9e-86d6-4fb3-9a73-f1efc5687447",
-      "toolName": "DeleteMeTool",
-      "action": "created",
-      "details": "Tool \"DeleteMeTool\" was created",
-      "timestamp": "2026-04-01T16:24:56.995Z"
-    },
-    {
-      "id": "e2fa14b7-1aba-4d2b-8456-6e554c0e4e2b",
-      "toolId": "f5a2740f-ea6e-498e-906d-7ea643bbc921",
-      "toolName": "RunCountTool",
-      "action": "deleted",
-      "details": "Tool \"RunCountTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:56.983Z"
-    },
-    {
-      "id": "76603ee3-2ec1-4eeb-a5af-2d308cad652b",
-      "toolId": "f5a2740f-ea6e-498e-906d-7ea643bbc921",
-      "toolName": "RunCountTool",
-      "action": "executed",
-      "details": "Tool \"RunCountTool\" was executed",
-      "timestamp": "2026-04-01T16:24:56.834Z"
-    },
-    {
-      "id": "f75298f2-99e6-45d5-867d-a8f76eaa6366",
-      "toolId": "f5a2740f-ea6e-498e-906d-7ea643bbc921",
-      "toolName": "RunCountTool",
-      "action": "created",
-      "details": "Tool \"RunCountTool\" was created",
-      "timestamp": "2026-04-01T16:24:56.265Z"
-    },
-    {
-      "id": "0abf7403-96cf-42b7-b2c2-f928cfd1af68",
-      "toolId": "5930f4ce-4696-4427-b4ee-75c580c265e4",
-      "toolName": "Deploy Script",
-      "action": "deleted",
-      "details": "Tool \"Deploy Script\" was deleted",
-      "timestamp": "2026-04-01T16:24:56.252Z"
-    },
-    {
-      "id": "431301d4-8878-4284-b6ca-3262f0e07ad5",
-      "toolId": "5930f4ce-4696-4427-b4ee-75c580c265e4",
-      "toolName": "Deploy Script",
-      "action": "created",
-      "details": "Tool \"Deploy Script\" was created",
-      "timestamp": "2026-04-01T16:24:56.097Z"
-    },
-    {
-      "id": "203e506a-d51f-4d38-bc0c-08dd6989fb7c",
-      "toolId": "f0fa039d-8474-4fd6-84f2-e517c7aaf8e1",
-      "toolName": "DetailTestTool",
-      "action": "deleted",
-      "details": "Tool \"DetailTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:54.717Z"
-    },
-    {
-      "id": "9eca5ddd-34f2-49a8-bff7-e81cf89a0130",
-      "toolId": "f0fa039d-8474-4fd6-84f2-e517c7aaf8e1",
-      "toolName": "DetailTestTool",
-      "action": "created",
-      "details": "Tool \"DetailTestTool\" was created",
-      "timestamp": "2026-04-01T16:24:54.068Z"
-    },
-    {
-      "id": "1d8624c4-926d-4a03-ad3c-6c5065520e1e",
-      "toolId": "99a2a8ce-04d1-4ad9-b9ac-2ddf012c1d46",
-      "toolName": "FilterTestTool",
-      "action": "deleted",
-      "details": "Tool \"FilterTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:54.037Z"
-    },
-    {
-      "id": "35f69e82-3ab1-493e-aec6-d56b19c1dd02",
-      "toolId": "99a2a8ce-04d1-4ad9-b9ac-2ddf012c1d46",
-      "toolName": "FilterTestTool",
-      "action": "executed",
-      "details": "Tool \"FilterTestTool\" was executed",
-      "timestamp": "2026-04-01T16:24:53.239Z"
-    },
-    {
-      "id": "28b3ecf4-f6ec-4596-aa8d-5884976bbc1f",
-      "toolId": "99a2a8ce-04d1-4ad9-b9ac-2ddf012c1d46",
-      "toolName": "FilterTestTool",
-      "action": "created",
-      "details": "Tool \"FilterTestTool\" was created",
-      "timestamp": "2026-04-01T16:24:53.099Z"
-    },
-    {
-      "id": "6b6ef661-9f0a-4f70-9f06-7acfd18c344c",
-      "toolId": "3be1afa5-7951-45af-b4f8-2f83d0b8e351",
-      "toolName": "ActivityTestTool",
-      "action": "deleted",
-      "details": "Tool \"ActivityTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:53.074Z"
-    },
-    {
-      "id": "93b24f3a-34ea-4eba-9b53-7ae7bd9708a6",
-      "toolId": "3be1afa5-7951-45af-b4f8-2f83d0b8e351",
-      "toolName": "ActivityTestTool",
-      "action": "created",
-      "details": "Tool \"ActivityTestTool\" was created",
-      "timestamp": "2026-04-01T16:24:52.337Z"
-    },
-    {
-      "id": "add441ea-c5c9-4b4e-a5ba-9c93cb85c5cc",
-      "toolId": "8e70f59e-026e-4857-85f2-3c4eedfa9eb1",
-      "toolName": "DetailTestTool",
-      "action": "deleted",
-      "details": "Tool \"DetailTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:50.351Z"
-    },
-    {
-      "id": "31c853fe-738b-48c3-8ecd-fbd79d383723",
-      "toolId": "8e70f59e-026e-4857-85f2-3c4eedfa9eb1",
-      "toolName": "DetailTestTool",
-      "action": "created",
-      "details": "Tool \"DetailTestTool\" was created",
-      "timestamp": "2026-04-01T16:24:41.941Z"
-    },
-    {
-      "id": "59ee71e5-e235-4820-89fa-211390b81b53",
-      "toolId": "d2f9ac52-ca9d-4a0c-b572-d9b3fb69be84",
-      "toolName": "FilterTestTool",
-      "action": "deleted",
-      "details": "Tool \"FilterTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:41.918Z"
-    },
-    {
-      "id": "e9b78aef-9b85-4635-bb69-d77114d36211",
-      "toolId": "d2f9ac52-ca9d-4a0c-b572-d9b3fb69be84",
-      "toolName": "FilterTestTool",
-      "action": "executed",
-      "details": "Tool \"FilterTestTool\" was executed",
-      "timestamp": "2026-04-01T16:24:41.092Z"
-    },
-    {
-      "id": "60ae6557-e09b-43c4-b934-3565e58f1bcc",
-      "toolId": "d2f9ac52-ca9d-4a0c-b572-d9b3fb69be84",
-      "toolName": "FilterTestTool",
-      "action": "created",
-      "details": "Tool \"FilterTestTool\" was created",
-      "timestamp": "2026-04-01T16:24:40.962Z"
-    },
-    {
-      "id": "14850a04-b587-49cc-8417-9a1f6d26fc6b",
-      "toolId": "383388de-f1e6-4e0b-a59f-2585905f6b7d",
-      "toolName": "ActivityTestTool",
-      "action": "deleted",
-      "details": "Tool \"ActivityTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:40.941Z"
-    },
-    {
-      "id": "8d5d5884-5101-4e03-880a-699a4dcf1699",
-      "toolId": "383388de-f1e6-4e0b-a59f-2585905f6b7d",
-      "toolName": "ActivityTestTool",
-      "action": "created",
-      "details": "Tool \"ActivityTestTool\" was created",
-      "timestamp": "2026-04-01T16:24:40.108Z"
-    },
-    {
-      "id": "6937a67c-49c5-477f-8ae6-3f2a9d3ad8c8",
-      "toolId": "02781c89-1b1a-4a8a-895b-08c0bfd0cb6a",
-      "toolName": "DetailTestTool",
-      "action": "deleted",
-      "details": "Tool \"DetailTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:38.171Z"
-    },
-    {
-      "id": "109bfdc8-eb6f-457b-b011-f3017919a9fa",
-      "toolId": "02781c89-1b1a-4a8a-895b-08c0bfd0cb6a",
-      "toolName": "DetailTestTool",
-      "action": "created",
-      "details": "Tool \"DetailTestTool\" was created",
-      "timestamp": "2026-04-01T16:24:02.002Z"
-    },
-    {
-      "id": "f8060ced-d9ef-4c5c-a860-393f989b9a31",
-      "toolId": "7864f4db-2b92-4752-9576-cfe522609147",
-      "toolName": "FilterTestTool",
-      "action": "deleted",
-      "details": "Tool \"FilterTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:01.979Z"
-    },
-    {
-      "id": "905ecc12-4000-4194-8f06-1463c8118526",
-      "toolId": "7864f4db-2b92-4752-9576-cfe522609147",
-      "toolName": "FilterTestTool",
-      "action": "executed",
-      "details": "Tool \"FilterTestTool\" was executed",
-      "timestamp": "2026-04-01T16:24:00.696Z"
-    },
-    {
-      "id": "c4816dff-fdbe-40bd-91d4-17c4e48b6882",
-      "toolId": "7864f4db-2b92-4752-9576-cfe522609147",
-      "toolName": "FilterTestTool",
-      "action": "created",
-      "details": "Tool \"FilterTestTool\" was created",
-      "timestamp": "2026-04-01T16:24:00.546Z"
-    },
-    {
-      "id": "f20d1366-c42d-484f-be3b-64b5d3b811aa",
-      "toolId": "ddeb8593-cde1-473a-9cd4-87b55b126673",
-      "toolName": "ActivityTestTool",
-      "action": "deleted",
-      "details": "Tool \"ActivityTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:24:00.531Z"
-    },
-    {
-      "id": "7f396191-8b33-496d-bc1f-f4b8f01cbda8",
-      "toolId": "ddeb8593-cde1-473a-9cd4-87b55b126673",
-      "toolName": "ActivityTestTool",
-      "action": "created",
-      "details": "Tool \"ActivityTestTool\" was created",
-      "timestamp": "2026-04-01T16:23:58.619Z"
-    },
-    {
-      "id": "3d415c6e-27e0-422d-b8f8-36760184995c",
-      "toolId": "36c269ea-34d7-4e56-98d4-06ef74082382",
-      "toolName": "DeleteMeTool",
-      "action": "deleted",
-      "details": "Tool \"DeleteMeTool\" was deleted",
-      "timestamp": "2026-04-01T16:23:35.314Z"
-    },
-    {
-      "id": "661ae80f-8452-4cdc-be32-e01d487179b2",
-      "toolId": "36c269ea-34d7-4e56-98d4-06ef74082382",
-      "toolName": "DeleteMeTool",
-      "action": "created",
-      "details": "Tool \"DeleteMeTool\" was created",
-      "timestamp": "2026-04-01T16:23:34.606Z"
-    },
-    {
-      "id": "44997b62-e045-4746-ba45-e9c73c303b87",
-      "toolId": "9097f12a-692d-42df-8b35-2e1687b0b765",
-      "toolName": "RunCountTool",
-      "action": "deleted",
-      "details": "Tool \"RunCountTool\" was deleted",
-      "timestamp": "2026-04-01T16:23:34.588Z"
-    },
-    {
-      "id": "df56b72b-09f9-4f2f-9da2-662531a654ba",
-      "toolId": "9097f12a-692d-42df-8b35-2e1687b0b765",
-      "toolName": "RunCountTool",
-      "action": "executed",
-      "details": "Tool \"RunCountTool\" was executed",
-      "timestamp": "2026-04-01T16:23:34.501Z"
-    },
-    {
-      "id": "241be0be-7c23-4beb-ad55-8598bca22d74",
-      "toolId": "9097f12a-692d-42df-8b35-2e1687b0b765",
-      "toolName": "RunCountTool",
-      "action": "created",
-      "details": "Tool \"RunCountTool\" was created",
-      "timestamp": "2026-04-01T16:23:33.611Z"
-    },
-    {
-      "id": "7a277e30-ddc9-4b18-a525-ed310f5fe1e4",
-      "toolId": "567cb863-c00c-4763-8748-78d615709604",
-      "toolName": "Deploy Script",
-      "action": "deleted",
-      "details": "Tool \"Deploy Script\" was deleted",
-      "timestamp": "2026-04-01T16:23:33.598Z"
-    },
-    {
-      "id": "e23586b6-f220-4d0c-88b3-da2aeb698897",
-      "toolId": "567cb863-c00c-4763-8748-78d615709604",
-      "toolName": "Deploy Script",
-      "action": "created",
-      "details": "Tool \"Deploy Script\" was created",
-      "timestamp": "2026-04-01T16:23:33.450Z"
-    },
-    {
-      "id": "0a3dfad9-2872-4863-812e-6d27e92e51a7",
-      "toolId": "97722791-833c-4a2d-b06e-c24e8f653663",
-      "toolName": "DetailTestTool",
-      "action": "deleted",
-      "details": "Tool \"DetailTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:23:31.838Z"
-    },
-    {
-      "id": "3153e49d-cd83-4f99-a82c-612c2c4927b6",
-      "toolId": "97722791-833c-4a2d-b06e-c24e8f653663",
-      "toolName": "DetailTestTool",
-      "action": "created",
-      "details": "Tool \"DetailTestTool\" was created",
-      "timestamp": "2026-04-01T16:21:41.185Z"
-    },
-    {
-      "id": "717f97c7-32d3-4215-800b-ed2107e97ba7",
-      "toolId": "2e34f8bb-482b-41a7-9d0a-6acdc389dec0",
-      "toolName": "FilterTestTool",
-      "action": "deleted",
-      "details": "Tool \"FilterTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:21:41.166Z"
-    },
-    {
-      "id": "18e6ec66-d7bf-4a84-bcd9-23de0e06ee6e",
-      "toolId": "2e34f8bb-482b-41a7-9d0a-6acdc389dec0",
-      "toolName": "FilterTestTool",
-      "action": "executed",
-      "details": "Tool \"FilterTestTool\" was executed",
-      "timestamp": "2026-04-01T16:21:39.834Z"
-    },
-    {
-      "id": "5f3f3ec9-13cc-452a-93ec-0c2a14ebd596",
-      "toolId": "2e34f8bb-482b-41a7-9d0a-6acdc389dec0",
-      "toolName": "FilterTestTool",
-      "action": "created",
-      "details": "Tool \"FilterTestTool\" was created",
-      "timestamp": "2026-04-01T16:21:39.629Z"
-    },
-    {
-      "id": "ee896ffb-f9e4-4c58-afaa-d32192e4d3ae",
-      "toolId": "22b66ffd-c12b-477d-a44a-802e4f437929",
-      "toolName": "ActivityTestTool",
-      "action": "deleted",
-      "details": "Tool \"ActivityTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:21:39.611Z"
-    },
-    {
-      "id": "41afbc54-4bbf-47b8-bf12-80dc0557cd0f",
-      "toolId": "22b66ffd-c12b-477d-a44a-802e4f437929",
-      "toolName": "ActivityTestTool",
-      "action": "created",
-      "details": "Tool \"ActivityTestTool\" was created",
-      "timestamp": "2026-04-01T16:21:37.717Z"
-    },
-    {
-      "id": "9bd5bd6b-9520-4620-a60e-d5adeef6517d",
-      "toolId": "7389eff3-a2f5-4ad6-a264-8bc50e3eb4d3",
-      "toolName": "DetailTestTool",
-      "action": "deleted",
-      "details": "Tool \"DetailTestTool\" was deleted",
-      "timestamp": "2026-04-01T16:21:36.021Z"
-    },
-    {
-      "id": "df704307-62f7-4faf-ac01-0712c944f1b6",
-      "toolId": "7389eff3-a2f5-4ad6-a264-8bc50e3eb4d3",
-      "toolName": "DetailTestTool",
-      "action": "created",
-      "details": "Tool \"DetailTestTool\" was created",
-      "timestamp": "2026-04-01T16:21:27.967Z"
-    }
-  ],
-  "settings": {
-    "theme": "light",
-    "autoSave": true,
-    "logLevel": "normal"
-  },
+  "activities": [],
+  "settings": { "theme": "light", "autoSave": true, "logLevel": "normal" },
   "tasks": [
     {
-      "id": "a797eafb-4941-4167-b15c-336e491b5dc3",
-      "title": "API updated title",
-      "description": "After update",
-      "assignee": "user",
-      "priority": "medium",
-      "column": "backlog",
-      "createdAt": "2026-04-01T16:34:43.470Z",
-      "updatedAt": "2026-04-01T16:34:43.480Z"
+      "id": "task-readiness-001",
+      "title": "Complete daily-readiness task breakdown (10 tasks)",
+      "description": "Execute the 10-task daily-readiness plan to bring Mission Control from semi-seeded test state to trustworthy daily operational system. Tasks: clean test data, populate docs, populate memories, populate calendar, define team model, define tools policy, verify persistence, audit error handling, add go-live checklist, document workflow rules.",
+      "assignee": "agent",
+      "priority": "high",
+      "column": "review",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T19:00:00.000Z"
     }
   ],
   "taskActivities": [
     {
-      "id": "3925c7e1-ce15-462f-9b1d-cae16f1542c6",
-      "taskId": "a797eafb-4941-4167-b15c-336e491b5dc3",
-      "taskTitle": "API update test",
+      "id": "ta-readiness-001",
+      "taskId": "task-readiness-001",
+      "taskTitle": "Complete daily-readiness task breakdown (10 tasks)",
       "action": "created",
       "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"API update test\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:43.470Z"
+      "actor": "agent",
+      "details": "Task \"Complete daily-readiness task breakdown (10 tasks)\" created and assigned to AI Agent",
+      "timestamp": "2026-04-02T18:00:00.000Z"
     },
     {
-      "id": "62093352-2ed5-4f53-ad00-889a26d46922",
-      "taskId": "93bc286e-978f-4874-be59-b6a91f5da9a6",
-      "taskTitle": "Unlinked task xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Unlinked task xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:43.389Z"
-    },
-    {
-      "id": "b7be7980-ae1f-4d6f-baf8-af7349ef1b41",
-      "taskId": "979aaae2-6605-4f23-8d31-924bf5e9c11e",
-      "taskTitle": "Linked task xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linked task xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:42.537Z"
-    },
-    {
-      "id": "89c77808-c83a-4427-9786-66d32646972a",
-      "taskId": "daf16b0b-a4f0-4421-ba6a-4bc1f9eb8221",
-      "taskTitle": "DeleteMeXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"DeleteMeXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:41.777Z"
-    },
-    {
-      "id": "3cb1b1cd-b7f6-4e63-a1c2-c771be84fcd9",
-      "taskId": "eb96024a-94c5-4963-827b-86946f2c9860",
-      "taskTitle": "BlockedReasonXYZ",
+      "id": "ta-readiness-002",
+      "taskId": "task-readiness-001",
+      "taskTitle": "Complete daily-readiness task breakdown (10 tasks)",
       "action": "moved",
       "fromColumn": "backlog",
-      "toColumn": "blocked",
-      "actor": "user",
-      "details": "\"BlockedReasonXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T16:34:41.160Z"
+      "toColumn": "in-progress",
+      "actor": "agent",
+      "details": "\"Complete daily-readiness task breakdown (10 tasks)\" moved from Backlog to In Progress",
+      "timestamp": "2026-04-02T18:01:00.000Z"
     },
     {
-      "id": "9865051a-bfb8-4f65-ae6c-81c33d30d799",
-      "taskId": "eb96024a-94c5-4963-827b-86946f2c9860",
-      "taskTitle": "BlockedReasonXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"BlockedReasonXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:34:41.134Z"
-    },
-    {
-      "id": "0411e4a2-d352-4328-a4f1-c9427799b635",
-      "taskId": "3809b358-ac6f-4d04-af55-3e05f6a080e7",
-      "taskTitle": "BlockMeXYZ",
+      "id": "ta-readiness-003",
+      "taskId": "task-readiness-001",
+      "taskTitle": "Complete daily-readiness task breakdown (10 tasks)",
       "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "blocked",
-      "actor": "user",
-      "details": "\"BlockMeXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T16:34:41.066Z"
-    },
-    {
-      "id": "5419de80-048e-4617-8620-87eb0c909836",
-      "taskId": "3809b358-ac6f-4d04-af55-3e05f6a080e7",
-      "taskTitle": "BlockMeXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"BlockMeXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:34:41.051Z"
-    },
-    {
-      "id": "cc99dfc1-6acd-4d60-bb00-185e61c4d702",
-      "taskId": "aaef7bf7-9dca-40a1-9d57-1f6b2fee4a92",
-      "taskTitle": "CancelEditXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"CancelEditXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:40.302Z"
-    },
-    {
-      "id": "237b456b-4b44-4961-9a73-9e2976222df4",
-      "taskId": "949d6f44-fcdf-40ee-afeb-a370a501de70",
-      "taskTitle": "EditableXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"EditableXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:39.525Z"
-    },
-    {
-      "id": "89b2d3cc-4b8c-40de-9287-89a839f1424e",
-      "taskId": "2d27ee45-316c-4824-a867-e44b622dd064",
-      "taskTitle": "Unique create test xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Unique create test xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:39.354Z"
-    },
-    {
-      "id": "e4d805bf-78dc-4806-a82e-639eefc0bc23",
-      "taskId": "f2bf3d42-ac28-4241-84a1-cc6858ad3915",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:33.382Z"
-    },
-    {
-      "id": "c9a71084-e08f-429b-824a-600fa2c509bb",
-      "taskId": "c176ff3b-d5b3-4277-9aa0-e0c0c3a418d7",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:32.335Z"
-    },
-    {
-      "id": "f3c83608-6660-4b59-825e-82db5f63ddfa",
-      "taskId": "1041654e-f16f-476a-888c-4cfbf7c17e83",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:30.830Z"
-    },
-    {
-      "id": "0244b26b-9785-4940-bf3a-5b230db97e1c",
-      "taskId": "12a9a049-eb46-4431-8376-cbb46ff43563",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:30.199Z"
-    },
-    {
-      "id": "c3b3fd5c-23c3-402e-a559-ba1431ca7a34",
-      "taskId": "176dbebe-f9b9-46b4-9096-60efa0f2dc8a",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:29.601Z"
-    },
-    {
-      "id": "bebb8f08-966f-4df5-a70a-0849c1d9889d",
-      "taskId": "73514e1f-43b8-4203-aeb2-bb68b3a9c094",
-      "taskTitle": "Backlog task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:28.167Z"
-    },
-    {
-      "id": "75f4c661-7ab7-4661-887a-cd9466ee3396",
-      "taskId": "8d167814-aff4-4875-87a2-26b8420e9b29",
-      "taskTitle": "Done task for progress",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T16:34:28.151Z"
-    },
-    {
-      "id": "83acf790-1b7d-4418-aff6-4883af5a1872",
-      "taskId": "8d167814-aff4-4875-87a2-26b8420e9b29",
-      "taskTitle": "Done task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:27.869Z"
-    },
-    {
-      "id": "6005f9d1-0cc5-47f5-8882-8b6f860dc32e",
-      "taskId": "ab3d2509-120a-4a2b-aa0f-1e9fa32e516a",
-      "taskTitle": "Linkable task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T16:34:26.599Z"
-    },
-    {
-      "id": "e47bf17d-1d55-4357-bb69-bd33495fb0f9",
-      "taskId": "8a5b5dba-8c98-4b91-9187-69aa531d1412",
-      "taskTitle": "Overview Task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Overview Task\" created and assigned to User",
-      "timestamp": "2026-04-01T16:33:50.289Z"
-    },
-    {
-      "id": "2d00105e-4f9c-4518-a9b3-1ba71fd3feee",
-      "taskId": "c159a11e-e964-4c19-acdd-357191359f94",
-      "taskTitle": "Task B",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Task B\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:33:49.656Z"
-    },
-    {
-      "id": "cc4c7a9f-5692-413b-97ab-97f28c992f9d",
-      "taskId": "7853c527-58d3-494e-94f4-bb11e0f6cb47",
-      "taskTitle": "Task A",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Task A\" created and assigned to User",
-      "timestamp": "2026-04-01T16:33:49.642Z"
-    },
-    {
-      "id": "d20cdd3c-c81a-4f62-b3a5-71a5fdc997b3",
-      "taskId": "01d8259f-8486-427e-bf7d-926a6d4a02e9",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:33:15.225Z"
-    },
-    {
-      "id": "91372c03-955c-40d1-89e6-b3bb8fcf38c2",
-      "taskId": "59048224-dbc6-448f-b165-84586bae511c",
-      "taskTitle": "API update test",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"API update test\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:30.712Z"
-    },
-    {
-      "id": "58d7020a-4684-4f93-9c7f-c055bab22027",
-      "taskId": "f778fba3-67d6-4544-a81f-24831f8a5058",
-      "taskTitle": "Unlinked task xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Unlinked task xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:30.611Z"
-    },
-    {
-      "id": "6bc83659-c7c2-4768-bf07-d184f34bbf5b",
-      "taskId": "46b72f45-7888-4035-92dd-ea7416c651a1",
-      "taskTitle": "Linked task xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linked task xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:29.793Z"
-    },
-    {
-      "id": "b1bfecb8-e3f6-4dea-ad54-9ab4d57b83ce",
-      "taskId": "848cc798-9b2b-4c3b-ab11-8d1f550282c8",
-      "taskTitle": "DeleteMeXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"DeleteMeXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:28.957Z"
-    },
-    {
-      "id": "d900efae-4345-4f22-8a95-85ec88233f2d",
-      "taskId": "b572e900-6fb8-4796-a746-61d020f8ff5e",
-      "taskTitle": "BlockedReasonXYZ",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "blocked",
-      "actor": "user",
-      "details": "\"BlockedReasonXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T16:32:28.324Z"
-    },
-    {
-      "id": "b459b7c0-c902-4031-8356-51a90a7d43c4",
-      "taskId": "b572e900-6fb8-4796-a746-61d020f8ff5e",
-      "taskTitle": "BlockedReasonXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"BlockedReasonXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:32:28.311Z"
-    },
-    {
-      "id": "fb5b6746-65c7-4256-91ba-2976f828db2d",
-      "taskId": "74ec935f-ad30-4e0f-9764-eee984db541e",
-      "taskTitle": "BlockMeXYZ",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "blocked",
-      "actor": "user",
-      "details": "\"BlockMeXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T16:32:28.233Z"
-    },
-    {
-      "id": "eb31a1e2-ac1e-47ca-9c85-b58256084b8d",
-      "taskId": "74ec935f-ad30-4e0f-9764-eee984db541e",
-      "taskTitle": "BlockMeXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"BlockMeXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:32:28.215Z"
-    },
-    {
-      "id": "e50cc633-db30-4323-83f8-6be000874309",
-      "taskId": "d1dbbfb4-ee8f-4e56-aaef-31ba128d355a",
-      "taskTitle": "CancelEditXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"CancelEditXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:27.439Z"
-    },
-    {
-      "id": "938f131b-d837-4b67-ade6-4b1449104526",
-      "taskId": "ad7c10af-f212-4803-8bf7-c085f400420d",
-      "taskTitle": "EditableXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"EditableXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:26.668Z"
-    },
-    {
-      "id": "d9dad25c-93d1-4c2c-8835-cdf525fc4dc6",
-      "taskId": "0ed6c644-2400-4093-b23f-6a831f7741d3",
-      "taskTitle": "Unique create test xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Unique create test xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:26.508Z"
-    },
-    {
-      "id": "76c0a240-eb5f-44e1-9461-d21449188ae2",
-      "taskId": "f4ffe699-e414-47d1-a37a-295ccaab63c9",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:20.410Z"
-    },
-    {
-      "id": "8233626f-c32a-4c80-ac62-b58dd9c318ea",
-      "taskId": "19bbf347-1c3b-466a-bb3e-65d24530609d",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:19.335Z"
-    },
-    {
-      "id": "c9b91aa1-3652-481f-acd5-a3f1b71ca7d6",
-      "taskId": "25dedbd9-06d3-4938-a005-8a0accb73e68",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:17.306Z"
-    },
-    {
-      "id": "706019d5-de45-456b-925e-5f18c711860a",
-      "taskId": "eb9dcd1b-8dc4-4ac6-a90d-67bc5b07a95c",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:16.686Z"
-    },
-    {
-      "id": "22660e57-2e04-41e0-a57a-373eb99ff89e",
-      "taskId": "723ee9fa-6bf5-4a50-98bc-c7c0813eb1d1",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:16.073Z"
-    },
-    {
-      "id": "2626bb1a-4a35-464b-9eba-237d0c9707b7",
-      "taskId": "723da1d9-3147-47e8-b8e2-98834c326195",
-      "taskTitle": "Backlog task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:14.687Z"
-    },
-    {
-      "id": "f187ebc7-3f20-48f6-a138-a27ee20498a6",
-      "taskId": "22576850-c8f5-49b0-9fc9-503edba1ca0d",
-      "taskTitle": "Done task for progress",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T16:32:14.672Z"
-    },
-    {
-      "id": "50e799af-6082-4956-b85f-dfd28e32bfe7",
-      "taskId": "22576850-c8f5-49b0-9fc9-503edba1ca0d",
-      "taskTitle": "Done task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:14.403Z"
-    },
-    {
-      "id": "674881a5-c3c7-48c6-9ff5-927df16c75fb",
-      "taskId": "61be5c3e-a600-487f-8170-761c6c203a6d",
-      "taskTitle": "Linkable task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T16:32:13.121Z"
-    },
-    {
-      "id": "eb059bac-5691-434d-9d8c-aed0145bc115",
-      "taskId": "13d056d5-889c-491c-8e60-e0380d6c90b4",
-      "taskTitle": "Overview Task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Overview Task\" created and assigned to User",
-      "timestamp": "2026-04-01T16:31:37.357Z"
-    },
-    {
-      "id": "b9afe02a-1898-4897-a95c-ac088f9037ea",
-      "taskId": "9fd293da-4690-4c24-a888-d396b138474c",
-      "taskTitle": "Task B",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Task B\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:31:36.728Z"
-    },
-    {
-      "id": "6e1a21af-820d-435f-9106-e493e0bf9d4a",
-      "taskId": "fad19537-23b0-40d2-8968-04a91d32454d",
-      "taskTitle": "Task A",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Task A\" created and assigned to User",
-      "timestamp": "2026-04-01T16:31:36.716Z"
-    },
-    {
-      "id": "68e31821-3b00-4946-830e-18141d3bb123",
-      "taskId": "f4df87d3-67e3-47c4-b232-ddfcc8746653",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:30:48.351Z"
-    },
-    {
-      "id": "ebba5011-1d33-486a-98d4-9cd8aa8ce5a8",
-      "taskId": "3751801d-751d-4393-b838-a06cd850ab2d",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:30:46.839Z"
-    },
-    {
-      "id": "1ae1e71d-67b0-4740-9724-16b37e6dcfde",
-      "taskId": "d406cc5e-17b5-4c91-b698-f4362d9d5007",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:30:45.675Z"
-    },
-    {
-      "id": "38f3a26e-18c4-4014-a103-91f69028464a",
-      "taskId": "15536bc7-8418-4d71-a1ef-4ef8eb4fbc85",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:30:45.042Z"
-    },
-    {
-      "id": "5da97aad-5d31-4e88-b9b2-ef1026188dee",
-      "taskId": "396f373f-c96e-4cce-a201-acace2591159",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:30:44.336Z"
-    },
-    {
-      "id": "bd813286-4ef2-4a31-850c-2c4651b14c82",
-      "taskId": "b526c8a4-96c5-4815-9a4a-0ea07b575a3c",
-      "taskTitle": "Overview Task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Overview Task\" created and assigned to User",
-      "timestamp": "2026-04-01T16:30:40.136Z"
-    },
-    {
-      "id": "eb4eebef-ab80-48cb-8cab-333bf37d18f9",
-      "taskId": "005b5776-e1ec-427f-9ab7-ba5b6a204b18",
-      "taskTitle": "Task B",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Task B\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:30:39.158Z"
-    },
-    {
-      "id": "d2a17824-1482-4336-be16-e06da4c71715",
-      "taskId": "f46ad970-9db3-4304-836f-88734f03a4a8",
-      "taskTitle": "Task A",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Task A\" created and assigned to User",
-      "timestamp": "2026-04-01T16:30:39.147Z"
-    },
-    {
-      "id": "b34f1836-24fd-429e-a21a-d2f08d1fc79f",
-      "taskId": "eae7bc01-9163-40ee-8a8b-074c9fc2cd52",
-      "taskTitle": "API update test",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"API update test\" created and assigned to User",
-      "timestamp": "2026-04-01T16:29:12.452Z"
-    },
-    {
-      "id": "67f9b366-f5b5-49a9-b966-44c7b43b6283",
-      "taskId": "8cbc890a-e340-4603-800c-c8b3308eb3cc",
-      "taskTitle": "Unlinked task xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Unlinked task xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:29:12.355Z"
-    },
-    {
-      "id": "3c2f9b69-d52c-4c81-adcf-8d48221a0e08",
-      "taskId": "b56f70dd-d9d0-4517-bb32-119a5532f233",
-      "taskTitle": "Linked task xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linked task xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:29:11.501Z"
-    },
-    {
-      "id": "eba47234-7acb-40b2-ae54-b3a6d5e21716",
-      "taskId": "9a7b8079-4af9-491b-bf90-b7d200079bc0",
-      "taskTitle": "DeleteMeXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"DeleteMeXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:29:10.733Z"
-    },
-    {
-      "id": "6427a346-b095-402f-9b70-eccd0cf7f241",
-      "taskId": "20260970-b0f0-4e98-b504-f0b24da8c7ec",
-      "taskTitle": "BlockedReasonXYZ",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "blocked",
-      "actor": "user",
-      "details": "\"BlockedReasonXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T16:29:10.089Z"
-    },
-    {
-      "id": "8819abc5-8b63-4d63-b678-d0f180b7529c",
-      "taskId": "20260970-b0f0-4e98-b504-f0b24da8c7ec",
-      "taskTitle": "BlockedReasonXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"BlockedReasonXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:29:10.067Z"
-    },
-    {
-      "id": "a7c87424-4ce0-4c45-9b65-3d83f00c9f44",
-      "taskId": "d6a357db-b9d6-4758-b335-58b59c779128",
-      "taskTitle": "BlockMeXYZ",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "blocked",
-      "actor": "user",
-      "details": "\"BlockMeXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T16:29:09.989Z"
-    },
-    {
-      "id": "74f61e3e-8400-45d9-b6ec-3998432b3cb0",
-      "taskId": "d6a357db-b9d6-4758-b335-58b59c779128",
-      "taskTitle": "BlockMeXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"BlockMeXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:29:09.970Z"
-    },
-    {
-      "id": "9870d62c-260d-43d9-a89a-50be5449ff69",
-      "taskId": "837d09f5-f203-4dbd-97e6-1dde45554d9c",
-      "taskTitle": "CancelEditXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"CancelEditXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:29:09.196Z"
-    },
-    {
-      "id": "b8c5362d-53e8-4f01-8c2b-09ee0d65c975",
-      "taskId": "d3fada35-b5ab-4f30-8aae-a4cc20691aab",
-      "taskTitle": "EditableXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"EditableXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:29:08.426Z"
-    },
-    {
-      "id": "38d17a00-6c4c-4776-b59d-f74163f970ef",
-      "taskId": "55ae611f-5769-45b3-ad70-c9060e2696be",
-      "taskTitle": "Unique create test xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Unique create test xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:29:08.253Z"
-    },
-    {
-      "id": "f3c16573-6884-4bb8-8cce-8696027fdb54",
-      "taskId": "6936b025-9068-49a6-8abb-cdf6f9bbc7a2",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:28:46.404Z"
-    },
-    {
-      "id": "8dc28c3c-52af-409f-899e-f5ba49a7c609",
-      "taskId": "b9fe272c-9662-4b02-a7ef-1222b537c2cb",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:28:44.869Z"
-    },
-    {
-      "id": "4fbf6df5-68ff-4f80-b304-544c3a497227",
-      "taskId": "b79d28a1-b7bb-493a-81e7-6f8a7bafeae1",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:28:43.712Z"
-    },
-    {
-      "id": "5cfbfe21-6236-4f94-b225-8399908181ea",
-      "taskId": "e2542503-aca7-4035-9f74-92e1967ed9c4",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:28:43.083Z"
-    },
-    {
-      "id": "9ad8be25-5114-48d6-af6f-311cc38b730a",
-      "taskId": "183e2324-ce72-4085-beb3-25b041b2bd36",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:28:42.467Z"
-    },
-    {
-      "id": "74bfab4b-8358-4633-be26-bdeffc234434",
-      "taskId": "d06655ca-6b66-44dd-9891-a281ca9a75a3",
-      "taskTitle": "Backlog task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T16:28:41.044Z"
-    },
-    {
-      "id": "42fb2aea-d842-45e7-a014-f863535568ff",
-      "taskId": "344768b7-7dc7-4b93-bfa1-8d458bb1599f",
-      "taskTitle": "Done task for progress",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T16:28:41.031Z"
-    },
-    {
-      "id": "491c260c-c5f2-4767-a60a-b01c58784151",
-      "taskId": "344768b7-7dc7-4b93-bfa1-8d458bb1599f",
-      "taskTitle": "Done task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T16:28:40.759Z"
-    },
-    {
-      "id": "7eab239f-dda0-40e3-8c6c-ebe4e31ed8ad",
-      "taskId": "46279dcd-9ef9-4603-8192-e9d6b4ac691b",
-      "taskTitle": "Linkable task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T16:28:39.519Z"
-    },
-    {
-      "id": "909b49ac-84cf-43a8-8f1f-30fe0d2b42d3",
-      "taskId": "437f394f-1f4d-4911-9963-9bd4cc2c6b5f",
-      "taskTitle": "Overview Task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Overview Task\" created and assigned to User",
-      "timestamp": "2026-04-01T16:27:51.618Z"
-    },
-    {
-      "id": "85f1e580-ff24-4d60-a303-5b3d2d1dcead",
-      "taskId": "f2dfe542-92dc-4821-8843-934ec6f83e04",
-      "taskTitle": "Task B",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Task B\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:27:51.012Z"
-    },
-    {
-      "id": "73d0eb5d-972a-4f4f-9a18-580456cc7afa",
-      "taskId": "4d7fd899-e21c-433f-92b2-93b35596df01",
-      "taskTitle": "Task A",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Task A\" created and assigned to User",
-      "timestamp": "2026-04-01T16:27:50.998Z"
-    },
-    {
-      "id": "e23746aa-bc00-462c-9c7d-9d7f3c7a7b07",
-      "taskId": "003ddeaa-5744-49a8-9a24-66578d527dda",
-      "taskTitle": "API update test",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"API update test\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:49.730Z"
-    },
-    {
-      "id": "bd7f4a14-9172-41d4-acfb-1c2a20f99749",
-      "taskId": "39a86511-a3dc-4051-b42d-ef42487f8457",
-      "taskTitle": "Unlinked task xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Unlinked task xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:49.627Z"
-    },
-    {
-      "id": "a365def6-35ab-4549-bdaa-0f99944840ad",
-      "taskId": "48f421b5-2197-4a87-893e-221121daa08f",
-      "taskTitle": "Linked task xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linked task xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:48.774Z"
-    },
-    {
-      "id": "087a0864-35bf-40bd-8d00-d16d474d602a",
-      "taskId": "5196da8d-2ba0-4d2b-a518-fe2c7e67d45c",
-      "taskTitle": "DeleteMeXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"DeleteMeXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:48.003Z"
-    },
-    {
-      "id": "3613cd4f-2f2f-47a4-a620-5ab13a5aa933",
-      "taskId": "03b9cfca-87c0-4067-8648-edf11386ddda",
-      "taskTitle": "BlockedReasonXYZ",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "blocked",
-      "actor": "user",
-      "details": "\"BlockedReasonXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T16:26:47.372Z"
-    },
-    {
-      "id": "c5aed1e8-59ec-4f0e-8c68-2df739587913",
-      "taskId": "03b9cfca-87c0-4067-8648-edf11386ddda",
-      "taskTitle": "BlockedReasonXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"BlockedReasonXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:26:47.352Z"
-    },
-    {
-      "id": "012eb2cb-48fe-4707-ab47-cacaa130b15c",
-      "taskId": "2f782b5c-0805-4801-9c3c-e8f2c6e6ce27",
-      "taskTitle": "BlockMeXYZ",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "blocked",
-      "actor": "user",
-      "details": "\"BlockMeXYZ\" moved from Backlog to Blocked",
-      "timestamp": "2026-04-01T16:26:47.277Z"
-    },
-    {
-      "id": "f7b3a96d-1b6d-4861-8fc2-2dd30c00893f",
-      "taskId": "2f782b5c-0805-4801-9c3c-e8f2c6e6ce27",
-      "taskTitle": "BlockMeXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"BlockMeXYZ\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:26:47.260Z"
-    },
-    {
-      "id": "af3572c5-e170-4b58-b15f-7081baa8aaf1",
-      "taskId": "9c3bd5d9-6346-48bf-ad53-f2240c82cedc",
-      "taskTitle": "CancelEditXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"CancelEditXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:46.500Z"
-    },
-    {
-      "id": "796a252d-f878-429e-8451-28a69ea2fa7e",
-      "taskId": "c205c16f-df75-4f65-9bbc-00653ac9a532",
-      "taskTitle": "EditableXYZ",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"EditableXYZ\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:45.732Z"
-    },
-    {
-      "id": "f7aa1eb8-8bc4-4af2-bd9a-9d6f5bac2585",
-      "taskId": "59a6a462-a105-4930-be28-aca426e55846",
-      "taskTitle": "Unique create test xyz",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Unique create test xyz\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:45.559Z"
-    },
-    {
-      "id": "ccc8b6c2-522f-4977-8c92-4cba69e3cc73",
-      "taskId": "9bf7b346-5d13-45c4-8fea-276ee36b2711",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:23.531Z"
-    },
-    {
-      "id": "51968a2b-8722-43ec-84d8-a14afaeaef34",
-      "taskId": "118c855b-5af2-495f-93ca-0d22091ecebd",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:21.984Z"
-    },
-    {
-      "id": "188c44c6-6b71-4dea-b64b-ad2ed53200aa",
-      "taskId": "a8491662-38c9-4ddf-8dd0-ca2a719e0b50",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:20.817Z"
-    },
-    {
-      "id": "8fb64fa0-2776-4817-93e0-54dc156ddc76",
-      "taskId": "9c04d1e0-2864-4adb-9b1f-ddd4cece84c6",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:20.203Z"
-    },
-    {
-      "id": "962dbf56-1715-476c-84cc-9822b8bc84b3",
-      "taskId": "9f417687-858b-473b-bcaf-f9bdf31b58e5",
-      "taskTitle": "Fix zyphor alignment issue",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Fix zyphor alignment issue\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:19.591Z"
-    },
-    {
-      "id": "386eb0e3-7254-4834-83a3-c2dc5a7e668e",
-      "taskId": "76f5942a-a045-4745-9baa-4b48ddc2cad4",
-      "taskTitle": "Backlog task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Backlog task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:18.139Z"
-    },
-    {
-      "id": "0649a39c-08c3-4233-94d1-9a3cdf505de1",
-      "taskId": "f4d6320b-10dd-4ef0-b171-9b7b1ff71986",
-      "taskTitle": "Done task for progress",
-      "action": "moved",
-      "fromColumn": "backlog",
-      "toColumn": "done",
-      "actor": "user",
-      "details": "\"Done task for progress\" moved from Backlog to Done",
-      "timestamp": "2026-04-01T16:26:18.124Z"
-    },
-    {
-      "id": "ea8eb8b0-1f68-450b-9724-94c31fd4359f",
-      "taskId": "f4d6320b-10dd-4ef0-b171-9b7b1ff71986",
-      "taskTitle": "Done task for progress",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Done task for progress\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:17.865Z"
-    },
-    {
-      "id": "59a15150-4a9a-4df0-b506-f9cf765ac53e",
-      "taskId": "43359ba0-8199-49af-8836-7afb437d51a4",
-      "taskTitle": "Linkable task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Linkable task\" created and assigned to User",
-      "timestamp": "2026-04-01T16:26:16.553Z"
-    },
-    {
-      "id": "5c4c26a2-f03b-48d4-ab2f-e9e837097d49",
-      "taskId": "ee5c0472-556d-4cc2-94cc-4b66f705f7a3",
-      "taskTitle": "Overview Task",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Overview Task\" created and assigned to User",
-      "timestamp": "2026-04-01T16:25:28.607Z"
-    },
-    {
-      "id": "1a6d1a8d-8615-40a3-b3f3-21a9213398ed",
-      "taskId": "db189324-8d26-4012-a9eb-bd02d272a74f",
-      "taskTitle": "Task B",
-      "action": "created",
-      "toColumn": "backlog",
-      "actor": "user",
-      "details": "Task \"Task B\" created and assigned to AI Agent",
-      "timestamp": "2026-04-01T16:25:27.989Z"
+      "fromColumn": "in-progress",
+      "toColumn": "review",
+      "actor": "agent",
+      "details": "\"Complete daily-readiness task breakdown (10 tasks)\" moved from In Progress to Review",
+      "timestamp": "2026-04-02T19:00:00.000Z"
     }
   ],
   "scheduledEvents": [
     {
-      "id": "b7f45ded-d502-4e7e-bbb6-91d233c58a93",
-      "name": "Filter recurring",
-      "description": "",
+      "id": "evt-geopolitics-001",
+      "name": "Daily Geopolitics Report",
+      "description": "Automated daily briefing covering geopolitical developments, regional risk signals, and macro trends relevant to ongoing projects and decision-making.",
       "scheduleType": "recurring",
-      "schedule": "Daily",
+      "schedule": "Daily at 07:30 Europe/Zagreb",
+      "cronExpression": "30 7 * * *",
       "status": "active",
-      "createdAt": "2026-04-01T16:33:47.037Z",
-      "updatedAt": "2026-04-01T16:33:47.037Z"
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z",
+      "eventType": "automation",
+      "owner": "agent",
+      "priority": "medium"
     },
     {
-      "id": "b302cb4d-036e-4523-9c7d-4a65dd682e57",
-      "name": "Filter onetime",
-      "description": "",
-      "scheduleType": "one-time",
-      "schedule": "Tomorrow",
+      "id": "evt-taskboard-monitor-002",
+      "name": "Mission Control Taskboard Monitor",
+      "description": "Periodic scan of the taskboard for stale tasks (in-progress > 24h without update, blocked without resolution, backlog items with urgent priority). Flags anomalies and nudges action.",
+      "scheduleType": "recurring",
+      "schedule": "Every 6 hours",
+      "cronExpression": "0 */6 * * *",
       "status": "active",
-      "createdAt": "2026-04-01T16:33:47.048Z",
-      "updatedAt": "2026-04-01T16:33:47.048Z"
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z",
+      "eventType": "automation",
+      "owner": "agent",
+      "priority": "high"
+    },
+    {
+      "id": "evt-worker-failure-003",
+      "name": "Worker Failure Handler",
+      "description": "Monitors agent task execution for failures. When a worker hits an unrecoverable error, moves the task to blocked with a clear blockReason and files a bug report if the failure indicates a system issue.",
+      "scheduleType": "recurring",
+      "schedule": "Continuous — triggered on agent error",
+      "status": "active",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z",
+      "eventType": "automation",
+      "owner": "agent",
+      "priority": "high"
+    },
+    {
+      "id": "evt-session-wrapup-004",
+      "name": "Session Wrap-Up Review",
+      "description": "End-of-session checkpoint. Agent logs a conversation memory summarizing work done, moves completed tasks to review/done, updates agent status, and saves any persistent learnings as long-term memories.",
+      "scheduleType": "recurring",
+      "schedule": "End of each session",
+      "status": "active",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z",
+      "eventType": "reminder",
+      "owner": "agent",
+      "priority": "medium"
+    },
+    {
+      "id": "evt-weekly-bug-triage-005",
+      "name": "Weekly Bug Triage",
+      "description": "Review all open bugs, re-assess severity, close resolved items, and escalate anything critical. Check if any bugs have been open for more than 7 days without progress.",
+      "scheduleType": "recurring",
+      "schedule": "Every Monday at 9:00",
+      "cronExpression": "0 9 * * 1",
+      "status": "active",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z",
+      "eventType": "review",
+      "owner": "user",
+      "priority": "medium"
+    },
+    {
+      "id": "evt-weekly-project-review-006",
+      "name": "Weekly Project Health Check",
+      "description": "Review active projects for progress, stalled milestones, and scope drift. Update project statuses, check that linked tasks are progressing, and flag any project that hasn't had activity in 5+ days.",
+      "scheduleType": "recurring",
+      "schedule": "Every Friday at 17:00",
+      "cronExpression": "0 17 * * 5",
+      "status": "active",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z",
+      "eventType": "review",
+      "owner": "user",
+      "priority": "medium"
+    },
+    {
+      "id": "evt-docs-maintenance-007",
+      "name": "Documentation Maintenance",
+      "description": "Monthly check that operational docs are still accurate. Verify OPENCLAW.md matches current API surface, review Docs section for outdated content, and update any references that have drifted from the codebase.",
+      "scheduleType": "recurring",
+      "schedule": "First Monday of each month at 10:00",
+      "cronExpression": "0 10 1-7 * 1",
+      "status": "active",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z",
+      "eventType": "review",
+      "owner": "user",
+      "priority": "low"
     }
   ],
   "projects": [
     {
-      "id": "4d517348-d3f5-4201-81fb-f28458c5a48d",
-      "name": "Active filter project",
-      "description": "",
+      "id": "proj-daily-readiness-001",
+      "name": "Mission Control Daily Readiness",
+      "description": "Bootstrap Mission Control from semi-seeded test state into a trustworthy daily operational system.",
       "status": "active",
-      "linkedTaskIds": [],
-      "createdAt": "2026-04-01T16:34:28.896Z",
-      "updatedAt": "2026-04-01T16:34:28.896Z",
-      "lastActiveAt": "2026-04-01T16:34:28.896Z"
-    },
-    {
-      "id": "e7302230-ce70-492c-bed4-02439087303e",
-      "name": "Archived filter project",
-      "description": "",
-      "status": "archived",
-      "linkedTaskIds": [],
-      "createdAt": "2026-04-01T16:34:28.905Z",
-      "updatedAt": "2026-04-01T16:34:28.916Z",
-      "lastActiveAt": "2026-04-01T16:34:28.905Z"
+      "linkedTaskIds": ["task-readiness-001"],
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T19:00:00.000Z",
+      "lastActiveAt": "2026-04-02T19:00:00.000Z",
+      "goal": "Make Mission Control usable as an actual daily command center with real content, verified persistence, and documented workflow rules.",
+      "desiredOutcome": "Dashboard shows real operational data. All sections contain meaningful content. No test/demo artifacts remain. System survives restarts. Workflow rules are documented and followed.",
+      "successCriteria": [
+        "No demo/test data visible in any section",
+        "Real docs, memories, and calendar events present",
+        "Team/Office model defined with persistent agent registry",
+        "Persistence verified across dev restart, cache rebuild, and production build",
+        "All mutation flows handle errors visibly",
+        "Go-live checklist passes",
+        "Workflow rules documented and reflected in current state"
+      ],
+      "constraints": [],
+      "assumptions": [],
+      "priority": "high",
+      "type": "initiative",
+      "owner": "shared",
+      "planningState": "ready",
+      "linkedDocIds": ["doc-golive-checklist-005", "doc-workflow-rules-006"],
+      "linkedMemoryIds": [],
+      "linkedCalendarEventIds": [],
+      "linkedBugIds": [],
+      "milestones": [
+        { "id": "ms-clean-001", "title": "Test/demo data removed", "status": "completed" },
+        { "id": "ms-content-002", "title": "Docs, memories, calendar populated with real content", "status": "completed" },
+        { "id": "ms-team-003", "title": "Team/Office lifecycle model defined", "status": "completed" },
+        { "id": "ms-persist-004", "title": "Persistence verified across restart scenarios", "status": "completed" },
+        { "id": "ms-errors-005", "title": "All mutation flows audited for silent failures", "status": "completed" },
+        { "id": "ms-golive-006", "title": "Go-live checklist created and reviewable", "status": "completed" },
+        { "id": "ms-workflow-007", "title": "Workflow rules documented and system reflects current work", "status": "in-progress" }
+      ],
+      "suggestedTasks": [],
+      "planningNotes": "",
+      "executionMode": "assistive"
     }
   ],
-  "conversationMemories": [],
+  "conversationMemories": [
+    {
+      "id": "cm-bootstrap-001",
+      "date": "2026-04-02",
+      "title": "Mission Control bootstrap: architecture decisions and initial build",
+      "content": "Built Mission Control from scratch as a Next.js operational hub. Key decisions made during this session:\n\n1. **Single JSON file store** — Chose data/store.json over a database. The system needs to be portable, zero-dependency, and inspectable. Atomic writes (write to .tmp, rename) prevent corruption. Automatic .bak backup before every write enables crash recovery.\n\n2. **Server-rendered dashboard** — The main dashboard uses force-dynamic SSR so it always shows current state without client-side fetching. All other pages are client-rendered with API calls.\n\n3. **Kanban with 5 columns** — backlog → in-progress → blocked → review → done. The blocked column was added specifically so agents can surface problems visibly rather than silently failing. Block reasons are required.\n\n4. **Agent hierarchy** — Three roles: orchestrator (coordinates), specialist (domain expert), worker (task executor). parentId creates a tree. Status polling every 5 seconds keeps the office view live.\n\n5. **Calendar as operational schedule** — Not a personal calendar. Four event types: automation (cron visibility), reminder (workflow prompts), deadline (time-bound work), review (recurring check-ins). Each maps to a different operational need.\n\n6. **.next cache validation** — After discovering that hard kills corrupt the .next build cache (making it look like data loss when store.json is fine), added startup validation that clears .next if critical manifest files are missing.\n\nFollow-up: major refactor split the monolithic store into separate modules, added dark mode, search (Ctrl+K), task priorities, and dashboard overhaul.",
+      "tags": ["architecture", "bootstrap", "decisions"],
+      "createdAt": "2026-04-02T12:00:00.000Z",
+      "updatedAt": "2026-04-02T12:00:00.000Z"
+    }
+  ],
   "longTermMemories": [
     {
-      "id": "54bd0ec5-719a-4273-9163-5e07a1b04a5f",
-      "title": "A preference",
-      "content": "Likes dark mode",
-      "category": "preference",
-      "createdAt": "2026-04-01T16:34:12.442Z",
-      "updatedAt": "2026-04-01T16:34:12.442Z"
+      "id": "ltm-persistence-model-001",
+      "title": "Persistence model: single JSON file with atomic writes",
+      "content": "All Mission Control state lives in data/store.json. No database. Write sequence: serialize → write to .tmp → backup current to .bak → atomic rename .tmp to main. A mutex queue serializes concurrent writes. In-memory cache avoids repeated disk reads. On corrupt file, recovery tries .bak first, then falls back to empty defaults. Never edit store.json while the server is running — the cache won't reflect manual edits and the next API write overwrites them. To reset: stop server, replace file, restart.",
+      "category": "decision",
+      "createdAt": "2026-04-02T12:00:00.000Z",
+      "updatedAt": "2026-04-02T12:00:00.000Z"
     },
     {
-      "id": "8ca4c075-c3f4-4a38-9be8-17f8f780d0b9",
-      "title": "A decision",
-      "content": "Use Next.js",
+      "id": "ltm-worker-failure-002",
+      "title": "Worker failure handling: block task + set blockReason",
+      "content": "When an agent hits a blocker it cannot resolve, the protocol is:\n1. Move the task to the 'blocked' column via POST /api/tasks/move\n2. Immediately set a clear blockReason via PUT /api/tasks explaining what went wrong\n3. The block reason displays prominently on the task card so the user sees the problem\n4. Once resolved, move back to in-progress and clear the blockReason\n\nAgents must never silently fail or leave tasks in-progress when they cannot continue. The blocked column exists specifically for visibility — use it. Silent failures were the original motivation for adding the blocked column.",
       "category": "decision",
-      "createdAt": "2026-04-01T16:34:12.450Z",
-      "updatedAt": "2026-04-01T16:34:12.450Z"
+      "createdAt": "2026-04-02T12:00:00.000Z",
+      "updatedAt": "2026-04-02T12:00:00.000Z"
+    },
+    {
+      "id": "ltm-session-discipline-003",
+      "title": "Session discipline: start and end protocol",
+      "content": "Every agent session must follow this protocol:\n\nSTART:\n1. Register/update self in Team API with status 'running'\n2. Read the mission statement\n3. Check open bugs for anything fixable\n4. Check taskboard for assigned work\n5. Review recent conversation memories for context\n\nWHILE WORKING:\n- Create tasks for active work, move through columns\n- Update agent description to reflect current task\n- Save documents to Docs, not just chat\n- File bugs immediately when encountered\n\nEND:\n1. Log a conversation memory summarizing what was done\n2. Move completed tasks to review or done\n3. Update agent status to idle or offline\n4. Save important learnings as long-term memories\n\nPrioritization: always check mission statement first. Ask: 'What task right now brings us closest to our mission?'",
+      "category": "context",
+      "createdAt": "2026-04-02T12:00:00.000Z",
+      "updatedAt": "2026-04-02T12:00:00.000Z"
+    },
+    {
+      "id": "ltm-dark-mode-pref-004",
+      "title": "UI preference: dark mode",
+      "content": "User prefers dark mode for Mission Control. The theme setting is at PATCH /api/settings { \"theme\": \"dark\" }. The app supports 'light' and 'dark' themes. Dark mode was added in the major refactor (commit e8b18d4).",
+      "category": "preference",
+      "createdAt": "2026-04-02T12:00:00.000Z",
+      "updatedAt": "2026-04-02T12:00:00.000Z"
+    },
+    {
+      "id": "ltm-validation-strategy-005",
+      "title": "Input validation: structured errors at API boundaries",
+      "content": "All API endpoints validate inputs strictly. Titles max 200 chars, content/descriptions max 10,000 chars (projects allow up to 100K for planningNotes). Enum fields reject invalid values. Validation errors return HTTP 400 with structured per-field errors: { \"error\": \"Validation failed\", \"fields\": [{ \"field\": \"name\", \"message\": \"...\" }] }. This was formalized in commit d196851 which also raised field limits after discovering that project creation was silently failing due to overly tight constraints.",
+      "category": "fact",
+      "createdAt": "2026-04-02T12:00:00.000Z",
+      "updatedAt": "2026-04-02T12:00:00.000Z"
+    },
+    {
+      "id": "ltm-next-cache-crash-006",
+      "title": "Crash recovery: .next cache corruption vs data loss",
+      "content": "When the server is killed abruptly (SIGKILL, power loss, crash), the .next build cache can be left corrupt. This prevents Next.js from starting or serving requests, making it appear as though data was lost — but store.json is always intact. The fix: on first getData() call, validate that .next/routes-manifest.json, build-manifest.json, and prerender-manifest.json exist. If any are missing, delete the entire .next directory and let Next.js rebuild. The .next directory can always be safely deleted. If 'npm run build' fails with MODULE_NOT_FOUND, clean .next before building: rm -rf .next && npm run build.",
+      "category": "fact",
+      "createdAt": "2026-04-02T12:00:00.000Z",
+      "updatedAt": "2026-04-02T12:00:00.000Z"
+    },
+    {
+      "id": "ltm-team-lifecycle-008",
+      "title": "Team lifecycle: persistent registry with live status updates",
+      "content": "The Team section uses a hybrid model:\n\n1. PERSISTENT IDENTITY — Agents are registered once and persist across restarts. OpenClaw (orchestrator) is the permanent primary agent. Sub-agents are registered when spun up and remain in the registry.\n\n2. LIVE STATUS — Status field (running/idle/offline) is the runtime layer. Agents update status at session boundaries: set to 'running' on session start, 'idle' or 'offline' on session end. Status is manual — no automatic heartbeat or timeout.\n\n3. OFFICE VISUALIZATION — Running agents appear at desks, idle at the water cooler, offline agents are listed in a sidebar but not shown in the office. The Office page polls every 3 seconds.\n\n4. RESTART BEHAVIOR — On server restart, agent identities and their last-set status persist. A previously 'running' agent will still show as 'running' after restart until explicitly updated. This is by design — the agent process is separate from the Mission Control server.\n\n5. HIERARCHY — parentId creates org chart relationships. Deleting a parent orphans children (sets their parentId to null). Orchestrators coordinate, specialists own domains, workers execute tasks.",
+      "category": "decision",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z"
+    },
+    {
+      "id": "ltm-tools-empty-009",
+      "title": "Tools section: intentionally empty until execution is implemented",
+      "content": "The Tools section is kept intentionally empty. The registry and UI exist, but 'executing' a tool only increments a usage counter and logs an activity entry — no actual work happens (no webhooks, no subprocess spawning, no API calls, no parameter processing). Adding tool entries in this state would create a confusing half-state where tools appear functional but aren't. The section will be populated when real execution capability is built. Until then, the empty state ('No tools yet') is the correct state.",
+      "category": "decision",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z"
+    },
+    {
+      "id": "ltm-workflow-discipline-010",
+      "title": "Workflow discipline: Mission Control is the source of truth",
+      "content": "Mission Control must reflect current operational state at all times. Five rules:\n1. Important work gets a Taskboard entry — create before starting, move through columns live\n2. Workflow changes go into Docs (detailed) and/or Memories (concise) — not left in chat\n3. Bugs go into Bug Reports — with screen, severity, and reproduction steps\n4. Multi-task initiatives get a Project — with goal, linked tasks, milestones\n5. Update as work progresses — not only after the fact\n\nThe test: anyone looking at the dashboard should understand what's happening, what's blocked, and what's next without asking. If work happened but isn't in Mission Control, it didn't happen.",
+      "category": "context",
+      "createdAt": "2026-04-02T19:00:00.000Z",
+      "updatedAt": "2026-04-02T19:00:00.000Z"
+    },
+    {
+      "id": "ltm-projects-v2-design-007",
+      "title": "Projects v2: strategic model with milestones and execution modes",
+      "content": "Projects were upgraded from simple task containers to strategic planning units. Key additions: goal, desiredOutcome, successCriteria, constraints, assumptions, planningNotes (up to 100K chars). Three execution modes: manual (human drives), assistive (agents suggest, human approves), autonomous-with-review (agents execute, human reviews). Milestones provide lightweight checkpoints. Suggested tasks let agents propose work without unilateral action. Entity linking connects projects to tasks, docs, bugs, memories, and calendar events. Progress is computed live from linked task completion, never stored. Backwards compatibility handled by applyDefaults() on every read — no migration scripts needed.",
+      "category": "decision",
+      "createdAt": "2026-04-02T12:00:00.000Z",
+      "updatedAt": "2026-04-02T12:00:00.000Z"
     }
   ],
   "docs": [
     {
-      "id": "eb9ad86e-9c64-4d5f-b948-6b61cbf51d13",
-      "title": "Zyphor integration guide",
-      "content": "How to integrate the zyphor system",
-      "category": "other",
-      "format": "plain text",
-      "createdAt": "2026-04-01T16:34:33.392Z",
-      "updatedAt": "2026-04-01T16:34:33.392Z"
+      "id": "doc-operating-model-001",
+      "title": "Mission Control Operating Model",
+      "content": "# Mission Control Operating Model\n\n## Purpose\n\nMission Control is a single-page operational hub for coordinating AI-assisted workflows. It consolidates task tracking, project planning, documentation, scheduling, bug reporting, memory persistence, and agent management into one system backed by a single JSON data store.\n\n## Architecture\n\n**Runtime:** Next.js application with server-rendered dashboard and client-side interactive pages.\n\n**Data layer:** All state lives in `data/store.json` — a flat JSON file with atomic write safety. There is no external database. The store is read into an in-memory cache on first access and written back atomically on every mutation.\n\n**API:** RESTful routes under `/api/`. Every section (tasks, projects, docs, calendar, bugs, memories, tools, team) has its own route handler supporting GET/POST/PUT/DELETE with structured validation errors.\n\n## Core Sections\n\n| Section | Path | Purpose |\n|---------|------|----------|\n| Dashboard | `/` | Server-rendered overview: task counts by column, open bugs by severity, active project progress, upcoming events, recent activity |\n| Taskboard | `/taskboard` | Kanban board with 5 columns: backlog, in-progress, blocked, review, done |\n| Projects | `/projects` | Strategic initiatives with linked tasks, docs, milestones, and progress tracking |\n| Calendar | `/calendar` | Scheduled events: automations, reminders, deadlines, reviews |\n| Docs | `/docs` | Document archive for plans, specs, research, and technical notes |\n| Memories | `/memories` | Conversation memories (session journal) and long-term memories (persistent facts/decisions) |\n| Bugs | `/bugs` | Bug tracker with severity levels and reproduction steps |\n| Tools | `/tools` | Custom tool registration, execution, and activity logging |\n| Team | `/team` | Agent org chart with mission statement. Hierarchical roles: orchestrator, specialist, worker |\n| Search | `Ctrl+K` | Global search across all content types |\n\n## Data Flow\n\n1. Dashboard loads server-side — reads all sections from the store in one pass\n2. Individual pages fetch from `/api/<section>` on mount\n3. Mutations go through POST/PUT/DELETE to the relevant API route\n4. Every write is serialized through a mutex queue, written atomically to disk, and cached in memory\n5. Dashboard always reflects the latest state because it re-reads on every page load (force-dynamic)\n\n## Operational Principles\n\n- **Single source of truth:** `data/store.json` is the only persistent state\n- **No seeding:** The app initializes with empty collections. Content is created exclusively through the API\n- **Crash resilience:** Atomic writes + automatic backup ensure data survives unexpected shutdowns\n- **Backwards compatibility:** New fields are auto-applied to old records via `applyDefaults()` on every read\n- **Validation at boundaries:** All API inputs are validated with max-length checks and enum constraints. Invalid requests return HTTP 400 with per-field error details",
+      "category": "technical",
+      "format": "markdown",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z"
+    },
+    {
+      "id": "doc-model-routing-002",
+      "title": "Model Routing and Worker Rules",
+      "content": "# Model Routing and Worker Rules\n\n## Agent System Overview\n\nMission Control manages AI agents through the Team section. Agents are organized in a hierarchical tree and can be monitored, assigned work, and coordinated through the dashboard.\n\n## Agent Roles\n\n| Role | Purpose | Typical Use |\n|------|---------|-------------|\n| **Orchestrator** | Coordinates work across multiple agents. Sits at the top of the hierarchy. | Primary session manager, delegation hub |\n| **Specialist** | Domain expert focused on a specific area. Reports to an orchestrator or another agent. | Code review, research, testing |\n| **Worker** | General-purpose task executor. Can report to any agent. | Task completion, data gathering, routine operations |\n\n## Hierarchy\n\nAgents form a tree via the `parentId` field:\n- Top-level agents have `parentId: null`\n- Child agents reference their parent's `id`\n- The Team page renders this as an org chart, sorted by role (orchestrators first, then specialists, then workers)\n\n## Status Lifecycle\n\n| Status | Meaning | Visual (Office view) |\n|--------|---------|----------------------|\n| `running` | Actively executing work | Appears at a desk |\n| `idle` | Registered but not working | Appears at the water cooler |\n| `offline` | Shut down or disconnected | Not visible |\n\nThe Team page polls agent status every 5 seconds to reflect real-time changes.\n\n## Agent Registration\n\nAgents are registered via `POST /api/team/agents`:\n\n```json\n{\n  \"name\": \"Research Agent\",\n  \"role\": \"specialist\",\n  \"description\": \"Handles deep research tasks\",\n  \"model\": \"claude-sonnet-4-6\",\n  \"parentId\": \"<orchestrator-id>\",\n  \"status\": \"idle\"\n}\n```\n\nRequired fields: `name`, `role`. All others have sensible defaults.\n\n## Routing Guidelines\n\n### When to use each role\n\n**Orchestrator** — Use when:\n- Managing a multi-step workflow that spans several domains\n- Coordinating output from multiple specialists/workers\n- Making decisions about task delegation and priority\n\n**Specialist** — Use when:\n- The work requires deep domain knowledge (e.g., security review, data analysis)\n- Quality matters more than speed\n- The agent needs to maintain context across related tasks\n\n**Worker** — Use when:\n- The task is well-defined and self-contained\n- Parallelism is desired (multiple workers can run simultaneously)\n- The work is routine or repetitive\n\n### Model Selection\n\nThe `model` field is a free-text string identifying which AI model the agent uses. Common values:\n- `claude-opus-4-6` — Most capable, best for orchestration and complex reasoning\n- `claude-sonnet-4-6` — Balanced performance, good for specialist and worker roles\n- `claude-haiku-4-5` — Fast and lightweight, ideal for high-volume worker tasks\n\n### Scaling Patterns\n\n- **Fan-out:** One orchestrator delegates to N workers for parallel execution\n- **Pipeline:** Orchestrator → specialist (analysis) → worker (execution) → specialist (review)\n- **Flat team:** Multiple specialists report directly to one orchestrator, each owning a domain",
+      "category": "technical",
+      "format": "markdown",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z"
+    },
+    {
+      "id": "doc-persistence-003",
+      "title": "Persistence and Restart Consistency",
+      "content": "# Persistence and Restart Consistency\n\n## Storage Model\n\nAll Mission Control state is stored in a single file: `data/store.json`. There is no database, no external service, no cache layer that is authoritative. The JSON file is the single source of truth.\n\n## Write Safety\n\nEvery mutation follows this atomic write sequence:\n\n1. **Serialize** — New state is JSON-stringified\n2. **Write temp** — Content is written to `data/store.json.tmp`\n3. **Backup** — Current `store.json` is copied to `store.json.bak`\n4. **Atomic rename** — `store.json.tmp` is renamed to `store.json`\n\nThe rename operation is atomic on Linux/Unix, meaning the file is either fully the old content or fully the new content — never a partial write. If the process crashes mid-write, the temp file is left behind but the main file remains intact.\n\n## Concurrency Control\n\nA mutex queue (`writePromise`) serializes all write operations. Even if multiple API requests arrive simultaneously, writes execute one at a time in order. This prevents race conditions where two concurrent writes could each read the same base state and one overwrites the other's changes.\n\n## In-Memory Cache\n\nOn the first `getData()` call in a process lifecycle, the store is read from disk and cached in memory. Subsequent reads return the cached copy without disk I/O. Every successful write updates both disk and cache atomically.\n\nThe cache is invalidated only on:\n- Process restart (new Node.js process starts with empty cache)\n- Error recovery (corrupt file triggers cache clear + re-read)\n\n## Crash Recovery\n\nIf `store.json` is unreadable or contains invalid JSON on startup:\n\n1. The system attempts to read `store.json.bak` (the automatic backup)\n2. If the backup is also corrupt, the system falls back to empty defaults\n3. The cache is populated from whichever source succeeded\n\nThis means at most one write's worth of data can be lost in a crash — the backup always contains the state from just before the most recent write.\n\n## Next.js Cache Validation\n\nA separate crash-resilience mechanism handles the Next.js build cache (`.next/` directory). On first `getData()` call, the system checks for critical cache files:\n\n- `.next/routes-manifest.json`\n- `.next/build-manifest.json`\n- `.next/prerender-manifest.json`\n\nIf any are missing (indicating a corrupt build cache from an unclean shutdown), the entire `.next/` directory is deleted. Next.js then rebuilds it automatically on the next request. This prevents the common scenario where the server refuses to start after a crash, making it appear as though data was lost when the JSON store is actually intact.\n\n## Backwards Compatibility\n\nThe `applyDefaults()` function runs on every data load. It iterates through all projects and fills in any missing fields that were added in later versions (v2 fields like `goal`, `desiredOutcome`, `milestones`, `executionMode`, etc.). This means:\n\n- Old data files work with new code without migration scripts\n- New fields appear with sensible defaults (empty strings, empty arrays, `\"not-started\"`, etc.)\n- No manual migration step is ever needed\n\n## Operational Notes\n\n- **Never edit `store.json` while the server is running** — the in-memory cache won't reflect manual edits, and the next API write will overwrite your changes\n- **To reset state:** Stop the server, replace `store.json` with the desired content (or delete it for empty defaults), then restart\n- **Backup files** (`store.json.bak`) are overwritten on every write — they are not a long-term backup strategy. For durable backups, copy the file externally\n- **The `.next/` directory can always be safely deleted** — it rebuilds automatically on the next server start",
+      "category": "technical",
+      "format": "markdown",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z"
+    },
+    {
+      "id": "doc-projects-v2-004",
+      "title": "Projects v2: Strategic Projects Model",
+      "content": "# Projects v2: Strategic Projects Model\n\n## Design Intent\n\nProjects v2 elevates projects from simple task containers into strategic planning units. Each project captures not just what needs to be done, but why it matters, what success looks like, and how execution should proceed.\n\n## Project Lifecycle\n\n```\nidea → planned → active → [blocked] → completed\n                                     → archived\n                                     → canceled\n```\n\n**Statuses:**\n- **idea** — Captured but not yet committed to\n- **planned** — Scoped and ready for execution\n- **active** — Work is underway\n- **blocked** — Cannot proceed due to external dependency\n- **completed** — All goals met\n- **archived** — Preserved for reference, no longer active\n- **canceled** — Abandoned, kept for historical context\n\n## Strategic Fields\n\n| Field | Purpose | Example |\n|-------|---------|--------|\n| `goal` | What the project aims to achieve | \"Reduce API response time to under 200ms\" |\n| `desiredOutcome` | The end state when the project succeeds | \"Users experience instant page loads\" |\n| `successCriteria` | Measurable conditions for completion | [\"P95 latency < 200ms\", \"No regressions in error rate\"] |\n| `constraints` | Known limitations or boundaries | [\"Must not require infrastructure changes\", \"Budget: 0\"] |\n| `assumptions` | Things assumed to be true | [\"Current bottleneck is DB queries\", \"Caching is viable\"] |\n| `planningNotes` | Free-form planning context (up to 100K chars) | Detailed analysis, research notes, decision rationale |\n\n## Planning State\n\nEach project tracks its planning readiness:\n\n- **not-started** — No planning has been done\n- **in-progress** — Planning is underway, fields being filled\n- **ready** — Planning is complete, execution can begin\n\n## Execution Modes\n\n| Mode | Behavior |\n|------|----------|\n| `manual` | Human drives all work. Agents assist only when asked. |\n| `assistive` | Agents suggest tasks and next steps. Human approves before execution. |\n| `autonomous-with-review` | Agents execute independently but submit work for human review. |\n\n## Entity Linking\n\nProjects can link to any other Mission Control entity:\n\n- **Tasks** — Work items contributing to the project. Progress is computed from linked task completion (done / total).\n- **Docs** — Specifications, research, design documents\n- **Bugs** — Related bug reports\n- **Memories** — Relevant decisions, preferences, or conversation context\n- **Calendar events** — Deadlines, reviews, automations tied to the project\n\nLinks are bidirectional in the UI — viewing a project shows all linked entities, and the API enriches project responses with full entity objects.\n\n## Milestones\n\nMilestones are lightweight checkpoints within a project:\n\n```json\n{\n  \"id\": \"m1\",\n  \"title\": \"API layer complete\",\n  \"status\": \"pending\",\n  \"dueDate\": \"2026-04-15\"\n}\n```\n\nStatuses: `pending` → `in-progress` → `completed`\n\nMilestone progress is tracked separately from task progress on the project card.\n\n## Suggested Tasks\n\nIn `assistive` or `autonomous-with-review` modes, agents can propose tasks:\n\n```json\n{\n  \"id\": \"st1\",\n  \"title\": \"Profile database queries\",\n  \"description\": \"Run EXPLAIN on the top 10 slowest queries\",\n  \"status\": \"proposed\"\n}\n```\n\nStatuses: `proposed` → `accepted` (creates a real task) or `rejected`\n\nThis allows agents to contribute to planning without unilateral action.\n\n## Priority and Ownership\n\n- **Priority:** `low`, `medium`, `high`, `critical` — affects dashboard ordering\n- **Type:** `idea`, `initiative`, `maintenance`, `automation`, `research`, `product`, `other`\n- **Owner:** `user` (human-driven), `agent` (AI-driven), `shared` (collaborative)\n\n## Progress Computation\n\nThe API computes progress on every GET:\n\n```json\n{\n  \"progress\": {\n    \"total\": 5,\n    \"done\": 3,\n    \"percent\": 60,\n    \"milestoneTotal\": 2,\n    \"milestoneCompleted\": 1\n  }\n}\n```\n\nThis is derived from linked task statuses and milestone statuses — not stored, always computed fresh.\n\n## Review Scheduling\n\n- `dueDate` — When the project should be completed\n- `nextReviewAt` — When the project should next be reviewed\n- `lastReviewedAt` — When it was last reviewed\n\nThese fields support periodic project health checks.",
+      "category": "planning",
+      "format": "markdown",
+      "createdAt": "2026-04-02T18:00:00.000Z",
+      "updatedAt": "2026-04-02T18:00:00.000Z"
+    },
+    {
+      "id": "doc-workflow-rules-006",
+      "title": "Mission Control Workflow Rules",
+      "content": "# Mission Control Workflow Rules\n\nThese rules define how Mission Control must be used as the single source of truth for all operational work. Following them ensures the system reflects reality, not stale chat-only state.\n\n---\n\n## Rule 1: Important work gets a Taskboard entry\n\nIf it takes more than a few minutes or involves real deliverables, it belongs on the Taskboard.\n\n- Create a task before starting the work, not after\n- Assign it (`user` or `agent`) and set priority\n- Move it through columns as work progresses: backlog → in-progress → review → done\n- If blocked, move to `blocked` immediately and set a clear `blockReason`\n- Link the task to its project if one exists\n\n**Anti-pattern:** Doing significant work in a chat conversation without a corresponding task. If it happened but wasn't tracked, create the task retroactively and move it to done.\n\n---\n\n## Rule 2: Workflow changes go into Docs and/or Memories\n\nDecisions, process changes, and architectural choices must be recorded — not left buried in chat history.\n\n- **Docs** for detailed write-ups: plans, specs, operational guides, research\n- **Long-term memories** for concise facts: preferences, decisions, policies, constraints\n- **Conversation memories** for session context: what was discussed, what was decided, what's next\n\n**Examples:**\n- Changed how persistence works → update the Persistence doc + add a decision memory\n- User expressed a preference → add a preference memory\n- Completed a research spike → save findings as a research doc\n\n---\n\n## Rule 3: Bugs go into Bug Reports\n\nEvery error, broken behavior, or data inconsistency gets filed as a bug — not just mentioned in chat.\n\n- Set `screen` to where the bug was found\n- Set `severity` honestly (low/medium/high/critical)\n- Include `stepsToReproduce` with enough detail to reproduce\n- Add notes as investigation progresses\n- Close bugs when resolved\n\n**Anti-pattern:** Fixing a bug without filing it. If it was worth fixing, it was worth recording.\n\n---\n\n## Rule 4: Real projects are represented in Projects\n\nAny multi-task initiative or strategic effort gets a Project entry.\n\n- Set a clear `goal` and `desiredOutcome`\n- Link related tasks, docs, bugs, and calendar events\n- Add milestones for major checkpoints\n- Update status as the project progresses\n- Review weekly (Friday health check)\n\n**Examples:**\n- \"Mission Control Daily Readiness\" — the bootstrap initiative\n- \"Njuskalo Deal Radar\" — a product project\n- \"Auth Middleware Rewrite\" — a maintenance initiative\n\n---\n\n## Rule 5: Update as work progresses, not only after the fact\n\nMission Control must reflect current state, not just historical records.\n\n- Move tasks to `in-progress` when starting, not when finishing\n- Update agent status to `running` at session start, `idle` at session end\n- File bugs when discovered, not days later\n- Log conversation memories at session end while context is fresh\n- Update project status and milestones as they change\n\n**The test:** At any moment, someone looking at the Mission Control dashboard should be able to understand what's happening, what's blocked, and what's next — without asking.\n\n---\n\n## Summary\n\n| What happened | Where it goes |\n|---------------|---------------|\n| Started working on something | Taskboard (create + move to in-progress) |\n| Made a decision | Long-term memory (decision category) |\n| Found a bug | Bug Reports |\n| Wrote a plan or spec | Docs |\n| Finished a conversation | Conversation memory |\n| Multi-task initiative | Projects |\n| Something runs on a schedule | Calendar |\n| Learned a user preference | Long-term memory (preference category) |\n| Hit a blocker | Task → blocked column + blockReason |",
+      "category": "planning",
+      "format": "markdown",
+      "createdAt": "2026-04-02T19:00:00.000Z",
+      "updatedAt": "2026-04-02T19:00:00.000Z"
+    },
+    {
+      "id": "doc-golive-checklist-005",
+      "title": "Go-Live Readiness Checklist",
+      "content": "# Go-Live Readiness Checklist\n\nThis checklist defines what must be true before Mission Control is considered ready for daily operational use. Each item is concrete and verifiable.\n\n---\n\n## 1. Data Hygiene\n\n- [ ] No demo/test/seed data visible in any section (no \"Zyphor\", \"DeleteMeXYZ\", \"Test event\", \"A preference\", etc.)\n- [ ] `data/store.json` contains only intentional operational content\n- [ ] No leftover test artifacts: `store.json.bak`, `store.json.test-backup`, `fix-report.md`, `tsconfig.tsbuildinfo`\n- [ ] Activity and taskActivity logs are clean (no test tool lifecycle entries)\n\n**How to verify:** `GET /api/tasks`, `/api/docs`, `/api/bugs`, `/api/memories/longterm`, `/api/calendar` — scan all titles for obvious test content.\n\n---\n\n## 2. Operational Documentation\n\n- [ ] Docs section contains real operational documents (not placeholders)\n- [ ] At minimum: Operating Model, Model Routing, Persistence Notes, Projects v2 Design\n- [ ] Documents accurately reflect current system behavior\n- [ ] OPENCLAW.md matches the current API surface\n\n**How to verify:** `GET /api/docs` — confirm at least 4 substantive docs with real content.\n\n---\n\n## 3. Memories\n\n- [ ] At least one conversation memory exists with real session context\n- [ ] Long-term memories contain real decisions, preferences, and facts\n- [ ] No test memories remain (\"Test memory\", \"A decision\", \"A preference\")\n- [ ] Memory categories are meaningful: decision, preference, fact, context\n\n**How to verify:** `GET /api/memories/longterm` and `GET /api/memories/conversation` — confirm content is operational, not placeholder.\n\n---\n\n## 4. Calendar\n\n- [ ] Calendar contains real recurring operational events\n- [ ] No dummy events remain (\"Test event\", \"Paused dashboard event\")\n- [ ] Events cover: automations, reminders, reviews\n- [ ] Schedules and cron expressions are realistic\n\n**How to verify:** `GET /api/calendar` — confirm events have meaningful names, descriptions, and schedules.\n\n---\n\n## 5. Team & Office\n\n- [ ] Team lifecycle model is explicitly defined (persistent registry + live status)\n- [ ] At least one agent is registered (OpenClaw orchestrator)\n- [ ] Mission statement is set and meaningful\n- [ ] Office page shows agent(s) instead of empty state\n- [ ] Agent status behavior is documented in long-term memories\n\n**How to verify:** `GET /api/team/agents` — at least 1 agent. `GET /api/team/mission` — non-empty. Visit `/office` — not empty.\n\n---\n\n## 6. Tools\n\n- [ ] Tools section state is intentional (empty by design OR populated with real tools)\n- [ ] If empty: decision is documented in long-term memories\n- [ ] If populated: tools serve a real purpose, not test placeholders\n\n**How to verify:** `GET /api/tools` — either empty (with documented reason) or containing real tools.\n\n---\n\n## 7. Persistence & Restart Consistency\n\n- [ ] Real content survives dev server restart\n- [ ] Real content survives .next cache deletion + restart\n- [ ] Real content survives production build (`npm run build`) + production start (`npm start`)\n- [ ] No false data-loss appearance after any restart scenario\n- [ ] API and UI both reflect the same persisted state\n\n**How to verify:** Record counts before restart → restart → compare counts after. Run across dev, cache-rebuild, and prod-build scenarios.\n\n---\n\n## 8. Error Handling & Save Reliability\n\n- [ ] All create/update/delete flows check `response.ok`\n- [ ] Validation errors are visible to the user (toast or inline message)\n- [ ] Forms do not clear on failed save\n- [ ] Oversized or invalid content returns a clear error, not a silent failure\n- [ ] Sub-components (EntityLinker, MilestoneList) handle errors properly\n\n**How to verify:** Attempt to create a doc with a 201-char title — should show validation error. Check that the form retains content after the error.\n\n---\n\n## 9. Health & Diagnostics\n\n- [ ] Health endpoint responds: `GET /api/health`\n- [ ] Debug endpoint available: `GET /api/debug`\n- [ ] Production build completes without errors: `rm -rf .next && npm run build`\n- [ ] TypeScript compiles clean: `npx tsc --noEmit`\n- [ ] All Playwright tests pass: `npx playwright test`\n\n**How to verify:** Run each command and confirm zero errors.\n\n---\n\n## 10. Operational Readiness\n\n- [ ] Dashboard shows meaningful data (not all zeros, not all test data)\n- [ ] Search (`Ctrl+K`) returns real content\n- [ ] Settings reflect user preferences (theme, autoSave, logLevel)\n- [ ] No console errors on page load in production mode\n\n**How to verify:** Visit `/` in production mode. Open browser console. Search for a known doc title.\n\n---\n\n## Sign-Off\n\nAll items checked → Mission Control is ready for daily operational use.\n\nDate: _______________\nReviewed by: _______________",
+      "category": "planning",
+      "format": "markdown",
+      "createdAt": "2026-04-02T19:00:00.000Z",
+      "updatedAt": "2026-04-02T19:00:00.000Z"
     }
   ],
   "team": {
-    "missionStatement": "",
-    "agents": []
+    "missionStatement": "Build and operate a reliable AI-assisted command center that consolidates task management, project planning, documentation, scheduling, and agent coordination into a single trustworthy system for daily use.",
+    "agents": [
+      {
+        "id": "agent-openclaw-001",
+        "name": "OpenClaw",
+        "role": "orchestrator",
+        "description": "Primary AI orchestrator. Manages tasks, coordinates sub-agents, maintains operational state across sessions.",
+        "model": "claude-opus-4-6",
+        "parentId": null,
+        "status": "idle",
+        "createdAt": "2026-04-02T18:00:00.000Z",
+        "updatedAt": "2026-04-02T18:00:00.000Z"
+      }
+    ]
   },
-  "bugs": [
-    {
-      "id": "f5398068-babf-43a2-b913-3bad30540eef",
-      "title": "Zyphor crashes on startup",
-      "screen": "Dashboard",
-      "severity": "high",
-      "status": "open",
-      "stepsToReproduce": "",
-      "notes": [],
-      "createdAt": "2026-04-01T16:34:33.400Z",
-      "updatedAt": "2026-04-01T16:34:33.400Z"
-    }
-  ]
+  "bugs": []
 }

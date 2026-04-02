@@ -2,6 +2,9 @@
 
 import { useState, useEffect, useCallback } from "react";
 import type { ConversationMemory, LongTermMemoryCategory, LongTermMemory } from "@/lib/types";
+import { formatRelativeTime } from "@/lib/utils";
+import { useToast } from "@/components/ui/Toast";
+import { apiFetch } from "@/lib/fetch";
 
 type MemoryTab = "conversation" | "longterm";
 
@@ -24,6 +27,7 @@ function formatDateLabel(dateStr: string): string {
 }
 
 export default function MemoriesPage() {
+  const { toast } = useToast();
   const [tab, setTab] = useState<MemoryTab>("conversation");
   const [conversationMemories, setConversationMemories] = useState<ConversationMemory[]>([]);
   const [longTermMemories, setLongTermMemories] = useState<LongTermMemory[]>([]);
@@ -51,6 +55,7 @@ export default function MemoriesPage() {
   const [editContent, setEditContent] = useState("");
   const [editTags, setEditTags] = useState("");
   const [editCategory, setEditCategory] = useState<LongTermMemoryCategory>("other");
+  const [editDate, setEditDate] = useState("");
 
   // Delete confirmation
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
@@ -87,7 +92,7 @@ export default function MemoriesPage() {
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean);
-    await fetch("/api/memories/conversation", {
+    const result = await apiFetch("/api/memories/conversation", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -97,6 +102,7 @@ export default function MemoriesPage() {
         tags,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setConvFormDate("");
     setConvFormTitle("");
     setConvFormContent("");
@@ -110,17 +116,19 @@ export default function MemoriesPage() {
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean);
-    await fetch("/api/memories/conversation", {
+    const result = await apiFetch("/api/memories/conversation", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, title: editTitle, content: editContent, tags }),
+      body: JSON.stringify({ id, title: editTitle, content: editContent, tags, date: editDate }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setEditingId(null);
     fetchData();
   }
 
   async function deleteConvMemory(id: string) {
-    await fetch(`/api/memories/conversation?id=${id}`, { method: "DELETE" });
+    const result = await apiFetch(`/api/memories/conversation?id=${id}`, { method: "DELETE" });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setConfirmDelete(null);
     fetchData();
   }
@@ -130,7 +138,7 @@ export default function MemoriesPage() {
   async function createLongTermMemory(e: React.FormEvent) {
     e.preventDefault();
     if (!ltFormTitle || !ltFormContent) return;
-    await fetch("/api/memories/longterm", {
+    const result = await apiFetch("/api/memories/longterm", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -139,6 +147,7 @@ export default function MemoriesPage() {
         category: ltFormCategory,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setLtFormTitle("");
     setLtFormContent("");
     setLtFormCategory("other");
@@ -147,7 +156,7 @@ export default function MemoriesPage() {
   }
 
   async function saveLtEdit(id: string) {
-    await fetch("/api/memories/longterm", {
+    const result = await apiFetch("/api/memories/longterm", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -157,12 +166,14 @@ export default function MemoriesPage() {
         category: editCategory,
       }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setEditingId(null);
     fetchData();
   }
 
   async function deleteLtMemory(id: string) {
-    await fetch(`/api/memories/longterm?id=${id}`, { method: "DELETE" });
+    const result = await apiFetch(`/api/memories/longterm?id=${id}`, { method: "DELETE" });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setConfirmDelete(null);
     fetchData();
   }
@@ -489,6 +500,12 @@ export default function MemoriesPage() {
                         {editingId === memory.id ? (
                           <div className="space-y-3">
                             <input
+                              type="date"
+                              value={editDate}
+                              onChange={(e) => setEditDate(e.target.value)}
+                              className="w-full px-3 py-2 text-sm bg-background border border-border rounded-md text-text"
+                            />
+                            <input
                               value={editTitle}
                               onChange={(e) => setEditTitle(e.target.value)}
                               className="w-full px-3 py-2 text-sm bg-background border border-border rounded-md text-text"
@@ -530,7 +547,7 @@ export default function MemoriesPage() {
                                 {memory.content}
                               </p>
                               {memory.tags.length > 0 && (
-                                <div className="flex gap-1.5 flex-wrap">
+                                <div className="flex gap-1.5 flex-wrap mb-2">
                                   {memory.tags.map((tag) => (
                                     <span
                                       key={tag}
@@ -541,6 +558,9 @@ export default function MemoriesPage() {
                                   ))}
                                 </div>
                               )}
+                              <p className="text-xs text-text-muted">
+                                Updated {formatRelativeTime(memory.updatedAt)}
+                              </p>
                             </div>
                             <div className="flex items-center gap-1.5 shrink-0">
                               <button
@@ -549,6 +569,7 @@ export default function MemoriesPage() {
                                   setEditTitle(memory.title);
                                   setEditContent(memory.content);
                                   setEditTags(memory.tags.join(", "));
+                                  setEditDate(memory.date);
                                 }}
                                 className="px-2.5 py-1 text-xs rounded-md text-text-secondary hover:bg-surface-hover transition-colors"
                               >
@@ -698,8 +719,11 @@ export default function MemoriesPage() {
                             {memory.category}
                           </span>
                         </div>
-                        <p className="text-xs text-text-secondary whitespace-pre-wrap">
+                        <p className="text-xs text-text-secondary whitespace-pre-wrap mb-2">
                           {memory.content}
+                        </p>
+                        <p className="text-xs text-text-muted">
+                          Updated {formatRelativeTime(memory.updatedAt)}
                         </p>
                       </div>
                       <div className="flex items-center gap-1.5 shrink-0">

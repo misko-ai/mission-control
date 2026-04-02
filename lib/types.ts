@@ -94,15 +94,62 @@ export interface ScheduledEvent {
 
 // --- Projects ---
 
+export type ProjectStatus = "idea" | "planned" | "active" | "blocked" | "completed" | "archived" | "canceled";
+export type ProjectPriority = "low" | "medium" | "high" | "critical";
+export type ProjectType = "idea" | "initiative" | "maintenance" | "automation" | "research" | "product" | "other";
+export type ProjectOwner = "user" | "agent" | "shared";
+export type PlanningState = "not-started" | "in-progress" | "ready";
+export type ExecutionMode = "manual" | "assistive" | "autonomous-with-review";
+export type MilestoneStatus = "pending" | "in-progress" | "completed";
+export type SuggestedTaskStatus = "proposed" | "accepted" | "rejected";
+
+export interface Milestone {
+  id: string;
+  title: string;
+  status: MilestoneStatus;
+  dueDate?: string;
+}
+
+export interface SuggestedTask {
+  id: string;
+  title: string;
+  description: string;
+  status: SuggestedTaskStatus;
+}
+
 export interface Project {
   id: string;
   name: string;
   description: string;
-  status: "active" | "completed" | "archived";
+  status: ProjectStatus;
   linkedTaskIds: string[];
   createdAt: string;
   updatedAt: string;
   lastActiveAt: string;
+  // v2 strategic fields
+  goal?: string;
+  desiredOutcome?: string;
+  successCriteria?: string[];
+  constraints?: string[];
+  assumptions?: string[];
+  priority?: ProjectPriority;
+  type?: ProjectType;
+  owner?: ProjectOwner;
+  planningState?: PlanningState;
+  // v2 cross-linking
+  linkedDocIds?: string[];
+  linkedMemoryIds?: string[];
+  linkedCalendarEventIds?: string[];
+  linkedBugIds?: string[];
+  // v2 execution
+  milestones?: Milestone[];
+  suggestedTasks?: SuggestedTask[];
+  planningNotes?: string;
+  executionMode?: ExecutionMode;
+  // v2 timing
+  dueDate?: string;
+  nextReviewAt?: string;
+  lastReviewedAt?: string;
 }
 
 // --- Memories ---

@@ -16,6 +16,8 @@ import type {
 } from "@/lib/types";
 import MilestoneList from "@/components/projects/MilestoneList";
 import EntityLinker from "@/components/projects/EntityLinker";
+import { useToast } from "@/components/ui/Toast";
+import { apiFetch } from "@/lib/fetch";
 
 // --- Badge maps ---
 
@@ -133,6 +135,7 @@ function relativeTime(iso: string) {
 // --- Page ---
 
 export default function ProjectsPage() {
+  const { toast } = useToast();
   const [projects, setProjects] = useState<ProjectWithProgress[]>([]);
   const [allTasks, setAllTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
@@ -265,44 +268,49 @@ export default function ProjectsPage() {
   }
 
   async function setProjectStatus(id: string, status: ProjectStatus) {
-    await fetch("/api/projects", {
+    const result = await apiFetch("/api/projects", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status }),
     });
+    if (!result.ok) { toast(result.error, "error"); }
     fetchData();
   }
 
   async function deleteProject(id: string) {
-    await fetch(`/api/projects?id=${id}`, { method: "DELETE" });
+    const result = await apiFetch(`/api/projects?id=${id}`, { method: "DELETE" });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setConfirmDelete(null);
     if (expandedId === id) setExpandedId(null);
     fetchData();
   }
 
   async function linkTask(projectId: string, taskId: string) {
-    await fetch("/api/projects/tasks", {
+    const result = await apiFetch("/api/projects/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ projectId, taskId }),
     });
+    if (!result.ok) { toast(result.error, "error"); return; }
     setTaskSearch("");
     fetchData();
   }
 
   async function unlinkTask(projectId: string, taskId: string) {
-    await fetch(`/api/projects/tasks?projectId=${projectId}&taskId=${taskId}`, {
+    const result = await apiFetch(`/api/projects/tasks?projectId=${projectId}&taskId=${taskId}`, {
       method: "DELETE",
     });
+    if (!result.ok) { toast(result.error, "error"); }
     fetchData();
   }
 
   async function updateSuggestedTaskStatus(projectId: string, taskId: string, status: string) {
-    await fetch("/api/projects/suggested-tasks", {
+    const result = await apiFetch("/api/projects/suggested-tasks", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ projectId, taskId, status }),
     });
+    if (!result.ok) { toast(result.error, "error"); }
     fetchData();
   }
 
