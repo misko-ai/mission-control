@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getData, saveData, generateId } from "@/lib/db";
 import { moveTask, logTaskActivity } from "@/lib/store";
+import { syncAgentStatus } from "@/lib/lifecycle";
 import { logError } from "@/lib/logger";
 import type { TaskActivityEntry, TaskColumn } from "@/lib/types";
 
@@ -35,9 +36,13 @@ export async function POST(request: NextRequest) {
         // Emergency override: cancel the active run
         const run = data.taskRuns.find((r) => r.id === task.currentRunId);
         if (run && run.status === "active") {
+          const cancelNow = new Date().toISOString();
           run.status = "cancelled";
-          run.finishedAt = new Date().toISOString();
+          run.finishedAt = cancelNow;
           run.terminalReason = "operator emergency override";
+          run.reasonCode = "emergency-override";
+          run.durationMs = new Date(cancelNow).getTime() - new Date(run.claimedAt).getTime();
+          syncAgentStatus(run.agentId, data);
         }
         task.currentRunId = undefined;
         task.updatedAt = new Date().toISOString();

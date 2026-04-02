@@ -55,6 +55,16 @@ export interface Task {
 
 export type RunStatus = "active" | "success" | "failure" | "timeout" | "cancelled";
 
+export type ReasonCode =
+  | "success"
+  | "failure"
+  | "cancelled"
+  | "timeout-heartbeat"
+  | "timeout-orphan"
+  | "timeout-legacy"
+  | "deleted"
+  | "emergency-override";
+
 export interface TaskRun {
   id: string;
   taskId: string;
@@ -65,6 +75,11 @@ export interface TaskRun {
   heartbeatAt: string;
   finishedAt?: string;
   terminalReason?: string;
+  reasonCode?: ReasonCode;
+  durationMs?: number;
+  linkedBugIds?: string[];
+  linkedProjectIds?: string[];
+  linkedDocIds?: string[];
 }
 
 export interface TaskActivityEntry {
@@ -77,6 +92,13 @@ export interface TaskActivityEntry {
   actor: "user" | "agent" | "system";
   details: string;
   timestamp: string;
+  runId?: string;
+  agentId?: string;
+  attempt?: number;
+  reasonCode?: ReasonCode;
+  linkedBugIds?: string[];
+  linkedProjectIds?: string[];
+  linkedDocIds?: string[];
 }
 
 // --- Calendar ---

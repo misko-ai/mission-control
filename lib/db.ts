@@ -82,6 +82,28 @@ function applyDefaults(data: Record<string, unknown>): AppData {
   (data.team as Record<string, unknown>).agents ??= [];
   data.bugs ??= [];
 
+  // Task runs: apply artifact link defaults for backward compat
+  for (const r of data.taskRuns as Record<string, unknown>[]) {
+    r.linkedBugIds ??= [];
+    r.linkedProjectIds ??= [];
+    r.linkedDocIds ??= [];
+  }
+
+  // Backfill run↔project links from project.linkedTaskIds
+  const projectList = data.projects as Array<Record<string, unknown>>;
+  const runList = data.taskRuns as Array<Record<string, unknown>>;
+  for (const project of projectList) {
+    const taskIds = (project.linkedTaskIds as string[]) || [];
+    for (const run of runList) {
+      if (
+        taskIds.includes(run.taskId as string) &&
+        !(run.linkedProjectIds as string[]).includes(project.id as string)
+      ) {
+        (run.linkedProjectIds as string[]).push(project.id as string);
+      }
+    }
+  }
+
   // Projects v2: apply defaults to each project for backward compat
   for (const p of data.projects as Record<string, unknown>[]) {
     p.goal ??= "";

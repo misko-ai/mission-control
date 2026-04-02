@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getData, saveData, generateId } from "@/lib/db";
 import { logTaskActivity } from "@/lib/store";
-import { canFinalize } from "@/lib/lifecycle";
+import { canFinalize, syncAgentStatus } from "@/lib/lifecycle";
 import { logError } from "@/lib/logger";
 import { isOneOf } from "@/lib/validation";
-import type { TaskActivityEntry } from "@/lib/types";
+import type { TaskActivityEntry, ReasonCode } from "@/lib/types";
 
 const VALID_OUTCOMES = ["success", "failure", "cancelled"] as const;
 type Outcome = (typeof VALID_OUTCOMES)[number];
@@ -12,7 +12,7 @@ type Outcome = (typeof VALID_OUTCOMES)[number];
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { runId, agentId, outcome, reason, skipReview } = body;
+    const { runId, agentId, outcome, reason, skipReview, linkedBugIds, linkedProjectIds, linkedDocIds } = body;
 
     if (!runId || !agentId || !outcome) {
       return NextResponse.json(
@@ -56,6 +56,19 @@ export async function POST(request: NextRequest) {
     // Update run
     run.finishedAt = now;
     run.terminalReason = reason || typedOutcome;
+    run.reasonCode = typedOutcome as ReasonCode;
+    run.durationMs = new Date(now).getTime() - new Date(run.claimedAt).getTime();
+
+    // Attach artifact links if provided
+    if (linkedBugIds?.length) {
+      run.linkedBugIds = [...new Set([...(run.linkedBugIds ?? []), ...linkedBugIds])];
+    }
+    if (linkedProjectIds?.length) {
+      run.linkedProjectIds = [...new Set([...(run.linkedProjectIds ?? []), ...linkedProjectIds])];
+    }
+    if (linkedDocIds?.length) {
+      run.linkedDocIds = [...new Set([...(run.linkedDocIds ?? []), ...linkedDocIds])];
+    }
 
     // Update task based on outcome
     let toColumn: string;
@@ -86,6 +99,7 @@ export async function POST(request: NextRequest) {
 
     task.currentRunId = undefined;
     task.updatedAt = now;
+    syncAgentStatus(agentId, data);
     await saveData(data);
 
     const activity: TaskActivityEntry = {
@@ -98,6 +112,13 @@ export async function POST(request: NextRequest) {
       actor: "agent",
       details: `"${task.title}" finalized: ${typedOutcome}${reason ? ` — ${reason}` : ""}`,
       timestamp: now,
+      runId: run.id,
+      agentId,
+      attempt: run.attempt,
+      reasonCode: typedOutcome as ReasonCode,
+      linkedBugIds: run.linkedBugIds?.length ? run.linkedBugIds : undefined,
+      linkedProjectIds: run.linkedProjectIds?.length ? run.linkedProjectIds : undefined,
+      linkedDocIds: run.linkedDocIds?.length ? run.linkedDocIds : undefined,
     };
     await logTaskActivity(activity);
 

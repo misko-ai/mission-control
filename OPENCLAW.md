@@ -91,6 +91,150 @@ A Kanban board for managing work. Tasks move through five columns: **backlog →
 - Use task activities to log what you did.
 - Check the backlog regularly for work assigned to you.
 
+#### Task Runs API
+
+Task runs track agent execution lifecycle. Each run represents one attempt by an agent to complete a task.
+
+**List / filter runs:**
+
+```
+GET /api/tasks/runs
+```
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `runId` | string | Fetch a single run by ID (returns `{ run }` instead of list) |
+| `taskId` | string | Filter by task ID |
+| `agentId` | string | Filter by agent ID |
+| `status` | string | Filter by status: `active`, `success`, `failure`, `timeout`, `cancelled` |
+| `active` | `true` | Shorthand: only active runs |
+| `terminal` | `true` | Shorthand: only completed/failed/timed-out runs |
+| `since` | ISO date | Runs claimed at or after this time |
+| `until` | ISO date | Runs claimed at or before this time |
+| `sort` | string | Sort field: `claimedAt` (default), `finishedAt`, `durationMs`, `attempt` |
+| `order` | string | `asc` or `desc` (default: `desc`) |
+| `limit` | number | Max results, 1-200 (default: 50) |
+| `offset` | number | Skip N results (default: 0) |
+
+**Response:**
+
+```json
+{
+  "runs": [
+    {
+      "id": "...",
+      "taskId": "...",
+      "agentId": "...",
+      "attempt": 1,
+      "status": "success",
+      "claimedAt": "2026-04-02T10:00:00.000Z",
+      "heartbeatAt": "2026-04-02T10:05:00.000Z",
+      "finishedAt": "2026-04-02T10:10:00.000Z",
+      "terminalReason": "success",
+      "reasonCode": "success",
+      "durationMs": 600000,
+      "linkedBugIds": [],
+      "linkedProjectIds": ["proj-1"],
+      "linkedDocIds": [],
+      "summary": "Success — attempt #1, ran for 10m, completed successfully, 1 linked artifact"
+    }
+  ],
+  "total": 42,
+  "limit": 50,
+  "offset": 0
+}
+```
+
+**Examples:**
+
+```bash
+# All active runs for a specific agent
+GET /api/tasks/runs?agentId=abc&active=true
+
+# Failed/timed-out runs from the last 24 hours
+GET /api/tasks/runs?terminal=true&since=2026-04-01T00:00:00Z&status=failure
+
+# Page 2 of runs for a task, 10 per page
+GET /api/tasks/runs?taskId=xyz&limit=10&offset=10
+
+# Longest runs first
+GET /api/tasks/runs?sort=durationMs&order=desc&terminal=true
+```
+
+**Link artifacts to a run:**
+
+```
+POST /api/tasks/runs/link-artifacts
+{ "runId": "...", "bugIds": ["..."], "projectIds": ["..."], "docIds": ["..."] }
+```
+
+At least one of `bugIds`, `projectIds`, or `docIds` is required. IDs are deduplicated.
+
+#### Task Activities API
+
+Activities log every lifecycle event: task creation, moves, claims, completions, reconciliation.
+
+**List / filter activities:**
+
+```
+GET /api/tasks/activities
+```
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `taskId` | string | Filter by task ID |
+| `agentId` | string | Filter by agent ID |
+| `action` | string | Filter by action: `created`, `moved`, `picked-up`, `completed`, `approved`, `reconciled` |
+| `actor` | string | Filter by actor: `user`, `agent`, `system` |
+| `reasonCode` | string | Filter by reason code |
+| `since` | ISO date | Activities at or after this time |
+| `until` | ISO date | Activities at or before this time |
+| `sort` | string | Sort field: `timestamp` (default) |
+| `order` | string | `asc` or `desc` (default: `desc`) |
+| `limit` | number | Max results, 1-100 (default: 50) |
+| `offset` | number | Skip N results (default: 0) |
+
+**Response:**
+
+```json
+{
+  "activities": [
+    {
+      "id": "...",
+      "taskId": "...",
+      "taskTitle": "Implement feature X",
+      "action": "completed",
+      "fromColumn": "in-progress",
+      "toColumn": "review",
+      "actor": "agent",
+      "details": "\"Implement feature X\" finalized: success",
+      "timestamp": "2026-04-02T10:10:00.000Z",
+      "runId": "...",
+      "agentId": "...",
+      "attempt": 1,
+      "reasonCode": "success",
+      "summary": "[completed] \"Implement feature X\" in-progress → review by agent (attempt #1) — completed successfully"
+    }
+  ],
+  "total": 15,
+  "limit": 50,
+  "offset": 0
+}
+```
+
+**Examples:**
+
+```bash
+# All reconciliation events
+GET /api/tasks/activities?action=reconciled
+
+# Agent activity for a specific agent
+GET /api/tasks/activities?agentId=abc&actor=agent
+
+# Recent system actions
+GET /api/tasks/activities?actor=system&limit=5
+```
+
 ---
 
 ### 3. Calendar (`/calendar`)
@@ -461,6 +605,73 @@ GET    /api/settings                     Get settings
 PATCH  /api/settings                     Update settings { theme?, autoSave?, logLevel? }
 
 GET    /api/search?q=<query>             Global search (min 2 chars)
+```
+
+---
+
+## Admin: Data Cleanup
+
+Old task runs and activities accumulate over time. The cleanup API provides a safe, reviewable way to remove stale data.
+
+**Endpoint:** `POST /api/admin/cleanup`
+
+**Request body (all optional):**
+
+| Param | Type | Default | Description |
+|-------|------|---------|-------------|
+| `dryRun` | boolean | `true` | Preview what would be removed without deleting anything |
+| `olderThanDays` | number | 7 | Remove terminal runs/activities older than this (1-365) |
+| `keepPerTask` | number | 3 | Always keep N most recent terminal runs per task (1-50) |
+| `keepMinActivities` | number | 20 | Always keep N most recent activities regardless of age (5-100) |
+
+**Safety guarantees:**
+- Active runs (`status: "active"`) are **never** deleted
+- Runs referenced by `task.currentRunId` are **never** deleted
+- The N most recent terminal runs per task are always kept
+- The N most recent activities are always kept
+- Non-dry-run cleanup is logged as an audit activity entry
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "dryRun": true,
+  "policy": {
+    "olderThanDays": 7,
+    "keepPerTask": 3,
+    "keepMinActivities": 20,
+    "cutoff": "2026-03-26T00:00:00.000Z"
+  },
+  "runs": {
+    "total": 200,
+    "removed": 45,
+    "kept": 155,
+    "protectedActive": 3,
+    "protectedCurrentRun": 2,
+    "protectedPerTask": 12,
+    "removedIds": ["run-id-1", "run-id-2"]
+  },
+  "activities": {
+    "total": 100,
+    "removed": 30,
+    "kept": 70,
+    "protectedRecent": 20,
+    "removedIds": ["act-id-1"]
+  }
+}
+```
+
+**Usage pattern — always dry-run first:**
+
+```bash
+# 1. Preview what would be cleaned
+POST /api/admin/cleanup  { "dryRun": true, "olderThanDays": 14 }
+
+# 2. Review the removedIds and counts
+
+# 3. Execute the cleanup
+POST /api/admin/cleanup  { "dryRun": false, "olderThanDays": 14 }
 ```
 
 ---

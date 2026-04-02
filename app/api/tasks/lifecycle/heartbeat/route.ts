@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getData, saveData } from "@/lib/db";
+import { syncAgentStatus } from "@/lib/lifecycle";
 import { logError } from "@/lib/logger";
 
 export async function POST(request: NextRequest) {
@@ -36,6 +37,7 @@ export async function POST(request: NextRequest) {
 
     const now = new Date().toISOString();
     run.heartbeatAt = now;
+    syncAgentStatus(agentId, data);
     await saveData(data);
 
     return NextResponse.json({ success: true, heartbeatAt: now });

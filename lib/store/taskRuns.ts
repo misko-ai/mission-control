@@ -31,3 +31,28 @@ export async function updateTaskRun(
   await saveData(data);
   return true;
 }
+
+export async function linkArtifactsToRun(
+  runId: string,
+  artifacts: { bugIds?: string[]; projectIds?: string[]; docIds?: string[] }
+): Promise<TaskRun | null> {
+  const data = await getData();
+  const run = data.taskRuns.find((r) => r.id === runId);
+  if (!run) return null;
+
+  if (artifacts.bugIds?.length) {
+    const existing = run.linkedBugIds ?? [];
+    run.linkedBugIds = [...new Set([...existing, ...artifacts.bugIds])];
+  }
+  if (artifacts.projectIds?.length) {
+    const existing = run.linkedProjectIds ?? [];
+    run.linkedProjectIds = [...new Set([...existing, ...artifacts.projectIds])];
+  }
+  if (artifacts.docIds?.length) {
+    const existing = run.linkedDocIds ?? [];
+    run.linkedDocIds = [...new Set([...existing, ...artifacts.docIds])];
+  }
+
+  await saveData(data);
+  return run;
+}

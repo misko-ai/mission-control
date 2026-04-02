@@ -8,7 +8,7 @@ import {
   logTaskActivity,
   getTaskRuns,
 } from "@/lib/store";
-import { reconcileStaleRuns } from "@/lib/lifecycle";
+import { reconcileStaleRuns, syncAgentStatus } from "@/lib/lifecycle";
 import { logError } from "@/lib/logger";
 import {
   requireString,
@@ -30,11 +30,36 @@ export async function GET() {
     const tasks = await getTasks();
     const runs = await getTaskRuns();
 
-    // Enrich tasks with lastHeartbeat from active runs
+    // Enrich tasks with run diagnostics
     const enriched = tasks.map((t) => {
-      if (!t.currentRunId) return t;
+      if (!t.currentRunId) {
+        // For non-active tasks, find the most recent run for terminal diagnostics
+        const lastRun = runs.find((r) => r.taskId === t.id);
+        if (!lastRun) return t;
+        return {
+          ...t,
+          lastRunStatus: lastRun.status,
+          lastRunReasonCode: lastRun.reasonCode,
+          lastRunDurationMs: lastRun.durationMs,
+          lastRunFinishedAt: lastRun.finishedAt,
+          lastRunAttempt: lastRun.attempt,
+          lastRunLinkedBugIds: lastRun.linkedBugIds,
+          lastRunLinkedProjectIds: lastRun.linkedProjectIds,
+          lastRunLinkedDocIds: lastRun.linkedDocIds,
+        };
+      }
       const run = runs.find((r) => r.id === t.currentRunId);
-      return run ? { ...t, lastHeartbeat: run.heartbeatAt } : t;
+      if (!run) return t;
+      return {
+        ...t,
+        lastHeartbeat: run.heartbeatAt,
+        runAttempt: run.attempt,
+        runStatus: run.status,
+        runClaimedAt: run.claimedAt,
+        runLinkedBugIds: run.linkedBugIds,
+        runLinkedProjectIds: run.linkedProjectIds,
+        runLinkedDocIds: run.linkedDocIds,
+      };
     });
 
     return NextResponse.json({ tasks: enriched });
@@ -153,9 +178,13 @@ export async function DELETE(request: NextRequest) {
     if (task?.currentRunId) {
       const run = data.taskRuns.find((r) => r.id === task.currentRunId);
       if (run && run.status === "active") {
+        const now = new Date().toISOString();
         run.status = "cancelled";
-        run.finishedAt = new Date().toISOString();
+        run.finishedAt = now;
         run.terminalReason = "task deleted";
+        run.reasonCode = "deleted";
+        run.durationMs = new Date(now).getTime() - new Date(run.claimedAt).getTime();
+        syncAgentStatus(run.agentId, data);
       }
       task.currentRunId = undefined;
       await saveData(data);

@@ -23,9 +23,12 @@ const statusLabel: Record<AgentStatus, string> = {
   offline: "Offline",
 };
 
+interface RunInfo { agentId: string; status: string }
+
 export default function TeamPage() {
   const { toast } = useToast();
   const [agents, setAgents] = useState<Agent[]>([]);
+  const [runs, setRuns] = useState<RunInfo[]>([]);
   const [missionStatement, setMissionStatement] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -56,14 +59,17 @@ export default function TeamPage() {
 
   const fetchData = useCallback(async () => {
     try {
-      const [agentsRes, missionRes] = await Promise.all([
+      const [agentsRes, missionRes, runsRes] = await Promise.all([
         fetch("/api/team/agents"),
         fetch("/api/team/mission"),
+        fetch("/api/tasks/runs"),
       ]);
       const agentsData = await agentsRes.json();
       const missionData = await missionRes.json();
+      const runsData = await runsRes.json();
       setAgents(agentsData.agents || []);
       setMissionStatement(missionData.missionStatement || "");
+      setRuns(runsData.runs || []);
     } catch {
       // silent
     } finally {
@@ -272,6 +278,22 @@ export default function TeamPage() {
                     Model: <span className="text-text-secondary">{agent.model}</span>
                   </p>
                 )}
+                {(() => {
+                  const activeRuns = runs.filter(
+                    (r) => r.agentId === agent.id && r.status === "active"
+                  );
+                  if (activeRuns.length > 0) {
+                    return (
+                      <p className="text-xs mt-0.5">
+                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-success/10 text-success">
+                          <span className="w-1.5 h-1.5 rounded-full bg-success" />
+                          {activeRuns.length} active run{activeRuns.length !== 1 ? "s" : ""}
+                        </span>
+                      </p>
+                    );
+                  }
+                  return null;
+                })()}
               </div>
               <div className="flex items-center gap-1.5 shrink-0">
                 <button

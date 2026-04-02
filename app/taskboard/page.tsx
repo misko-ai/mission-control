@@ -22,6 +22,22 @@ interface Task {
   currentRunId?: string;
   runCount?: number;
   lastHeartbeat?: string;
+  // Active run diagnostics
+  runAttempt?: number;
+  runStatus?: string;
+  runClaimedAt?: string;
+  runLinkedBugIds?: string[];
+  runLinkedProjectIds?: string[];
+  runLinkedDocIds?: string[];
+  // Last run diagnostics (terminal)
+  lastRunStatus?: string;
+  lastRunReasonCode?: string;
+  lastRunDurationMs?: number;
+  lastRunFinishedAt?: string;
+  lastRunAttempt?: number;
+  lastRunLinkedBugIds?: string[];
+  lastRunLinkedProjectIds?: string[];
+  lastRunLinkedDocIds?: string[];
 }
 
 interface Project {
@@ -231,10 +247,14 @@ export default function TaskboardPage() {
                   <ActivityDot action={a.action} actor={a.actor} />
                   <div className="flex-1 min-w-0">
                     <p className="text-text leading-relaxed">{a.details}</p>
-                    <div className="flex items-center gap-2 mt-1">
+                    <div className="flex items-center gap-2 mt-1 flex-wrap">
                       <span className={`font-medium ${a.actor === "system" ? "text-danger" : a.actor === "agent" ? "text-success" : "text-accent"}`}>
                         {a.actor === "system" ? "System" : a.actor === "agent" ? "AI Agent" : "User"}
                       </span>
+                      {a.reasonCode && <ReasonBadge code={a.reasonCode} />}
+                      {a.attempt != null && (
+                        <span className="text-text-muted">#{a.attempt}</span>
+                      )}
                       <span className="text-text-muted">{formatRelativeTime(a.timestamp)}</span>
                     </div>
                   </div>
@@ -568,9 +588,9 @@ function TaskCard({
         {task.description}
       </p>
 
-      {/* Heartbeat indicator for in-progress agent tasks */}
-      {task.column === "in-progress" && task.assignee === "agent" && (
-        <HeartbeatIndicator task={task} />
+      {/* Run status indicator for agent tasks */}
+      {task.assignee === "agent" && (
+        <RunStatusIndicator task={task} />
       )}
 
       {/* Block reason */}
@@ -665,8 +685,89 @@ function ActivityDot({ action, actor }: { action: string; actor: string }) {
   return <div className={`w-2 h-2 rounded-full shrink-0 mt-1 ${colorClass}`} />;
 }
 
-function HeartbeatIndicator({ task }: { task: Task }) {
-  if (!task.currentRunId) {
+const REASON_LABELS: Record<string, string> = {
+  success: "Success",
+  failure: "Failed",
+  cancelled: "Cancelled",
+  "timeout-heartbeat": "Timed out",
+  "timeout-orphan": "Orphaned",
+  "timeout-legacy": "Legacy stale",
+  deleted: "Deleted",
+  "emergency-override": "Force-cancelled",
+};
+
+function formatCompactDuration(ms: number): string {
+  const s = Math.floor(ms / 1000);
+  if (s < 60) return `${s}s`;
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m}m`;
+  const h = Math.floor(m / 60);
+  return `${h}h ${m % 60}m`;
+}
+
+function RunStatusIndicator({ task }: { task: Task }) {
+  const artifactCount =
+    (task.runLinkedBugIds?.length ?? 0) +
+    (task.runLinkedProjectIds?.length ?? 0) +
+    (task.runLinkedDocIds?.length ?? 0) +
+    (task.lastRunLinkedBugIds?.length ?? 0) +
+    (task.lastRunLinkedProjectIds?.length ?? 0) +
+    (task.lastRunLinkedDocIds?.length ?? 0);
+
+  // Active run: show heartbeat status
+  if (task.column === "in-progress" && task.currentRunId) {
+    const attempt = task.runAttempt ?? task.runCount ?? 1;
+
+    if (!task.lastHeartbeat) {
+      return (
+        <div className="mt-1.5 space-y-0.5">
+          <div className="flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-warning shrink-0" />
+            <span className="text-[10px] text-warning">Waiting for heartbeat</span>
+            <span className="text-[10px] text-text-muted">· Attempt #{attempt}</span>
+          </div>
+          {artifactCount > 0 && <ArtifactPills count={artifactCount} />}
+        </div>
+      );
+    }
+
+    const ageMs = Date.now() - new Date(task.lastHeartbeat).getTime();
+    const ageSec = Math.floor(ageMs / 1000);
+    let colorClass: string;
+    let label: string;
+    if (ageSec < 60) {
+      colorClass = "bg-success";
+      label = "Active";
+    } else if (ageSec < 120) {
+      colorClass = "bg-warning";
+      label = "Stale";
+    } else {
+      colorClass = "bg-danger";
+      label = "No heartbeat";
+    }
+    const ageText = ageSec < 60 ? `${ageSec}s ago` : `${Math.floor(ageSec / 60)}m ago`;
+    const elapsedMs = task.runClaimedAt
+      ? Date.now() - new Date(task.runClaimedAt).getTime()
+      : 0;
+
+    return (
+      <div className="mt-1.5 space-y-0.5">
+        <div className="flex items-center gap-1">
+          <span className={`w-1.5 h-1.5 rounded-full ${colorClass} shrink-0`} />
+          <span className="text-[10px] text-text-muted">
+            {label} · {ageText}
+          </span>
+          <span className="text-[10px] text-text-muted">
+            · #{attempt}{elapsedMs > 0 ? ` · ${formatCompactDuration(elapsedMs)}` : ""}
+          </span>
+        </div>
+        {artifactCount > 0 && <ArtifactPills count={artifactCount} />}
+      </div>
+    );
+  }
+
+  // In-progress but no run (should not normally happen for agent tasks)
+  if (task.column === "in-progress" && !task.currentRunId) {
     return (
       <div className="mt-1.5 flex items-center gap-1">
         <span className="w-1.5 h-1.5 rounded-full bg-danger shrink-0" />
@@ -675,38 +776,66 @@ function HeartbeatIndicator({ task }: { task: Task }) {
     );
   }
 
-  if (!task.lastHeartbeat) {
+  // Terminal run info for blocked/review/done columns
+  if (task.lastRunStatus && task.lastRunStatus !== "active") {
+    const reasonLabel = task.lastRunReasonCode
+      ? REASON_LABELS[task.lastRunReasonCode] ?? task.lastRunReasonCode
+      : task.lastRunStatus;
+    const duration = task.lastRunDurationMs != null
+      ? formatCompactDuration(task.lastRunDurationMs)
+      : null;
+    const finishedAgo = task.lastRunFinishedAt
+      ? formatRelativeTime(task.lastRunFinishedAt)
+      : null;
+
+    const statusColor =
+      task.lastRunStatus === "success" ? "text-success" :
+      task.lastRunStatus === "failure" || task.lastRunStatus === "timeout" ? "text-danger" :
+      "text-warning";
+
     return (
-      <div className="mt-1.5 flex items-center gap-1">
-        <span className="w-1.5 h-1.5 rounded-full bg-warning shrink-0" />
-        <span className="text-[10px] text-warning">Waiting for heartbeat</span>
+      <div className="mt-1.5 space-y-0.5">
+        <div className="flex items-center gap-1 flex-wrap">
+          <span className={`text-[10px] font-medium ${statusColor}`}>{reasonLabel}</span>
+          {task.lastRunAttempt && (
+            <span className="text-[10px] text-text-muted">#{task.lastRunAttempt}</span>
+          )}
+          {duration && (
+            <span className="text-[10px] text-text-muted">· {duration}</span>
+          )}
+          {finishedAgo && (
+            <span className="text-[10px] text-text-muted">· {finishedAgo}</span>
+          )}
+        </div>
+        {artifactCount > 0 && <ArtifactPills count={artifactCount} />}
       </div>
     );
   }
 
-  const ageMs = Date.now() - new Date(task.lastHeartbeat).getTime();
-  const ageSec = Math.floor(ageMs / 1000);
+  return null;
+}
 
-  let colorClass: string;
-  let label: string;
-  if (ageSec < 60) {
-    colorClass = "bg-success";
-    label = "Active";
-  } else if (ageSec < 120) {
-    colorClass = "bg-warning";
-    label = "Stale";
-  } else {
-    colorClass = "bg-danger";
-    label = "No heartbeat";
-  }
+function ArtifactPills({ count }: { count: number }) {
+  return (
+    <div className="flex items-center gap-1">
+      <span className="text-[10px] px-1.5 py-0 rounded bg-accent/10 text-accent">
+        {count} artifact{count !== 1 ? "s" : ""}
+      </span>
+    </div>
+  );
+}
 
-  const ageText = ageSec < 60 ? `${ageSec}s ago` : `${Math.floor(ageSec / 60)}m ago`;
+function ReasonBadge({ code }: { code: string }) {
+  const label = REASON_LABELS[code] ?? code;
+  const colorClass =
+    code === "success" ? "bg-success/15 text-success" :
+    code === "failure" || code.startsWith("timeout") ? "bg-danger/15 text-danger" :
+    "bg-warning/15 text-warning";
 
   return (
-    <div className="mt-1.5 flex items-center gap-1">
-      <span className={`w-1.5 h-1.5 rounded-full ${colorClass} shrink-0`} />
-      <span className={`text-[10px] text-text-muted`}>{label} · {ageText}</span>
-    </div>
+    <span className={`text-[10px] px-1.5 py-0 rounded ${colorClass}`}>
+      {label}
+    </span>
   );
 }
 

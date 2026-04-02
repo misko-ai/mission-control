@@ -1,5 +1,5 @@
 import { getData, saveData, generateId } from "./db";
-import type { Task, TaskRun, TaskActivityEntry, Agent } from "./types";
+import type { AppData, Task, TaskRun, TaskActivityEntry, Agent, ReasonCode } from "./types";
 
 export const HEARTBEAT_INTERVAL_MS = 30_000;
 export const STALE_THRESHOLD_MS = 120_000;
@@ -47,10 +47,33 @@ export function isStale(run: TaskRun): boolean {
   return Date.now() - new Date(run.heartbeatAt).getTime() > STALE_THRESHOLD_MS;
 }
 
+/**
+ * Derive agent status from authoritative run state.
+ * - Any active run → "running"
+ * - No active runs → "idle"
+ * Operates on the in-memory data object; caller is responsible for saveData().
+ */
+export function syncAgentStatus(agentId: string, data: AppData): void {
+  const agent = data.team.agents.find((a) => a.id === agentId);
+  if (!agent) return;
+
+  const hasActiveRun = data.taskRuns.some(
+    (r) => r.agentId === agentId && r.status === "active"
+  );
+  const derived = hasActiveRun ? "running" : "idle";
+
+  if (agent.status !== derived) {
+    agent.status = derived;
+    agent.updatedAt = new Date().toISOString();
+  }
+}
+
 export interface ReconcileRepair {
   taskId: string;
   runId: string | null;
+  agentId: string | null;
   reason: string;
+  reasonCode: ReasonCode;
 }
 
 export async function reconcileStaleRuns(opts?: {
@@ -80,17 +103,19 @@ export async function reconcileStaleRuns(opts?: {
         task.blockReason = "Auto-reconciled: run record missing (data inconsistency)";
         task.currentRunId = undefined;
         task.updatedAt = nowIso;
-        repairs.push({ taskId: task.id, runId: null, reason: "orphaned run pointer" });
+        repairs.push({ taskId: task.id, runId: null, agentId: null, reason: "orphaned run pointer", reasonCode: "timeout-orphan" });
       } else if (run.status === "active" && now - new Date(run.heartbeatAt).getTime() > threshold) {
         // Stale heartbeat
         run.status = "timeout";
         run.finishedAt = nowIso;
         run.terminalReason = "heartbeat expired";
+        run.reasonCode = "timeout-heartbeat";
+        run.durationMs = new Date(nowIso).getTime() - new Date(run.claimedAt).getTime();
         task.column = "blocked";
         task.blockReason = `Auto-reconciled: agent heartbeat expired (last: ${run.heartbeatAt})`;
         task.currentRunId = undefined;
         task.updatedAt = nowIso;
-        repairs.push({ taskId: task.id, runId: run.id, reason: "heartbeat expired" });
+        repairs.push({ taskId: task.id, runId: run.id, agentId: run.agentId, reason: "heartbeat expired", reasonCode: "timeout-heartbeat" });
       }
     } else {
       // Legacy: in-progress with no run record — check updatedAt age
@@ -98,16 +123,27 @@ export async function reconcileStaleRuns(opts?: {
         task.column = "blocked";
         task.blockReason = `Auto-reconciled: no active run (legacy task, last updated: ${task.updatedAt})`;
         task.updatedAt = nowIso;
-        repairs.push({ taskId: task.id, runId: null, reason: "legacy task without run" });
+        repairs.push({ taskId: task.id, runId: null, agentId: null, reason: "legacy task without run", reasonCode: "timeout-legacy" });
       }
     }
   }
 
   if (repairs.length > 0) {
+    // Sync agent statuses for all affected agents
+    const affectedAgentIds = new Set<string>();
+    for (const repair of repairs) {
+      const run = repair.runId ? data.taskRuns.find((r) => r.id === repair.runId) : null;
+      if (run) affectedAgentIds.add(run.agentId);
+    }
+    for (const aid of affectedAgentIds) {
+      syncAgentStatus(aid, data);
+    }
+
     // Log activities for each repair
     for (const repair of repairs) {
       const task = data.tasks.find((t) => t.id === repair.taskId);
       if (!task) continue;
+      const run = repair.runId ? data.taskRuns.find((r) => r.id === repair.runId) : null;
       const activity: TaskActivityEntry = {
         id: generateId(),
         taskId: repair.taskId,
@@ -118,6 +154,10 @@ export async function reconcileStaleRuns(opts?: {
         actor: "system",
         details: `"${task.title}" auto-reconciled: ${repair.reason}`,
         timestamp: nowIso,
+        runId: repair.runId ?? undefined,
+        agentId: repair.agentId ?? undefined,
+        attempt: run?.attempt,
+        reasonCode: repair.reasonCode,
       };
       data.taskActivities.unshift(activity);
     }

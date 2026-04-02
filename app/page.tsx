@@ -54,6 +54,14 @@ export default async function Dashboard() {
     offline: agents.filter((a: Agent) => a.status === "offline"),
   };
 
+  // Map agent → active run count for dashboard display
+  const activeRunsByAgent = new Map<string, number>();
+  for (const run of data.taskRuns) {
+    if (run.status === "active") {
+      activeRunsByAgent.set(run.agentId, (activeRunsByAgent.get(run.agentId) ?? 0) + 1);
+    }
+  }
+
   // --- Combined recent activity (tool + task activities) ---
   type UnifiedActivity = {
     id: string;
@@ -234,29 +242,39 @@ export default async function Dashboard() {
           </div>
           {agents.length > 0 ? (
             <div className="space-y-2">
-              {agents.map((agent: Agent) => (
-                <div
-                  key={agent.id}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-md bg-surface-hover"
-                >
-                  <span className={`w-2 h-2 rounded-full shrink-0 ${
-                    agent.status === "running" ? "bg-success" :
-                    agent.status === "idle" ? "bg-warning" :
-                    "bg-text-muted"
-                  }`} />
-                  <div className="flex-1 min-w-0">
-                    <span className="text-sm text-text truncate block">{agent.name}</span>
-                    <span className="text-xs text-text-muted">{agent.role}</span>
+              {agents.map((agent: Agent) => {
+                const runCount = activeRunsByAgent.get(agent.id) ?? 0;
+                return (
+                  <div
+                    key={agent.id}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-md bg-surface-hover"
+                  >
+                    <span className={`w-2 h-2 rounded-full shrink-0 ${
+                      agent.status === "running" ? "bg-success" :
+                      agent.status === "idle" ? "bg-warning" :
+                      "bg-text-muted"
+                    }`} />
+                    <div className="flex-1 min-w-0">
+                      <span className="text-sm text-text truncate block">{agent.name}</span>
+                      <span className="text-xs text-text-muted">
+                        {agent.role}
+                        {runCount > 0 && (
+                          <span className="text-success ml-1.5">
+                            · {runCount} active run{runCount !== 1 ? "s" : ""}
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                    <span className={`text-xs px-2 py-0.5 rounded shrink-0 ${
+                      agent.status === "running" ? "bg-success/20 text-success" :
+                      agent.status === "idle" ? "bg-warning/20 text-warning" :
+                      "bg-surface-active text-text-muted"
+                    }`}>
+                      {agent.status}
+                    </span>
                   </div>
-                  <span className={`text-xs px-2 py-0.5 rounded shrink-0 ${
-                    agent.status === "running" ? "bg-success/20 text-success" :
-                    agent.status === "idle" ? "bg-warning/20 text-warning" :
-                    "bg-surface-active text-text-muted"
-                  }`}>
-                    {agent.status}
-                  </span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-8">

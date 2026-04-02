@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getData, saveData, generateId } from "@/lib/db";
 import { logTaskActivity } from "@/lib/store";
-import { canClaim } from "@/lib/lifecycle";
+import { canClaim, syncAgentStatus } from "@/lib/lifecycle";
 import { logError } from "@/lib/logger";
 import type { TaskRun, TaskActivityEntry } from "@/lib/types";
 
@@ -48,6 +48,7 @@ export async function POST(request: NextRequest) {
 
     data.taskRuns.unshift(run);
     data.taskRuns = data.taskRuns.slice(0, 200);
+    syncAgentStatus(agentId, data);
     await saveData(data);
 
     const activity: TaskActivityEntry = {
@@ -60,6 +61,9 @@ export async function POST(request: NextRequest) {
       actor: "agent",
       details: `"${task.title}" claimed by agent (attempt #${attempt})`,
       timestamp: now,
+      runId: run.id,
+      agentId,
+      attempt,
     };
     await logTaskActivity(activity);
 

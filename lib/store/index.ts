@@ -23,6 +23,7 @@ export type {
   TaskActivityEntry,
   TaskRun,
   RunStatus,
+  ReasonCode,
   ScheduleType,
   ScheduleStatus,
   ScheduledEvent,
