@@ -1,5 +1,14 @@
 {
-  "tools": [],
+  "tools": [
+    {
+      "id": "6d3f9a72-18b3-47d8-9f4e-45084f88b0ed",
+      "name": "DeleteMeTool",
+      "description": "Will be deleted",
+      "parameters": [],
+      "createdAt": "2026-04-02T18:17:45.213Z",
+      "usageCount": 0
+    }
+  ],
   "activities": [
     {
       "id": "2f16e202-8272-4764-b149-c2487821b7a3",
