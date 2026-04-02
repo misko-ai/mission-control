@@ -19,6 +19,9 @@ interface Task {
   updatedAt: string;
   blockReason?: string;
   completedAt?: string;
+  currentRunId?: string;
+  runCount?: number;
+  lastHeartbeat?: string;
 }
 
 interface Project {
@@ -229,8 +232,8 @@ export default function TaskboardPage() {
                   <div className="flex-1 min-w-0">
                     <p className="text-text leading-relaxed">{a.details}</p>
                     <div className="flex items-center gap-2 mt-1">
-                      <span className={`font-medium ${a.actor === "agent" ? "text-success" : "text-accent"}`}>
-                        {a.actor === "agent" ? "AI Agent" : "User"}
+                      <span className={`font-medium ${a.actor === "system" ? "text-danger" : a.actor === "agent" ? "text-success" : "text-accent"}`}>
+                        {a.actor === "system" ? "System" : a.actor === "agent" ? "AI Agent" : "User"}
                       </span>
                       <span className="text-text-muted">{formatRelativeTime(a.timestamp)}</span>
                     </div>
@@ -565,6 +568,11 @@ function TaskCard({
         {task.description}
       </p>
 
+      {/* Heartbeat indicator for in-progress agent tasks */}
+      {task.column === "in-progress" && task.assignee === "agent" && (
+        <HeartbeatIndicator task={task} />
+      )}
+
       {/* Block reason */}
       {isBlocked && task.blockReason && (
         <div className="mt-2 p-2 rounded bg-danger/10 border border-danger/20">
@@ -651,8 +659,54 @@ function ActivityDot({ action, actor }: { action: string; actor: string }) {
   if (action === "completed") colorClass = "bg-success";
   if (action === "approved") colorClass = "bg-success";
   if (action === "created") colorClass = "bg-accent";
+  if (action === "reconciled") colorClass = "bg-danger";
   if (actor === "agent" && action === "moved") colorClass = "bg-warning";
 
   return <div className={`w-2 h-2 rounded-full shrink-0 mt-1 ${colorClass}`} />;
+}
+
+function HeartbeatIndicator({ task }: { task: Task }) {
+  if (!task.currentRunId) {
+    return (
+      <div className="mt-1.5 flex items-center gap-1">
+        <span className="w-1.5 h-1.5 rounded-full bg-danger shrink-0" />
+        <span className="text-[10px] text-danger">No active run</span>
+      </div>
+    );
+  }
+
+  if (!task.lastHeartbeat) {
+    return (
+      <div className="mt-1.5 flex items-center gap-1">
+        <span className="w-1.5 h-1.5 rounded-full bg-warning shrink-0" />
+        <span className="text-[10px] text-warning">Waiting for heartbeat</span>
+      </div>
+    );
+  }
+
+  const ageMs = Date.now() - new Date(task.lastHeartbeat).getTime();
+  const ageSec = Math.floor(ageMs / 1000);
+
+  let colorClass: string;
+  let label: string;
+  if (ageSec < 60) {
+    colorClass = "bg-success";
+    label = "Active";
+  } else if (ageSec < 120) {
+    colorClass = "bg-warning";
+    label = "Stale";
+  } else {
+    colorClass = "bg-danger";
+    label = "No heartbeat";
+  }
+
+  const ageText = ageSec < 60 ? `${ageSec}s ago` : `${Math.floor(ageSec / 60)}m ago`;
+
+  return (
+    <div className="mt-1.5 flex items-center gap-1">
+      <span className={`w-1.5 h-1.5 rounded-full ${colorClass} shrink-0`} />
+      <span className={`text-[10px] text-text-muted`}>{label} · {ageText}</span>
+    </div>
+  );
 }
 

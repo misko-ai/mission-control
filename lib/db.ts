@@ -19,6 +19,7 @@ const defaultData: AppData = {
   },
   tasks: [],
   taskActivities: [],
+  taskRuns: [],
   scheduledEvents: [],
   projects: [],
   conversationMemories: [],
@@ -71,6 +72,7 @@ async function ensureDataFile() {
 function applyDefaults(data: Record<string, unknown>): AppData {
   data.tasks ??= [];
   data.taskActivities ??= [];
+  data.taskRuns ??= [];
   data.scheduledEvents ??= [];
   data.projects ??= [];
   data.conversationMemories ??= [];

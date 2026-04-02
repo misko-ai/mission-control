@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { generateId } from "@/lib/db";
+import { getData, saveData, generateId } from "@/lib/db";
 import {
   getTasks,
   addTask,
   updateTask,
   deleteTask,
   logTaskActivity,
+  getTaskRuns,
 } from "@/lib/store";
+import { reconcileStaleRuns } from "@/lib/lifecycle";
 import { logError } from "@/lib/logger";
 import {
   requireString,
@@ -18,10 +20,24 @@ import {
 } from "@/lib/validation";
 import type { Task, TaskActivityEntry } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
+    // Piggyback reconciliation (throttled internally to once per 60s)
+    await reconcileStaleRuns();
+
     const tasks = await getTasks();
-    return NextResponse.json({ tasks });
+    const runs = await getTaskRuns();
+
+    // Enrich tasks with lastHeartbeat from active runs
+    const enriched = tasks.map((t) => {
+      if (!t.currentRunId) return t;
+      const run = runs.find((r) => r.id === t.currentRunId);
+      return run ? { ...t, lastHeartbeat: run.heartbeatAt } : t;
+    });
+
+    return NextResponse.json({ tasks: enriched });
   } catch (err) {
     logError("GET /api/tasks", err);
     return NextResponse.json({ error: "Failed to load tasks" }, { status: 500 });
@@ -129,6 +145,20 @@ export async function DELETE(request: NextRequest) {
 
     if (!id) {
       return NextResponse.json({ error: "ID required" }, { status: 400 });
+    }
+
+    // Cancel active run if task has one
+    const data = await getData();
+    const task = data.tasks.find((t) => t.id === id);
+    if (task?.currentRunId) {
+      const run = data.taskRuns.find((r) => r.id === task.currentRunId);
+      if (run && run.status === "active") {
+        run.status = "cancelled";
+        run.finishedAt = new Date().toISOString();
+        run.terminalReason = "task deleted";
+      }
+      task.currentRunId = undefined;
+      await saveData(data);
     }
 
     const found = await deleteTask(id);

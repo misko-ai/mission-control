@@ -47,16 +47,34 @@ export interface Task {
   createdAt: string;
   updatedAt: string;
   completedAt?: string;
+  currentRunId?: string;
+  runCount?: number;
+}
+
+// --- Task Runs (lifecycle tracking) ---
+
+export type RunStatus = "active" | "success" | "failure" | "timeout" | "cancelled";
+
+export interface TaskRun {
+  id: string;
+  taskId: string;
+  agentId: string;
+  attempt: number;
+  status: RunStatus;
+  claimedAt: string;
+  heartbeatAt: string;
+  finishedAt?: string;
+  terminalReason?: string;
 }
 
 export interface TaskActivityEntry {
   id: string;
   taskId: string;
   taskTitle: string;
-  action: "created" | "moved" | "picked-up" | "completed" | "approved";
+  action: "created" | "moved" | "picked-up" | "completed" | "approved" | "reconciled";
   fromColumn?: TaskColumn;
   toColumn?: TaskColumn;
-  actor: "user" | "agent";
+  actor: "user" | "agent" | "system";
   details: string;
   timestamp: string;
 }
@@ -252,6 +270,7 @@ export interface AppData {
   settings: AppSettings;
   tasks: Task[];
   taskActivities: TaskActivityEntry[];
+  taskRuns: TaskRun[];
   scheduledEvents: ScheduledEvent[];
   projects: Project[];
   conversationMemories: ConversationMemory[];

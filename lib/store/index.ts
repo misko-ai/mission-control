@@ -1,6 +1,7 @@
 // Re-export everything for backward compatibility
 export { getData, saveData, generateId } from "../db";
 export * from "./tasks";
+export * from "./taskRuns";
 export * from "./tools";
 export * from "./memories";
 export * from "./projects";
@@ -20,6 +21,8 @@ export type {
   TaskAssignee,
   TaskPriority,
   TaskActivityEntry,
+  TaskRun,
+  RunStatus,
   ScheduleType,
   ScheduleStatus,
   ScheduledEvent,

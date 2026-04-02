@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { generateId } from "@/lib/db";
+import { getData, saveData, generateId } from "@/lib/db";
 import { moveTask, logTaskActivity } from "@/lib/store";
 import { logError } from "@/lib/logger";
 import type { TaskActivityEntry, TaskColumn } from "@/lib/types";
@@ -26,6 +26,30 @@ export async function POST(request: NextRequest) {
     }
 
     const targetColumn = toColumn as TaskColumn;
+
+    // Guard: reject moves on agent tasks with an active run (except emergency override to blocked)
+    const data = await getData();
+    const task = data.tasks.find((t) => t.id === taskId);
+    if (task?.currentRunId && task.assignee === "agent") {
+      if (targetColumn === "blocked") {
+        // Emergency override: cancel the active run
+        const run = data.taskRuns.find((r) => r.id === task.currentRunId);
+        if (run && run.status === "active") {
+          run.status = "cancelled";
+          run.finishedAt = new Date().toISOString();
+          run.terminalReason = "operator emergency override";
+        }
+        task.currentRunId = undefined;
+        task.updatedAt = new Date().toISOString();
+        await saveData(data);
+      } else {
+        return NextResponse.json(
+          { error: "Task has an active agent run. Use lifecycle endpoints or move to blocked to force-cancel." },
+          { status: 409 }
+        );
+      }
+    }
+
     const result = await moveTask(taskId, targetColumn);
     if (!result) {
       return NextResponse.json({ error: "Task not found" }, { status: 404 });
