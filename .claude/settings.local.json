@@ -32,7 +32,8 @@
       "Bash(ls:*)",
       "Bash(wc -l /home/marko/mission-control/app/api/*/route.ts)",
       "Bash(npx tsc:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(pkill -f \"next dev\")"
     ]
   }
 }
