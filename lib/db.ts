@@ -9,6 +9,12 @@ const BACKUP_FILE = DATA_FILE + ".bak";
 const TMP_FILE = DATA_FILE + ".tmp";
 const SENTINEL_FILE = path.join(DATA_DIR, ".initialized");
 const NEXT_CACHE_DIR = path.join(process.cwd(), ".next");
+const BACKUPS_DIR = path.join(process.cwd(), "backups");
+
+// Auto-backup: write a timestamped snapshot to backups/ at most once per interval
+const AUTO_BACKUP_INTERVAL_MS = 30 * 60 * 1000; // 30 minutes
+const AUTO_BACKUP_MAX_COUNT = 48; // keep last 48 snapshots (~24h at 30min intervals)
+let lastAutoBackupAt = 0;
 
 // Recovery tracking — set during getData, exported for health endpoint
 export type RecoverySource = "store" | "backup" | "tmp-recovery" | "first-boot";
@@ -124,6 +130,33 @@ async function fsyncDir(dirPath: string): Promise<void> {
     await dh.sync();
   } finally {
     await dh.close();
+  }
+}
+
+/** Write a timestamped snapshot to backups/ and prune old ones. Best-effort. */
+async function maybeAutoBackup(json: string): Promise<void> {
+  const now = Date.now();
+  if (now - lastAutoBackupAt < AUTO_BACKUP_INTERVAL_MS) return;
+
+  try {
+    await fs.mkdir(BACKUPS_DIR, { recursive: true });
+
+    const ts = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+    const backupPath = path.join(BACKUPS_DIR, `store-${ts}.json`);
+    await fs.writeFile(backupPath, json, "utf-8");
+    lastAutoBackupAt = now;
+
+    // Prune: keep only the most recent AUTO_BACKUP_MAX_COUNT files
+    const files = await fs.readdir(BACKUPS_DIR);
+    const snapshots = files
+      .filter((f) => f.startsWith("store-") && f.endsWith(".json"))
+      .sort();
+    if (snapshots.length > AUTO_BACKUP_MAX_COUNT) {
+      const toDelete = snapshots.slice(0, snapshots.length - AUTO_BACKUP_MAX_COUNT);
+      await Promise.all(toDelete.map((f) => fs.unlink(path.join(BACKUPS_DIR, f)).catch(() => {})));
+    }
+  } catch {
+    // Auto-backup is best-effort — never block writes
   }
 }
 
@@ -333,6 +366,9 @@ export async function saveData(data: AppData): Promise<void> {
 
     // 6. Ensure sentinel exists (first successful write marks initialization)
     await writeSentinel();
+
+    // 7. Periodic auto-backup to backups/ (best-effort, non-blocking)
+    await maybeAutoBackup(json);
   });
 
   await writePromise;
