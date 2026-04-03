@@ -141,7 +141,13 @@ async function maybeAutoBackup(json: string): Promise<void> {
   try {
     await fs.mkdir(BACKUPS_DIR, { recursive: true });
 
-    const ts = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+    const d = new Date();
+    const ts = d.getFullYear().toString()
+      + String(d.getMonth() + 1).padStart(2, "0")
+      + String(d.getDate()).padStart(2, "0")
+      + "_" + String(d.getHours()).padStart(2, "0")
+      + String(d.getMinutes()).padStart(2, "0")
+      + String(d.getSeconds()).padStart(2, "0");
     const backupPath = path.join(BACKUPS_DIR, `store-${ts}.json`);
     await fs.writeFile(backupPath, json, "utf-8");
     lastAutoBackupAt = now;
@@ -291,6 +297,35 @@ export async function getData(): Promise<AppData> {
     }
   }
 
+  // 3.5. Try most recent auto-backup from backups/
+  if (!data) {
+    try {
+      const files = await fs.readdir(BACKUPS_DIR);
+      const snapshots = files
+        .filter((f) => f.startsWith("store-") && f.endsWith(".json"))
+        .sort()
+        .reverse(); // most recent first
+      for (const file of snapshots) {
+        data = await tryLoadFile(path.join(BACKUPS_DIR, file));
+        if (data) {
+          console.warn(`[MC] Recovered from auto-backup: ${file}`);
+          recoverySource = "backup";
+          recoveryWarning = `Recovered from auto-backup snapshot: ${file}`;
+          try {
+            const json = JSON.stringify(data, null, 2);
+            await durableWrite(DATA_FILE, json);
+            await fsyncDir(DATA_DIR);
+          } catch {
+            // Best effort restore — we have data in memory
+          }
+          break;
+        }
+      }
+    } catch {
+      // backups dir doesn't exist or unreadable — continue
+    }
+  }
+
   // 4. Nothing loadable — check if this is data loss or first boot
   if (!data) {
     const hasSentinel = await sentinelExists();
@@ -367,8 +402,8 @@ export async function saveData(data: AppData): Promise<void> {
     // 6. Ensure sentinel exists (first successful write marks initialization)
     await writeSentinel();
 
-    // 7. Periodic auto-backup to backups/ (best-effort, non-blocking)
-    await maybeAutoBackup(json);
+    // 7. Periodic auto-backup to backups/ (best-effort, fire-and-forget)
+    maybeAutoBackup(json).catch(() => {});
   });
 
   await writePromise;
